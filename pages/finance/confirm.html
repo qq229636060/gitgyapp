@@ -1,0 +1,43 @@
+<div class="bui-page" id="confirm">
+    <header class="bui-bar">
+      <div class="bui-bar-left">
+        <a class="bui-btn" onclick="bui.back()"><i class="icon-back"></i></a>
+        </div>
+        <div class="bui-bar-main">确认交租</div>
+        <div class="bui-bar-right"></div>
+    </header>
+    <main>
+      <ul class="formbox">
+      <li class="pd20" style="display:none"></li>
+      <li><em>账单房源</em><div class="linebox">{{housename}}</div></li> 
+      <li><em>租客姓名</em><div class="linebox">{{zkname}}</div></li>
+      <li><em>账单周期</em><div class="linebox">{{zqtime}}</div></li>
+      <li><em>应收款日</em><div class="linebox">{{rentTime}}</div></li>
+      <li><em>账单金额</em><div class="linebox">{{zmoney}}元</div></li>
+    </ul>
+    <ul class="formbox" style="margin:.2rem 0 0 0">
+      <li class="pd20" style="display:none"></li>
+      <li>
+        <em>支付方式</em>
+        <div class="linebox">
+          <select v-model="payfunction">
+            <option value="0">选择支付方式</option>
+            <option v-for="payway in pay_way" :value="payway.id">{{payway.name}}</option>
+          </select>
+        </div>
+      </li> 
+      <li>
+        <em>实际支付时间</em>
+        <div class="linebox">
+          <input type="text" id="datepickerpay" readonly="readonly" class="bui-input" v-model="times">
+        </div>
+      </li>
+    </ul>
+
+      <div class="bottombtn" style="position:fixed;bottom:0;width:100%">
+        <div @click="qd" style="width:100%">确定</div>
+      </div>
+    </main>
+   </div>
+
+ <style>#confirm .linebox{width:5rem}</style>

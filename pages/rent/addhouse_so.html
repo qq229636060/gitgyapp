@@ -1,0 +1,35 @@
+<div class="bui-page" id="so">
+  <header class="bui-bar">
+    <div class="bui-bar-left"> 
+       
+      <a class="bui-btn" onclick="bui.back()"><i class="icon-back"></i></a> </div>
+    <div class="bui-bar-main">搜索</div>
+    <div class="bui-bar-right"> 
+       
+    </div>
+  </header>
+  <main>
+    <div id="housesearchbar" class="bui-searchbar bui-box">
+      <div class="span1">
+        <div class="bui-input"><i class="icon-search"></i>
+          <input type="search" value="" placeholder="请输入关键字">
+        </div>
+      </div>
+      <div class="btn-search">搜索</div>
+    </div>
+    
+    <div id="scrollsohouse" class="bui-scroll" v-cloak v-if="noneshow == 1">
+          <ul class="sohousename">
+            <li v-for="house in houselist" @click="getinfo(house.name,house.address,house.region,house.plate,house.cityid,house.id)">{{house.name}}</li>
+          </ul>
+    </div>
+    <div class="nones" v-if="noneshow == 0">
+        <img src="../../images/icon/nones.png">
+        <p>没有数据</p>
+    </div>
+  </main>
+  <footer> 
+    
+  </footer>
+</div>
+<style>.bui-searchbar{background:#efeff4;padding:.24rem .36rem;padding-bottom:.24rem}.bui-searchbar .bui-input input[type=password],.bui-searchbar .bui-input input[type=search],.bui-searchbar .bui-input input[type=text],.bui-searchbar .bui-input textarea{height:.7rem;padding-top:0;padding-bottom:0;font-size:.28rem}.bui-searchbar .btn-search{font-size:.3rem;line-height:.7rem}</style>

@@ -1,0 +1,33 @@
+<div class="bui-page" id="bankcard">
+    <header class="bui-bar">
+        <div class="bui-bar-left">
+            
+            <a class="bui-btn" onclick="bui.back()"><i class="icon-back"></i></a>
+        </div>
+        <div class="bui-bar-main">银行卡管理</div>
+        <div class="bui-bar-right">
+            
+        </div>
+    </header>
+    <main>
+    	<div class="nonebindcard" v-show="nonecard == 0">
+    		<img src="../../images/icon/bankcard.png">
+    		<p>您还没有绑定的银行卡</p>
+    		<a href="pages/my/bindcard.html"><p>立即绑定</p></a>
+    	</div>
+    	<div class="bankcard" v-show="nonecard == 1">
+    		<div class="bankicons">
+    			<img src="../../images/icon/bankcradicon.png">
+    		</div>
+    		<div class="bankinfos">
+    			<p>{{cardinfo.card_number}}</p>
+    			<p>{{cardinfo.card_type}}</p>
+    			<p>{{cardinfo.bank_name}}</p>
+    		</div>
+    	</div>
+        
+    </main>
+    <footer>
+        
+    </footer>
+</div>

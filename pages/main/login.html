@@ -1,0 +1,22 @@
+<!-- 这里还是一个标准的BUI页面 -->
+<div class="bui-page" id="login">
+    <main>
+       <div class="loginpage">
+         <div class="login_logos"><img src="../../images/icon/logo.png"></div>
+         <form class="loginbox"  @submit.prevent="loginbtn">
+            <div class="logininputs">
+              <input type="text" name="" placeholder="请输入您的悦租账号" v-model="iddata.ids" >
+              <i class="icons1"></i>
+              </div>
+             <div class="logininputs">
+              <input type="password" name="" placeholder="请输入您的悦租密码" v-model="iddata.password">
+              <i class="icons2"></i>
+            </div>
+            <div class="loginbtn" @click="loginbtn">
+              登录
+            </div>
+         </form>
+       </div>
+      <footer></footer>
+    </main>
+</div>

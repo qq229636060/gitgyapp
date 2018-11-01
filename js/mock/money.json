@@ -1,0 +1,29 @@
+{
+"zuyuetype":[
+      {"types":"全部"},
+      {"types":"收入"},
+      {"types":"支出"}
+    ],
+"htstyle":[
+      { "style": "全部", "id": "" },
+      { "style": "租金", "id": "" },
+      { "style": "押金", "id": "" },
+      { "style": "水费", "id": "" },
+      { "style": "电费", "id": "" },
+      { "style": "物业费", "id": "" },
+      { "style": "宽带费", "id": "" },
+      { "style": "服务费", "id": "" }
+
+],
+ "htobject":[
+      { "obj": "不限", "id": "" },
+      { "obj": "业主", "id": "" },
+      { "obj": "租客", "id": "" }
+    ],
+ "contractlist":[
+    {"housename":"保利香槟国际","houseadder":"1号楼22楼2208","contertype":"支付宝","yzname":"啦啦了","zutime":"2018.08.09 15:30","zuya":"押金","money":[{"types":"0","name":"-1000.00"}]},
+    {"housename":"保利香槟国际","houseadder":"1号楼22楼2208","contertype":"微信","yzname":"啦啦了","zutime":"2018.08.09 15:30","zuya":"租金","money":[{"types":"1","name":"+1000.00"}]},
+    {"housename":"保利香槟国际","houseadder":"1号楼22楼2208","contertype":"微信","yzname":"啦啦了","zutime":"2018.08.09 15:31","zuya":"租金","money":[{"types":"1","name":"+1000.00"}]}
+ ]
+}
+

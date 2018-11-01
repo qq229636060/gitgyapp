@@ -1,0 +1,36 @@
+<div class="bui-page" id="refresh">
+    <header class="bui-bar">
+        <div class="bui-bar-left">
+            
+            <a class="bui-btn" onclick="bui.back()"><i class="icon-back"></i></a>
+        </div>
+        <div class="bui-bar-main">批量处理</div>
+        <div class="bui-bar-right">
+           
+        </div>
+    </header>
+    <main>
+          <div id="scrollz" class="bui-scroll">
+          	<div class="bui-scroll-head"></div>
+          	<div class="bui-scroll-main">
+          		<ul id="list" class="bui-list">
+          			<li class="bui-btn" v-for="house in houselist">
+                    <div class="housebox">
+                        <div class="myhousebox">{{house.name}}</div>
+                        <div class="bigsroom sall">
+                          <div class="rooms fbroom" v-for="rooms in house.room" @click="clickroom()" :data-roomsid="rooms.id">
+                           <p>房间{{rooms.room_no}}</p>
+                          </div>
+                        </div>
+                    </div>
+                </li>
+          		</ul>
+          	</div>
+          	<div class="bui-scroll-foot"></div>
+          </div>
+    </main>
+    <footer>
+      <div class="bottombtn" @click="f5()"><div style="width:100%">批量刷新</div></div>
+    </footer>
+</div>
+<style>.fbroom{border:none;border:solid 1px #dbdfe2;border-radius:.06rem;height:1.4rem;padding:0}.fbroom>p{text-align:center;font-size:.3rem;margin:0;height:.7rem;line-height:.7rem}.fbroom>p:last-child{border-top:solid 1px #dbdfe2}.myhousebox{font-size:.3rem}#scrollz{background:#f1f5f8}#refresh .sall .fbroom>p:last-child{border-top:none}#refresh .sall .curs_z{border:solid 1px #27cda1}</style>

@@ -1,0 +1,83 @@
+<div class="bui-page" id="account">
+    <header class="bui-bar">
+        <div class="bui-bar-left">
+            <!-- 左边按钮 -->
+            <a class="bui-btn" onclick="bui.back();"><i class="icon-back"></i></a>
+        </div>
+        <div class="bui-bar-main">账户余额</div>
+        <div class="bui-bar-right">
+            <!-- 右边按钮 -->
+        </div>
+    </header>
+    <main>
+        <div class="msgtop" v-cloak>
+        	<div class="msgtimes" id="msgtimes">
+        		<p class="years">{{years}}</p>
+        		<p><em>{{month}}</em>月<i></i></p>
+        	</div>
+        	<div class="msgtopbox leftline">
+        		<p>{{balance}}</p>
+        		<p>账户余额(元)</p>
+        	</div>
+        	<div class="msgtopbox">
+        		<p>{{cush}}</p>
+        		<p>提现中(元)</p>
+        	</div>
+        </div>
+        <div class="bg" v-show="show < 4" v-on:click="navs('4')"></div>
+               <div class="fix nonefix" style="top:auto">
+       <div class="tiaojian" v-cloak>
+        <div :class="show==1 ? 'option cur':'option'" v-on:click="navs('1')"><span class="optxt k1">提现</span><i></i><em></em></div>
+        <div :class="show==2 ? 'option cur':'option'" v-on:click="navs('2')"><span class="optxt k2">交易状态</span><i></i><em></em></div>
+        <div :class="show==3 ? 'option cur':'option'" v-on:click="navs('3')"><span class="optxt k3">支付方式</span><i></i><em></em></div>
+        <div class="tjlist" v-show="show < 4">
+            <div class="tj1" v-show="show == 1">
+                <ul class="tjbox">
+                    <li v-for="(h,index) in orderType" @click="overselcet('1',h.name,index,h.val)" :class="now == index ? 'now':''" v-bind:data-id='h.val'>{{h.name}}<i></i></li>
+                </ul>
+            </div>
+            <div class="tj2" v-show="show == 2">
+                <ul class="tjbox">
+                    <li v-for="(h1,index) in orderStatus" @click="overselcet('2',h1.name,index,h1.val)" :class="now1 == index ? 'now':''" v-bind:data-id='h1.val'>{{h1.name}}<i></i></li>
+                </ul>
+            </div>
+            <div class="tj2" v-show="show == 3">
+                <ul class="tjbox">
+                    <li v-for="(h3,index) in paySource" @click="overselcet('3',h3.name,index,h3.val)" :class="now2 == index ? 'now':''" v-bind:data-id='h3.val'>{{h3.name}}<i></i></li>
+                </ul>
+            </div>
+        </div>
+      </div>
+    </div>
+     <div id="zdscroll" class="bui-scroll" v-show="none == 0">
+            <div class="bui-scroll-head"></div>
+            <div class="bui-scroll-main">
+                <ul class="bui-list">
+                    <li v-for="j in housebox" @click="gotoinfos(j.order_type,j.order_status,j.source,j.created,j.total_fee,j.channel,j.nick,j.my_cmms_amt,j.rent_info)">
+                       <div class="zdbox_top">
+                           <span>{{j.order_type}}</span>
+                           <span>{{j.order_status}}</span>
+                       </div> 
+                       <div class="zdbox_bottom">
+                           <div class="zdbox_bottom_l">
+                               <p>{{j.source}}</p>
+                               <p>{{j.created}}</p>
+                           </div>
+                           <div class="zdbox_bottom_r">{{j.total_fee}}</div>
+                       </div> 
+                    </li>
+                </ul>
+            </div>
+            <div class="bui-scroll-foot"></div>
+        </div>
+        <div class="nones" v-show="none == 1"><img src="../../images/icon/nones.png"> <p>没有数据</p></div>
+    </main>
+    <footer>
+        <!-- 底部内容 -->
+    </footer>
+</div>
+<style type="text/css">
+    .nonefix{ position:static }
+    .bui-scroll .bui-scroll-foot{ z-index: 2 }
+    .bg{z-index: 3}
+</style>

@@ -1,0 +1,55 @@
+<div class="bui-page" id="myindex">
+    <main>
+        <div class="topcenter">
+            <div class="usetitle">用户中心</div>
+            <div class="facez"><a href="pages/my/useinfo.html"><img :src="faceimg"></a></div>
+            <div class="usename">{{usecenter.nick}}</div>
+            <div class="callme"><em></em>{{usecenter.mobile}}</div>
+        </div>
+        <ul class="hoverlist">
+          <li>
+            <a href="pages/my/account.html"><em class="icon1"></em>账户余额<i></i></a>
+          </li>
+           <li>
+            <a href="pages/my/bankcard.html"><em class="icon2"></em>银行卡<i></i></a>
+          </li>
+           <li @click="tels()">
+            <a><em class="icon3"></em>客服电话<i></i></a>
+          </li>
+          <li>
+            <a @click="myshop"><em class="icon5"></em>我的网店<i></i></a>
+          </li>
+          <li>
+            <a href="pages/my/set.html"><em class="icon4"></em>设置<i></i></a>
+          </li>
+        </ul>
+        <div class="myshops">
+          <div id="qrcode"></div>
+        </div>
+    </main>
+    <footer>
+    <div class="footers">
+       <div class="gotoindex">
+        <img src="../../images/icon/home50.png?i=1">
+        <p>首页</p>
+      </div>
+       <div class="gotohouse">
+        <img src="../../images/icon/house50.png?i=1">
+        <p>房源</p>
+      </div>
+       <div><img src="../../images/icon/footadd.png" class="footadd"></div>
+       <div class="gotoyuyue">
+        <img src="../../images/icon/time50.png?i=1">
+        <p>预约</p>
+      </div>
+       <div class="my cur">
+        <img src="../../images/icon/user-g50.png?i=1">
+        <p>我的</p>
+      </div>
+     </div>
+    </footer>
+</div>
+<style type="text/css">
+.myshops{ width: 100%; height: 100%; position: fixed; top:0; left: 0; background: rgba(0,0,0,0.8);display: none; z-index: 999}
+.myshops img{ width: 200px; height: 200px; position: absolute; left: 50%; top:50%; margin: -100px 0 0 -100px; }
+</style>

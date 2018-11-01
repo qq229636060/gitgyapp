@@ -1,0 +1,54 @@
+<div class="bui-page" id="moneyinfo">
+    <header class="bui-bar">
+        <div class="bui-bar-left">
+            
+            <a class="bui-btn" onclick="bui.back()"><i class="icon-back"></i></a>
+        </div>
+        <div class="bui-bar-main">流水详情</div>
+        <div class="bui-bar-right">
+            
+        </div>
+    </header>
+    <main>
+         <div class="acinfo_top">
+        	<p>{{moneyinfos.money}}</p>
+        	<p>{{moneyinfos.costType}}</p>
+        </div>
+        <div class="acinfo_bottom">
+        	<ul class="formbox diff">
+        		<li>
+        			<em>交易房间</em>
+        			<div class="linebox">{{moneyinfos.house}}</div>
+        		</li>
+        		<li>
+        			<em>交易对象</em>
+        			<div class="linebox">{{moneyinfos.trader}}</div>
+        		</li>
+				<li>
+        			<em>对象姓名</em>
+        			<div class="linebox">{{moneyinfos.name}}</div>
+        		</li>
+        		<li>
+        			<em>交易时间</em>
+        			<div class="linebox">{{moneyinfos.time}}</div>
+        		</li>
+        		<li>
+        			<em>资金流向</em>
+        			<div class="linebox">{{moneyinfos.moneyType}}</div>
+        		</li>
+        		<li>
+        			<em>交易方式</em>
+        			<div class="linebox">{{moneyinfos.payWay}}</div>
+        		</li>
+        		<li>
+        			<em>费用周期</em>
+        			<div class="linebox">{{moneyinfos.zq}}</div>
+        		</li>
+        	</ul>
+        </div>
+    </main>
+    <footer>
+        
+    </footer>
+</div>
+<style>#moneyinfo .formbox li{justify-content:space-between;padding-right:.3rem;border:none}.diff li em{color:#999}.diff li:first-child{background-color:#fff;color:#333}.diff li:first-child em{color:#999}.linebox{width:5rem;text-align:right}</style>

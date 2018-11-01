@@ -1,0 +1,25 @@
+{
+"zuyuetype":[
+      {"types":"全部租约"},
+      {"types":"进行中"},
+      {"types":"快到期"},
+      {"types":"已到期"},
+      {"types":"已退房"}
+    ],
+"htstyle":[
+      { "style": "全部类型", "id": "" },
+      { "style": "电子合同", "id": "" },
+      { "style": "纸质合同", "id": "" }
+],
+ "htobject":[
+      { "obj": "不限", "id": "" },
+      { "obj": "业主", "id": "" },
+      { "obj": "租客", "id": "" }
+    ],
+ "contractlist":[
+    {"housename":"保利香槟国际","houseadder":"1号楼22楼2208","contertype":"快到期","yzname":"啦啦了","zutime":"2018.08.09 - 2018.08.09","facepic":"0","kdq":"还有3天到期"},
+    {"housename":"保利香槟国际","houseadder":"1号楼22楼2208","contertype":"快到期","yzname":"啦啦了","zutime":"2018.08.09 - 2018.08.09","facepic":"0","kdq":"还有3天到期"},
+    {"housename":"保利香槟国际","houseadder":"1号楼22楼2208","contertype":"快到期","yzname":"啦啦了","zutime":"2018.08.09 - 2018.08.09","facepic":"1","kdq":""}
+ ]
+}
+

@@ -1,0 +1,108 @@
+<div class="bui-page" id="app2">
+    <header class="bui-bar">
+        <div class="bui-bar-left"></div>
+        <div class="bui-bar-main"><i class="fj">集</i>房源管理</div>
+        <div class="bui-bar-right">
+          <div class="bui-btn" style="display:flex;display:-webkit-flex">
+            <i class="icon-search"><a href="pages/rent/so2.html" style="display:block"></a></i>
+            <i class="icon-plus addhouse" style="margin:0 0 0 .2rem"><a href="pages/rent/addhouse.html?mode=2"></a></i>
+          </div>
+        </div>
+    </header>
+    <main>
+       <div class="bg" v-show="show < 4" v-on:click="navs('4')"></div>
+       <div class="fix">
+       <div class="tiaojian">
+      	<div :class="show==1 ? 'option cur':'option'" v-on:click="navs('1')"><span class="optxt k1">房源位置</span><i></i><em></em></div>
+      	<div :class="show==2 ? 'option cur':'option'" v-on:click="navs('2')"><span class="optxt k2">房源状态</span><i></i><em></em></div>
+      	
+      	<div class="tjlist" v-show="show < 4">
+      		<div class="tj1" v-show="show == 1">
+      			<ul class="tjbox">
+              <li @click="overselcet('1','全部','-1','')" :class="now == -1 ? 'now':''">全部<i></i></li>
+      				<li v-for="(h,index) in housename" @click="overselcet('1',h.apartment,index,h.id)" :class="now == index ? 'now':''" v-bind:data-id="h.id">{{h.apartment}}<i></i></li>
+      			</ul>
+      		</div>
+      		<div class="tj2" v-show="show == 2">
+      			<ul class="tjbox">
+              <li @click="overselcet('2','全部','-2','')" :class="now == -2? 'now':''">全部<i></i></li>
+      				<li v-for="(h1,index) in hstatus" @click="overselcet('2',h1.name,index,h1.id)" :class="now1 == index ? 'now':''" v-bind:data-id="h1.id">{{h1.name}}<i></i></li>
+      			</ul>
+      		</div>
+
+      	</div>
+      </div>
+    </div>
+     
+		 <div id="scroll2" class="bui-scroll mt9">
+		  <div class="bui-scroll-head"></div>
+		  <div class="bui-scroll-main">
+		    <ul id="list" class="bui-list">
+		        <li class="bui-btn" v-for="(bighouse,indexs) in houselist">
+		        	<div class="housebox">
+		        		<div class="myhousebox" @click="gotohouseinfo(bighouse.floor[0].rent_id)">
+		        			<p>{{bighouse.apartment}}</p>
+		        		</div>
+		          <div class="floorbox">
+                <div class="fbox" v-for="flbox in bighouse.floor">
+		          	<div class="numberfloor">—— {{flbox.floor}}楼 ——</div>
+                  <div class="bigsroom">
+		        		<div :class="rooms.st == '0' ? 'rooms' : 'rooms cursz' " v-for="(rooms,index) in flbox.room" @click="openroom(rooms.id,$event)">
+		        		 	<div class="roominfo">
+		        		 	<div class="roomsnum"><em>房间</em><span class="roomsnum_z">{{rooms.room_no}}</span></div>
+		        		 	<div class="roomstatus" v-if="rooms.st == 1">{{rooms.tenant_name}}</div>
+                  <div class="roomstatus" v-else>空置{{rooms.emptyDay}}天</div>
+		        		 	</div>
+		        		 	  <div class="btns" v-show="btnshow == rooms.id">
+                      <em class="jt"></em>
+                      <div class="oproominfo">
+                        <em>{{rooms.room_no}}</em>
+                        <i v-if="rooms.st == 1">租客:{{rooms.tenant_name}}</i>
+                        <i v-else>空置</i>
+                      </div>
+                      <span v-if="rooms.st == 0">
+                        <a class="btnurl" v-on:click="qyue(rooms.id,rooms.tenant_id)">签约</a>
+                        <a class="btnurl" @click="gotoaddroom(rooms.id)" v-if="rooms.first_edit == 1">编辑</a>
+                        <a class="btnurl" v-bind:data-id="rooms.id" v-on:click="roominfo(rooms.id,rooms.tenant_id)" v-if="rooms.first_edit != 1">详情</a>
+                      </span>
+                      <span v-else>
+                        <a class="btnurl" v-on:click="htinfo(rooms.id,rooms.tenant_id)">合同</a>
+                        <a class="btnurl" @click="gotoaddroom(rooms.id)" v-if="rooms.first_edit == 1">编辑</a>
+                        <a class="btnurl" v-bind:data-id="rooms.id" v-on:click="roominfo(rooms.id,rooms.tenant_id)" v-if="rooms.first_edit != 1">详情</a>
+                      </span>
+                  </div>
+		        		</div>
+                </div> 
+              </div>
+		        	</div>
+		        </div>
+		        </li>
+		    </ul>
+		  </div>
+		  <div class="bui-scroll-foot"></div>
+		</div>
+
+    </main>
+  <footer>
+     <div class="footers">
+       <div class="gotoindex">
+        <img src="../../images/icon/home50.png?i=1">
+        <p>首页</p>
+      </div>
+       <div class="cur" class="gotohouse">
+        <img src="../../images/icon/house-g50.png?i=1">
+        <p>房源</p>
+      </div>
+       <div><img src="../../images/icon/footadd.png" class="footadd"></div>
+       <div class="gotoyuyue">
+        <img src="../../images/icon/time50.png?i=1">
+        <p>预约</p>
+      </div>
+       <div class="my">
+        <img src="../../images/icon/user50.png?i=1">
+        <p>我的</p>
+      </div>
+     </div>
+   </footer>
+</div>
+ <style>.bui-page>.main,.bui-page>main,.bui-scroll .bui-scroll-foot{background:#f1f5f8}.mt9{margin:.9rem 0 0 0}.bui-list{border-top:none}.addhouse{display:block;margin:.15rem 0 .15rem .3rem}.addhouse a,.icon-search a{color:#fff;display:block;width:100%;height:100%;position:absolute;top:0}.bui-bar .bui-bar-left,.bui-bar .bui-bar-right{width:1.2rem}</style>

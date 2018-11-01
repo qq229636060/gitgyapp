@@ -1,0 +1,44 @@
+<div class="bui-page" id="addzd">
+    <header class="bui-bar">
+      <div class="bui-bar-left">
+        <a class="bui-btn" onclick="bui.back()"><i class="icon-back"></i></a>
+        </div>
+        <div class="bui-bar-main">添加账单</div>
+        <div class="bui-bar-right"></div>
+    </header>
+    <main>
+      <ul class="formbox">
+      <li class="pd20"><em>基本信息</em></li>
+      <li><em>姓名</em><div class="linebox">{{usenames}}</div></li> 
+      <li><em>周期开始</em><div class="linebox"><input type="text" id="datepicker_input_s" readonly="readonly" class="bui-input" v-model="times"></div></li>
+      <li><em>周期结束</em><div class="linebox"><input type="text" id="datepicker_input_e" readonly="readonly" class="bui-input" v-model="timee"></div></li>
+      <li><em>应收款日</em><div class="linebox"><input type="text" id="paytime" readonly="readonly" class="bui-input" v-model="paytime"></div></li>
+    </ul>
+ <div class="other">
+        <div class="addother">
+          <div class="othername">添加扣款</div><div id="addrefundmoney" class="addotherbtn">+再扣一笔</div></div>
+          <ul class="formbox">
+             <li class="jisuan" v-for="(tuizu,index) in payinfo">
+              <div class="refund_lz">
+                <span>{{tuizu.name}}</span>
+                <span>
+                  <select v-model="tuizu.costType">
+                    <option value="0">收入</option>
+                    <option value="1">支出</option>
+                  </select>
+                  <i></i>
+                </span>
+              </div>
+              <div class="refund_rz"><input type="text" v-bind:name="tuizu.val" placeholder="0" v-model="tuizu.money">元</div>
+            </li>
+          </ul>
+      </div>
+      <ul class="formbox" style="margin:.1rem 0 0 0">
+      <li class="pd20" style="display:none"><em></em></li>
+      <li style="border:none"><em>备注信息</em><div class="linebox"><input type="text" class="bui-input" v-model="beizhu"></div></li> </ul>
+    </main>
+    <footer>
+      <div class="bottombtn" @click="savezd"><div style="width:100%">保存</div></div>
+    </footer>
+   </div>
+<style>.other .formbox li:first-child{background:#fff;border-top:solid 1px #eee;color:#333}.formbox [class*=bui-btn].bui-box{padding:0;border:none;min-height:auto;line-height:.4rem}.bui-list .bui-box .span1{font-size:.3rem}.formbox .span1{overflow:hidden;height:.36rem}.bui-list>.bui-btn-line{line-height:.82rem}.bui-dialog-select .bui-dialog-head{min-height:1rem;line-height:1rem;background:#27cda1;color:#fff;font-size:.3rem}</style>

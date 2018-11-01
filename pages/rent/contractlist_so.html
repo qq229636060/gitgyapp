@@ -1,0 +1,67 @@
+<div class="bui-page" id="zuyuelistappso">
+    <header class="bui-bar">
+        <div class="bui-bar-left">
+            <!-- 左边按钮 -->
+             <a class="bui-btn" onclick="bui.back();"><i class="icon-back"></i></a>
+           </div>
+        <div class="bui-bar-main">租约搜索</div>
+        <div class="bui-bar-right">
+          
+        </div>
+    </header>
+    <main>
+           <div id="searchbar" class="bui-searchbar bui-box">
+      <div class="span1">
+        <div class="bui-input"> <i class="icon-search"></i>
+          <input type="search" value="" placeholder="姓名、手机、小区名"/>
+        </div>
+      </div>
+      <div class="btn-search">搜索</div>
+    </div>
+    <div id="scrollcontract" class="bui-scroll mt0">
+      <div class="bui-scroll-head"></div>
+      <div class="bui-scroll-main">
+        <ul id="listcontracts" class="bui-list">
+            <li class="bui-btn" v-for="contracts in clist" v-on:click="hover_info(contracts.room_id,contracts.id,contracts.status,contracts.rent_id)">
+             <div class="contractbox">
+               <div class="contractbox_t">
+                 <span style="color: #666">{{contracts.roomTitle}}</span>
+               </div>
+               <div class="contractbox_m">
+                 <p><em :class="iconface == 0 ? '' : 'yezhu'"></em>{{h5txt}}:{{contracts.name}}</p>
+                 <p>租期：{{contracts.start_end}}</p>
+               </div>
+               <div class="contractbox_b">
+                  <span v-if="contracts.status == 1" style="color: #999">进行中</span>
+                 <span v-if="contracts.status == 2" style="color: #4dc2a4">快到期</span>
+                 <span v-if="contracts.status == 3" style="color: #4dc2a4">已到期</span>
+                 <span v-if="contracts.status == 4" style="color: #999">已退房</span>
+                 <span v-if="contracts.leftDay<=7 && contracts.leftDay>0 && contracts.status!= 4">(还有{{contracts.leftDay}}天)</span>
+               </div>
+             </div>
+            </li>
+        </ul>
+      </div>
+      <div class="bui-scroll-foot"></div>
+    </div>
+    </main>
+</div>
+ <style type="text/css">
+      .bui-page>.main, .bui-page>main,.bui-scroll .bui-scroll-foot{ background: #f1f5f8 }
+      .mt0{ margin:0 }
+      .bui-list{border-top:none }
+      .addhouse{ display: block;    margin: 0.15rem 0 0.15rem 0.3rem;}
+      .addhouse a{color: #fff;display: block;width: 100%;height: 100%;position: absolute;top: 0; }
+      .bui-bar .bui-bar-left, .bui-bar .bui-bar-right{ width: 1.2rem;}
+      .bui-searchbar {
+    background: #efeff4;
+    padding: 0.24rem .36rem;
+    padding-bottom: 0.24rem;
+}
+.bui-searchbar .bui-input input[type="search"], .bui-searchbar .bui-input input[type="text"], .bui-searchbar .bui-input input[type="password"], .bui-searchbar .bui-input textarea {
+    height: .7rem;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: .28rem;
+}.bui-searchbar .btn-search{ font-size: .3rem; line-height: .7rem;}
+ </style>

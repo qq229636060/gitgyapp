@@ -1,0 +1,35 @@
+<div class="bui-page" id="kfcont">
+    <header class="bui-bar">
+        <div class="bui-bar-left">
+        <a class="bui-btn" onclick="bui.back()"><i class="icon-back"></i></a>
+        </div>
+        <div class="bui-bar-main">看房预约</div>
+        <div class="bui-bar-right"> 
+        </div>
+    </header>
+    <main>
+       <div class="cont_top">
+        <div class="cont_top_l">
+          <div>{{infomsg.rent_title}}</div>
+        </div>
+        <div class="cont_top_r">
+        <a :href="'tel:'+infomsg.mobile"><em></em></a>
+        </div>
+       </div>
+       <div class="yuyuetype">
+        <div>预约状态</div>
+        <div v-if="infomsg.st == 1">待确定</div>
+        <div v-if="infomsg.st == 2">预约成功</div>
+        <div v-if="infomsg.st == 3">预约失败</div>
+       </div>
+       <ul class="formbox">
+       <li class="pd20"><em>基本信息</em></li> 
+       <li><em>租客姓名</em><div class="linebox">{{infomsg.name}}</div></li>
+       <li><em>看房时间</em><div class="linebox">{{infomsg.bespeak_time}}</div></li>
+       <li><em>备注信息</em><div class="linebox">{{infomsg.remark}}</div></li>
+       <li v-if="infomsg.st == 3"><em>拒绝理由</em><div class="linebox">{{infomsg.refuse}}</div></li>
+       </ul>
+       <div v-show="infomsg.st == 1" class="bottombtn" style="position:fixed;bottom:0"><div style="background:#fff;color:#333" @click="jujue">拒绝</div> <div @click="qd">确定</div></div>
+    </main>
+</div>
+ <style>.pd20{padding:.2rem}</style>

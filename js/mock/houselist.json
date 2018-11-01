@@ -1,0 +1,30 @@
+{
+"myhouse":[
+      {"house":"汇福花园"},
+      {"house":"保利香槟国际"},
+      {"house":"万达广场B区"},
+      {"house":"省人防单位宿舍"},
+      {"house":"世欧王庄王子塔"}
+    ],
+"hstatus":[
+      { "status": "全部", "id": "" },
+      { "status": "已租", "id": "" },
+      { "status": "空置", "id": "" },
+      { "status": "收租", "id": "" },
+      { "status": "到期", "id": "" }
+],
+ "hxtype":[
+      { "hxtypetxt": "不限", "id": "" },
+      { "hxtypetxt": "整租", "id": "" },
+      { "hxtypetxt": "合租", "id": "" }
+    ],
+"houselist":[
+      {"housename":"保利香槟国际","area":"福州市 晋安","rooms":[{"roomname":"1001","roomstatus":"空置中","btnurl":"0","boxcur":"0","btns":[{"btnname":"添加合同","btnurl":"pages/rent/addcontract.html"},{"btnname":"发布房源","btnurl":"pages/rent/addroom.html"}]},{"roomname":"1002","roomstatus":"啦啦了","boxcur":"1","btns":[{"btnname":"查看合同","btnurl":"pages/rent/checkcontract.html"},{"btnname":"房间详情","btnurl":"pages/rent/roominfo.html"}]}]},
+      {"housename":"汇福花园","area":"福州市 台江区","rooms":[{"roomname":"1001","roomstatus":"空置中","boxcur":"0"},{"roomname":"1003","roomstatus":"空置中","boxcur":"0"},{"roomname":"1004","roomstatus":"啦啦了","boxcur":"1"},{"roomname":"1005","roomstatus":"空置中","boxcur":"0"},{"roomname":"1006","roomstatus":"空置中" ,"boxcur":"0"}]},
+      {"housename":"黎明新村","area":"福州市 晋安","rooms":[{"roomname":"1001","roomstatus":"空置中","boxcur":"0"}]},
+      {"housename":"保利香槟国际1","area":"福州市 晋安","rooms":[{"roomname":"1001","roomstatus":"空置中","boxcur":"0"},{"roomname":"1002","roomstatus":"啦啦了" ,"boxcur":"1"}]},
+      {"housename":"汇福花园1","area":"福州市 台江区","rooms":[{"roomname":"1001","roomstatus":"空置中","boxcur":"0"},{"roomname":"1003","roomstatus":"空置中" ,"boxcur":"0"},{"roomname":"1004","roomstatus":"啦啦了" ,"boxcur":"1"},{"roomname":"1005","roomstatus":"空置中" ,"boxcur":"0"},{"roomname":"1006","roomstatus":"空置中" ,"boxcur":"0"}]},
+      {"housename":"黎明新村1","area":"福州市 晋安","rooms":[{"roomname":"1001","roomstatus":"空置中","boxcur":"0"}]}
+    ]
+}
+

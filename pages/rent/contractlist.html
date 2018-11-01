@@ -1,0 +1,81 @@
+<div class="bui-page" id="zuyuelistapp">
+    <header class="bui-bar">
+        <div class="bui-bar-left">
+            <!-- 左边按钮 -->
+             <a class="bui-btn" onclick="bui.back();"><i class="icon-back"></i></a>
+           </div>
+        <div class="bui-bar-main">租约列表</div>
+      <div class="bui-bar-right"><div class="bui-btn"><i class="icon-search"><a @click="gotososo()" style="display: block; height: 0.3rem; width: 0.3rem;"></a></i></div></div>
+    </header>
+    <main>
+      
+       <div class="bg" v-show="show < 4" v-on:click="navs('4')"></div>
+       <div class="fix">
+       <div class="tiaojian">
+      	<div :class="show==1 ? 'option cur':'option'" v-on:click="navs('1')"><span class="optxt k1">租客</span><i></i><em></em></div>
+      	<div :class="show==2 ? 'option cur':'option'" v-on:click="navs('2')"><span class="optxt k2">合同状态</span><i></i><em></em></div>
+      	<!-- <div :class="show==3 ? 'option cur':'option'" v-on:click="navs('3')"><span class="optxt k3">合同类型</span><i></i><em></em></div> -->
+      	<div class="tjlist" v-show="show < 4">
+      		<div class="tj1" v-show="show == 1">
+      			<ul class="tjbox">
+      				<li v-for="(h,index) in trader" @click="overselcet('1',h,index)" :class="now == index ? 'now':''">{{h}}<i></i></li>
+      			</ul>
+      		</div>
+      		<div class="tj1" v-show="show == 2">
+      			<ul class="tjbox">
+              <li @click="overselcet('2','全部',-1)" :class="now1 == -1 ? 'now':''">全部<i></i></li>
+      				<li v-for="(h1,index) in leaseStatus" @click="overselcet('2',h1,index)" :class="now1 == index ? 'now':''">{{h1}}<i></i></li>
+      			</ul>
+      		</div>
+      	<!-- 	<div class="tj2" v-show="show == 3">
+      			<ul class="tjbox">
+      				<li v-for="(h3,index) in leaseType" @click="overselcet('3',h3,index)" :class="now2 == index ? 'now':''">{{h3}}<i></i></li>
+      			</ul>
+      		</div> -->
+      	</div>
+      </div>
+    </div>
+    <div id="scrollcontract" class="bui-scroll">
+      <div class="bui-scroll-head"></div>
+      <div class="bui-scroll-main">
+        <ul id="listcontracts" class="bui-list">
+            <li class="bui-btn" v-for="contracts in clist" v-on:click="hover_info(contracts.room_id,contracts.id,contracts.status,contracts.rent_id)">
+             <div class="contractbox">
+               <div class="contractbox_t">
+                 <span style="color: #666">{{contracts.roomTitle}}</span>
+               </div>
+               <div class="contractbox_m">
+                 <p><em :class="iconface == 0 ? '' : 'yezhu'"></em>{{namesz}}：{{contracts.name}}</p>
+                 <p>租期：{{contracts.start_end}}</p>
+               </div>
+               <div class="contractbox_b">
+                  <span v-if="contracts.status == 1" style="color: #999">进行中</span>
+                 <span v-if="contracts.status == 2" style="color: #4dc2a4">快到期</span>
+                 <span v-if="contracts.status == 3" style="color: #4dc2a4">已到期</span>
+                 <span v-if="contracts.status == 4" style="color: #999">已退房</span>
+                 <span v-if="contracts.leftDay<=7 && contracts.leftDay>0 && contracts.status!= 4">(还有{{contracts.leftDay}}天)</span>
+               </div>
+             </div>
+            </li>
+        </ul>
+      </div>
+      <div class="bui-scroll-foot"></div>
+    </div>
+    </main>
+</div>
+ <style type="text/css">
+      .bui-page>.main, .bui-page>main,.bui-scroll .bui-scroll-foot{ background: #f1f5f8 }
+      .bui-scroll{ margin: 0.9rem 0 0 0 }
+      .bui-list{border-top:none }
+      .addhouse{ display: block;    margin: 0.15rem 0 0.15rem 0.3rem;}
+      .addhouse a{color: #fff;display: block;width: 100%;height: 100%;position: absolute;top: 0; }
+      .bui-bar .bui-bar-left, .bui-bar .bui-bar-right{ width: 1.2rem;}
+      .addhouse a, .icon-search a {
+    color: #fff;
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+}
+ </style>

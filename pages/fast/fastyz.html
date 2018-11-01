@@ -1,0 +1,38 @@
+<div class="bui-page" id="fast">
+    <header class="bui-bar">
+        <div class="bui-bar-left">
+            <a class="bui-btn" onclick="bui.back()"><i class="icon-back"></i></a>
+        </div>
+        <div class="bui-bar-main">快捷发布</div>
+        <div class="bui-bar-right">
+            
+        </div>
+    </header>
+    <main>
+        <div class="fastindex" v-if="mode == 1">
+			<div class="fast_l">
+				<ul>
+ 					<li v-for="lefth in lefthouse" :class="nows == lefth.id?'curs':''" @click="clickleft(lefth.id)">{{lefth.cell_name}}</li>
+				</ul>
+			</div>
+			<div class="fast_r">
+				<ul>
+					<li v-for="housez in rightroom">
+						<p style="margin:0;border-bottom:solid 1px #eee;border-top:none" @click="gotohts(housez.rent_id,housez.owner_id)">{{housez.address_name}}</p>
+					</li>
+				</ul>
+			</div>
+        </div>
+        <div class="fastindex" v-if="mode == 2">
+			<div class="fast_l">
+				<ul>
+ 					<li v-for="lefth in lefthouse2" :class="nows == lefth.id?'curs':''" @click="gotohts2(lefth.id)">{{lefth.apartment}}</li>
+				</ul>
+			</div>
+			
+        </div>
+    </main>
+    <footer>
+        
+    </footer>
+</div>

@@ -1,0 +1,47 @@
+<div class="bui-page" id="fast">
+    <header class="bui-bar">
+        <div class="bui-bar-left">
+            <a class="bui-btn" onclick="bui.back()"><i class="icon-back"></i></a>
+        </div>
+        <div class="bui-bar-main">快捷发布</div>
+        <div class="bui-bar-right">
+            
+        </div>
+    </header>
+    <main>
+        <div class="fastindex" v-if="mode == 1">
+			<div class="fast_l">
+				<ul>
+ 					<li v-for="lefth in lefthouse" :class="nows == lefth.id?'curs':''" @click="clickleft(lefth.id)">{{lefth.cell_name}}</li>
+				</ul>
+			</div>
+			<div class="fast_r">
+				<ul>
+					<li v-for="housez in rightroom">
+						<p>{{housez.address_name}}</p>
+						<p v-for="rooms in housez.room" @click="gotoht(rooms.id,rooms.tenant_id)">{{rooms.room_no}}</p>
+					</li>
+				</ul>
+			</div>
+        </div>
+        <div class="fastindex" v-if="mode == 2">
+			<div class="fast_l">
+				<ul>
+ 					<li v-for="lefth in lefthouse2" :class="nows == lefth.id?'curs':''" @click="clickleft2(lefth.id)">{{lefth.apartment}}</li>
+				</ul>
+			</div>
+			<div class="fast_r">
+				<ul>
+					<li v-for="housez in rightroom2">
+						<p>{{housez.floor}}楼</p>
+						 <p v-for="rooms in housez.room" @click="gotoht(rooms.id,rooms.tenant_id)">{{rooms.room_no}}</p>
+					
+					</li>
+				</ul>
+			</div>
+        </div>
+    </main>
+    <footer>
+        
+    </footer>
+</div>

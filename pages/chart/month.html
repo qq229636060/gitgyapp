@@ -1,0 +1,184 @@
+<div class="bui-page" id="month">
+    <header class="bui-bar">
+        <div class="bui-bar-left">
+            
+            <a class="bui-btn" onclick="bui.back()"><i class="icon-back"></i></a>
+        </div>
+        <div class="bui-bar-main"><input type="" name="" id="xztime" readonly="readonly"></div>
+        <div class="bui-bar-right">
+        	<div class="bui-btn"><i id="editday" class="icon-more2"></i></div>
+        </div>
+    </header>
+    <main>
+      <div id="uiSlideTab" class="bui-tab">
+          <div class="bui-tab-head">
+              <ul class="bui-nav">
+                  <li class="bui-btn active">运营</li>
+                  <li class="bui-btn">财务</li>
+              </ul>
+          </div>
+          <div class="bui-tab-main" v-cloak>
+              <ul>
+                  <li>
+                  	 <div class="getdata" v-show="st == 1">
+                     <div class="table710">
+						<div class="tongjiboxs"><div class="tongjiboxs_title"><i></i>房源状况</div>
+						<div class="tongjiboxs_boxs"><div>
+						 	<p>{{mdata.rent_rate}}</p> 
+						 	<p>入住率</p>
+						 	</div> 
+						 	<div><p>{{mdata.room_empty_average}}</p> 
+							<p>平均空置天数</p>
+							</div>
+							</div>
+						</div>
+					    <div class="fix4">
+							<div class="sfix">
+								<p><em>{{mdata.room_total}}</em></p>
+								<p>总房间</p>
+							</div>
+							<div class="sfix">
+								<p><em>{{mdata.room_new}}</em></p>
+								<p>新增房间</p>
+							</div>
+							<div class="sfix">
+								<p><em>{{mdata.room_rent}}</em></p>
+								<p>在租房间</p>
+							</div>
+							<div class="sfix">
+								<p><em>{{mdata.room_empty}}</em></p>
+								<p>空置房间</p>
+							</div>
+					    </div>
+					    <div class="tongjiboxs_boxs">
+					    	<div>
+						 	<p>{{mdata.room_average_price}}</p> 
+						 	<p>平均出房价格(元)</p>
+						 	</div> 
+						 	<div><p>{{mdata.room_average_time}}</p> 
+							<p>平均出房时间(天)</p>
+							</div>
+						</div>
+						<div class="fix4">
+							<div class="sfix">
+								<p><em>{{mdata.room_empty_month}}</em></p>
+								<p>整月空置</p>
+							</div>
+							<div class="sfix">
+								<p><em>{{mdata.room_rent_new}}</em></p>
+								<p>新租房间</p>
+							</div>
+							<div class="sfix">
+								<p><em>{{mdata.room_rent_renew}}</em></p>
+								<p>续租房间</p>
+							</div>
+							<div class="sfix">
+								<p><em>{{mdata.room_return}}</em></p>
+								<p>退租房间</p>
+							</div>
+					    </div>
+						</div>
+						<div class="tubiao" id="tubiao"></div>
+						<div class="tubiao" id="tubiao2"></div>
+					</div>
+					<div class="nones" v-show="st == 0"><img src="../../images/icon/nones.png"> <p>没有数据</p></div>
+                  </li>
+                  <li>
+                      <div class="getdata" v-show="st1 == 1">
+                      	<div class="table710">
+							<div class="tongjiboxs"><div class="tongjiboxs_title"><i></i>房源状况</div>
+							<div class="tongjiboxs_boxs">
+							<div style="margin:0 auto;text-align:center">
+						 	<p>{{mcaiwudata.bill_total}}</p> 
+						 	<p>总账单(个)</p>
+						 	</div> 
+						</div>
+						<div class="fix4">
+							<div class="sfix">
+								<p><em>{{mcaiwudata.bill_received}}</em></p>
+								<p>应收账单</p>
+							</div>
+							<div class="sfix">
+								<p><em>{{mcaiwudata.bill_paid}}</em></p>
+								<p>应付账单</p>
+							</div>
+							<div class="sfix">
+								<p><em>{{mcaiwudata.bill_unreceived}}</em></p>
+								<p>待收账单</p>
+							</div>
+							<div class="sfix">
+								<p><em>{{mcaiwudata.bill_unpaid}}</em></p>
+								<p>待付账单</p>
+							</div>
+					    </div>
+                      </div>
+                  </div>
+                   <div class="table710">
+					   <div class="tongjiboxs"><div class="tongjiboxs_title"><i></i>本月收支</div>
+					   <div class="bigmonth_box">
+					   	 <div class="bigmonth_box_l">
+							<p>{{mcaiwudata.money_rate}}</p>
+							<p>回款率</p>
+					   	 </div>
+					   	 <div class="bigmonth_box_r">
+							<p><em>应收已收(元)：{{mcaiwudata.money_received}}</em></p>
+							<p><em>应收未收(元)：{{mcaiwudata.money_unreceived}}</em></p>
+					   	 </div>
+					   </div>
+					</div>
+             	  </div>
+             	    <div class="table710">
+					   <div class="tongjiboxs"><div class="tongjiboxs_title"><i></i>收入</div>
+					   <div class="bigmonth_box">
+					   	 <div class="bigmonth_box_l">
+							<p>{{mcaiwudata.revenue_total}}</p>
+							<p>总收入</p>
+					   	 </div>
+					   	 <div class="bigmonth_box_r">
+							<p><em>租金收入(元)：{{mcaiwudata.revenue_rent}}</em></p>
+							<p><em>押金收入(元)：{{mcaiwudata.revenue_deposit}}</em></p>
+							<p><em>杂费收入(元)：{{mcaiwudata.revenue_sundry}}</em></p>
+					   	 </div>
+					   </div>
+					</div>
+             	  </div>
+             	  <div class="table710">
+					   <div class="tongjiboxs"><div class="tongjiboxs_title"><i></i>支出</div>
+					   <div class="bigmonth_box">
+					   	 <div class="bigmonth_box_l">
+							<p>{{mcaiwudata.disburse_total}}</p>
+							<p>总支出</p>
+					   	 </div>
+					   	 <div class="bigmonth_box_r">
+							<p><em>租金支出(元)：{{mcaiwudata.disburse_rent}}</em></p>
+							<p><em>押金支出(元)：{{mcaiwudata.disburse_deposit}}</em></p>
+							<p><em>杂费支出(元)：{{mcaiwudata.disburse_sundry}}</em></p>
+					   	 </div>
+					   </div>
+					</div>
+             	  </div>
+             	    <div class="table710">
+					   <div class="tongjiboxs"><div class="tongjiboxs_title"><i></i>下月租金预期</div>
+					   <div class="bigmonth_box">
+					   	 <div class="bigmonth_box_l">
+							<p>{{mcaiwudata.expect_difference}}</p>
+							<p>预计租金收支差</p>
+					   	 </div>
+					   	 <div class="bigmonth_box_r">
+							<p><em>预计租金收入(元)：{{mcaiwudata.expect_revenue}}</em></p>
+							<p><em>预计租金支出(元)：{{mcaiwudata.expect_disburse}}</em></p>
+					   	 </div>
+					   </div>
+					</div>
+             	  </div>
+                      <div class="nones" v-show="st1 == 0"><img src="../../images/icon/nones.png"> <p>没有数据</p>
+                      </div>
+                  </div></li>
+              </ul>
+          </div>
+      </div>
+    </main>
+    <footer>
+        
+    </footer>
+</div>

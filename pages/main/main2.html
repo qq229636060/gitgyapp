@@ -1,0 +1,133 @@
+<!-- 这里还是一个标准的BUI页面 -->
+<div class="bui-page" id="main2">
+    <header class="bui-bar">
+        <div class="bui-bar-main" @click="fensan"><i class="fj">集</i>首页</div>
+    </header>
+    <main>
+      <div class="indexshju" >
+        <div class="indextitle"><i></i>您的待办</div>
+        <div class="indextopshuju">
+           <div class="shujuboxs">
+            <a href="pages/finance/zhangdan.html?mode=2&status=1&money_type=1">
+             <p>{{rtb}}</p>
+             <p>应收未收(元)</p>
+            </a>
+           </div>
+           <div class="shujuboxs">
+             <a href="pages/finance/zhangdan.html?mode=2&status=2&money_type=2">
+             <p>{{ow}}</p>
+             <p>应付未付(元)</p>
+            </a>
+           </div>
+        </div>
+        <div class="shujubottom">
+           <div class="shujuboxs">
+             <a href="pages/rent/contractlist.html?status=1">
+             <p><i>{{expire_7day}}</i>笔</p>
+             <p>快到期(未来7天)</p>
+           </a>
+           </div>
+           <div class="shujuboxs">
+            <a href="pages/rent/contractlist.html?status=2">
+             <p><i>{{expire_0day}}</i>个</p>
+             <p>合同到期</p>
+           </a>
+           </div>
+           <div class="shujuboxs" @click="gotyuyue()">
+             <p><i>{{room_bespeak}}</i>个</p>
+             <p>未处理预约</p>
+           </div>
+        </div>
+      </div>
+       <div class="fast">
+         <div class="fastbox">
+           <a class="gotohouse">
+             <p class="fasticon1"></p>
+             <p>房源</p>
+           </a>
+         </div>
+         <div class="fastbox" >
+          <a href="pages/rent/contractlist.html">
+           <p class="fasticon2"></p>
+           <p>租约</p>
+          </a>
+         </div>
+         <div class="fastbox">
+            <a href="pages/finance/zhangdan.html?mode=2">
+           <p class="fasticon3"></p>
+           <p>账单</p>
+         </a>
+         </div>
+         <div class="fastbox">
+          <a href="pages/finance/money.html?mode=2">
+           <p class="fasticon4"></p>
+           <p>流水</p>
+          </a>
+         </div>
+         <div class="fastbox">
+           <a href="pages/release/releaseindex2.html?mode=2">
+           <p class="fasticon5"></p>
+           <p>发布</p>
+         </a>
+         </div>
+       </div>
+       <div class="indextongji">
+          <div class="indextitle"><i></i><a href="pages/chart/month.html">报表统计</a></div>
+          <div class="tongjiboxs">
+            <div class="tongjiboxs_title"><i></i>房源状况</div>
+            <div class="tongjiboxs_boxs">
+              <div>
+                 <a href="pages/chart/month.html">
+                 <p>{{rent_rate}}</p>
+                 <p>上月入住率</p>
+                 </a>
+              </div>
+              <div>
+                 <a href="pages/chart/month.html">
+                 <p>{{room_average_price}}</p>
+                 <p>上月平均出房价格(元)</p>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="tongjiboxs">
+            <div class="tongjiboxs_title"><i></i>财务状况</div>
+            <div class="tongjiboxs_boxs">
+              <div>
+                 <p>{{money_rate}}</p>
+                 <p>上月回款率</p>
+              </div>
+              <div>
+                 <p>{{expect_difference}}</p>
+                 <p>本月预计收支差(元)</p>
+              </div>
+            </div>
+          </div>
+       </div>
+        <!--  <div>
+         <a href="pages/rent/contractlist.html" class="bui-btn">租约列表</a>
+         </div> -->
+        <!-- 中间内容 -->
+    </main>
+   <footer>
+       <div class="footers">
+       <div class="cur" class="gotoindex">
+        <img src="../../images/icon/home-g50.png?i=1">
+        <p>首页</p>
+      </div>
+       <div class="gotohouse">
+        <img src="../../images/icon/house50.png?i=1">
+        <p>房源</p>
+      </div>
+       <div><img src="../../images/icon/footadd.png" class="footadd"></div>
+       <div class="gotoyuyue">
+        <img src="../../images/icon/time50.png?i=1">
+        <p>预约</p>
+      </div>
+       <div class="my">
+        <img src="../../images/icon/user50.png?i=1">
+        <p>我的</p>
+      </div>
+     </div>
+    </footer>
+</div>

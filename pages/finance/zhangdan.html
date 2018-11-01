@@ -1,0 +1,92 @@
+<div class="bui-page" id="zhangdan">
+    <header class="bui-bar">
+      <div class="bui-bar-left">
+            <!-- 左边按钮 -->
+        <a class="bui-btn" onclick="bui.back();"><i class="icon-back"></i></a>
+        </div>
+        <div class="bui-bar-main">账单列表</div>
+          <div class="bui-bar-right">
+          <div class="bui-btn">
+            <i class="icon-search"><a href="pages/finance/zhangdanso.html" style="display: block; height: 0.3rem; width: 0.3rem"></a></i>
+          </div>
+        </div>
+    </header>
+    <main>
+       <div class="tj_times" v-cloak>
+          <input class="tjtimes" id="starttimes" type="text" readonly="readonly">
+          &nbsp;一&nbsp;
+          <input class="tjtimes" id="endtimes" type="text" readonly="readonly">
+       </div>
+       <div class="bg" v-show="show < 4" v-on:click="navs('4')"></div>
+       <div class="fix" style="top:2rem">
+       <div class="tiaojian" v-cloak>
+      	<div :class="show==1 ? 'option cur':'option'" v-on:click="navs('1')"><span class="optxt k1">房源位置</span><i></i><em></em></div>
+      	<div :class="show==2 ? 'option cur':'option'" v-on:click="navs('2')"><span class="optxt k2">账单状态</span><i></i><em></em></div>
+        <div :class="show==3 ? 'option cur':'option'" v-on:click="navs('3')"><span class="optxt k3">账单对象</span><i></i><em></em></div>
+      	<div class="tjlist" v-show="show < 4">
+      		<div class="tj1" v-show="show == 1">
+      			<ul class="tjbox">
+              <li @click="overselcet('1','全部',-1,0)" :class="now == -1 ? 'now':''">全部<i></i></li>
+      				<li v-for="(h,index) in zuyuetype" @click="overselcet('1',h.name,index,h.ids)" :class="now == index ? 'now':''">{{h.name}}<i></i></li>
+      			</ul>
+      		</div>
+      		<div class="tj1" v-show="show == 2">
+      			<ul class="tjbox">
+              <li @click="overselcet('2','全部',-2,0)" :class="now == -2 ? 'now':''">全部<i></i></li>
+      				<li v-for="(h1,index) in htstyle" @click="overselcet('2',h1.name,index,h1.ids)" :class="now1 == index ? 'now':''">{{h1.name}}<i></i></li>
+      			</ul>
+      		</div>
+          <div class="tj1" v-show="show == 3">
+            <ul class="tjbox">
+              <li @click="overselcet('3','全部',-3,0)" :class="now == -3 ? 'now':''">全部<i></i></li>
+              <li v-for="(h2,index) in yezhu" @click="overselcet('3',h2.name,index,h2.ids)" :class="now1 == index ? 'now':''">{{h2.name}}<i></i></li>
+            </ul>
+          </div>
+      	</div>
+      </div>
+    </div>
+ 
+    <div id="scrollcontract" class="bui-scroll mt9" v-cloak>
+      <div class="bui-scroll-head"></div>
+      <div class="bui-scroll-main">
+        <ul id="listcontracts" class="bui-list">
+ <li class="bui-btn" v-for="(contracts, index) in clist" @click="hoverinfo(contracts.id,contracts.billStatus,contracts.tenant_id,contracts.owner_id,contracts.cate)">
+             <div class="contractbox">
+               <div class="contractbox_t">
+                 <span>{{contracts.roominfo}}</span>
+                 <span v-if="contracts.billStatus == 0"></span>
+                 <span v-if="contracts.billStatus == 1" style="color: #f7a700">应处理</span>
+                 <span v-if="contracts.billStatus == 2" style="color: #fc7c7a">已逾期</span>
+                 <span v-if="contracts.billStatus == 3" style="color: #27cda1">未到期</span>
+                 <span v-if="contracts.billStatus == 4" style="color: #999999">已处理</span>
+               </div>
+               <div class="contractbox_m">
+                 <p>{{contracts.jydx}}<i class="smline">:</i>{{contracts.jydxname}}</p>
+                 <p>应收款日:{{contracts.rent_time}}</p>
+                 <div class="listmoneys">￥{{contracts.money}}</div>
+               </div>
+             </div>
+            </li>
+        </ul>
+      </div>
+      <div class="bui-scroll-foot"></div>
+    </div>
+    </main>
+   </div>
+
+ <style>.bui-page>.main,.bui-page>main,.bui-scroll .bui-scroll-foot{background:#f1f5f8}.bui-list{border-top:none}.addhouse{display:block;margin:.15rem 0 .15rem .3rem}.addhouse a{color:#fff;display:block;width:100%;height:100%;position:absolute;top:0}.bui-bar .bui-bar-left,.bui-bar .bui-bar-right{width:1.2rem}#money .bui-scroll{margin:1rem 0 0 0}#money .bg{z-index:1}#money .contractbox_t span{color:#333;font-size:.3rem;line-height:.46rem}#zhangdan .contractbox_t span:last-child{font-size:.28rem;color:#999;width:1.2rem;text-align:right}.mt9 {
+    margin: .9rem 0 0 0;}.contractbox_t span:first-child{ width: 5.6rem; }.listmoneys{color: #333}
+    #zhangdan .contractbox_t span {
+    color: #333;
+    font-size: .3rem;
+    line-height: .46rem;
+}
+.addhouse a, .icon-search a {
+    color: #fff;
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+}
+  </style>

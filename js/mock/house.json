@@ -1,0 +1,12 @@
+{
+"name":1,
+"houselist":[
+      {"housename":"保利香槟国际","area":"福州市 晋安","boxcur":"0","rooms":[{"roomname":"1001","roomstatus":"空置中","btns":[{"btnname":"添加合同","btnurl":"pages/rent/addcontract.html"},{"btnname":"发布房源","btnurl":"pages/rent/addroom.html"}]},{"roomname":"1002","roomstatus":"租客:啦啦了","btns":[{"btnname":"查看合同","btnurl":"pages/rent/checkcontract.html"},{"btnname":"房间详情","btnurl":"pages/rent/roominfo.html"}]}]},
+      {"housename":"汇福花园","area":"福州市 台江区","boxcur":"1","rooms":[{"roomname":"1001","roomstatus":"空置中","btns":[{"btnname":"添加合同","btnurl":""},{"btnname":"发布房源","btnurl":""}]},{"roomname":"1003","roomstatus":"空置中","btns":[{"btnname":"添加合同","btnurl":""},{"btnname":"发布房源","btnurl":""}]},{"roomname":"1004","roomstatus":"租客:啦啦了","btns":[{"btnname":"添加合同","btnurl":"addcontract.html"},{"btnname":"发布房源","btnurl":""}]},{"roomname":"1005","roomstatus":"空置中","btns":[{"btnname":"添加合同","btnurl":""},{"btnname":"发布房源","btnurl":""}]},{"roomname":"1006","roomstatus":"空置中","btns":[{"btnname":"添加合同","btnurl":""},{"btnname":"发布房源","btnurl":""}]}]},
+      {"housename":"黎明新村","area":"福州市 晋安","boxcur":"0","rooms":[{"roomname":"1001","roomstatus":"空置中"}]},
+      {"housename":"保利香槟国际1","area":"福州市 晋安","boxcur":"0","rooms":[{"roomname":"1001","roomstatus":"空置中","btns":[{"btnname":"添加合同","btnurl":""},{"btnname":"发布房源","btnurl":""}]},{"roomname":"1002","roomstatus":"租客:啦啦了","btns":[{"btnname":"添加合同","btnurl":""},{"btnname":"发布房源","btnurl":""}]}]},
+      {"housename":"汇福花园1","area":"福州市 台江区","boxcur":"0","rooms":[{"roomname":"1001","roomstatus":"空置中"},{"roomname":"1003","roomstatus":"空置中"},{"roomname":"1004","roomstatus":"租客:啦啦了"},{"roomname":"1005","roomstatus":"空置中","btns":[{"btnname":"添加合同","btnurl":""},{"btnname":"发布房源","btnurl":""}]},{"roomname":"1006","roomstatus":"空置中","btns":[{"btnname":"添加合同","btnurl":""},{"btnname":"发布房源","btnurl":""}]}]},
+      {"housename":"黎明新村1","area":"福州市 晋安","boxcur":"0","rooms":[{"roomname":"1001","roomstatus":"空置中"}]}
+    ]
+}
+

@@ -1,0 +1,96 @@
+<div class="bui-page" id="houseinfo_app">
+    <header class="bui-bar">
+        <div class="bui-bar-left">
+            
+            <a class="bui-btn" @click="houtui"><i class="icon-back"></i></a>
+        </div>
+        <div class="bui-bar-main">房源详情</div>
+        <div class="bui-bar-right">
+           <div class="bui-btn"><i class="icon-more2" id="housebtnopen"></i></div>
+        </div>
+    </header>
+    <main>
+      <ul class="formbox">
+            <li>房屋信息</li>
+            <li><em>所在城市</em><div class="linebox">{{houseinfo.city}}</div></li>
+            <li v-if="mode == 2"><em>公寓名称</em><div class="linebox">{{houseinfo.gyname}}</div></li>
+            <li><em>小区名称</em><div class="linebox">{{houseinfo.xqname}}</div></li>
+            <li><em>所属区域</em><div class="linebox">{{houseinfo.qy}}{{houseinfo.qy1}}</div></li>
+            <li>
+              <em v-if="mode == 1">小区地址</em>
+              <em v-if="mode == 2">公寓地址</em>
+              <div class="linebox">{{houseinfo.xqadder}}</div>
+            </li>
+            <li v-if="mode == 2">
+              <em>楼层总数</em>
+              <div class="linebox">
+                {{houseinfo.zfloor}}楼
+              </div>
+            </li>
+            <li v-if="mode == 2">
+              <em>总房间数</em>
+              <div class="linebox">
+                {{houseinfo.zrooms}}间
+              </div>
+            </li>
+            <li v-if="mode == 2">
+              <em>公共区域</em>
+            </li>
+            <li class="roomspz" v-if="mode == 2">
+              <span v-for="shebei in houseinfo.pub" :class="shebei.state == 1?'cur':''">{{shebei.name}}</span>
+            </li>
+            <li v-if="mode == 1"><em>楼栋门牌</em><div class="linebox">{{houseinfo.mp1}}栋{{houseinfo.mp2}}单元{{houseinfo.mp3}}楼{{houseinfo.mp4}}号</div></li>
+            <li v-if="mode == 1"><em>租凭方式</em><div class="linebox">{{houseinfo.zuping}}</div></li>
+        </ul>
+        <ul class="formbox">
+            <li>房间信息</li>
+        </ul>
+        <ul id="listview" class="bui-listview">
+        <li v-for="rooms in houseinfo.rooms" :data_roomid="rooms.id" v-if=" mode== 1">
+          <div class="bui-btn bui-box">
+            <div class="span1">
+            <span>{{rooms.room_no}}</span>
+            <span>{{rooms.state}}</span>
+           </div>
+          </div>
+        </li>
+         <li v-for="floorz in houseinfo.jzrooms" :data_floor="floorz.id" v-if="mode== 2">
+          <div class="bui-btn bui-box">
+            <div class="span1" @click="gotofloorroom(floorz.id,floorz.floor,floorz.room,houseinfo.gyname)">
+            <span>{{floorz.floor}}楼</span>
+            <span class="spanz">已有{{floorz.room}}间房</span>
+            <i></i>
+           </div>
+          </div>
+        </li>
+      </ul>
+    </main>
+ <footer>
+  <div class="bottombtn" id="savehouse" @click="gotoyzcontract()">
+    <div style="width:100%" v-if="ownerid == 0">录入业主合同</div>
+    <div style="width:100%" v-if="ownerid != 0">查看业主合同</div>
+  </div>
+</footer>
+    
+        <div id="uiDialog" class="bui-dialog">
+            <div class="bui-dialog-head"></div>
+            <div class="bui-dialog-main">
+                <div class="container-xy">
+                   <div class="window_floor">
+                     <em>楼层名:</em><input type="number" name="" v-model="addfloors">
+                   </div>
+                   <div class="window_floor">
+                     <em>房间数:</em><input type="number" name="" v-model="addrooms">
+                   </div>
+                </div>
+            </div>
+            <div class="bui-dialog-foot">
+                <div class="bui-box">
+                    <div class="span1"><div class="bui-btn">取消</div></div>
+                    <div class="span1"><div class="bui-btn blue">确定</div></div>
+                </div>
+            </div>
+            <div class="bui-dialog-close"><i class="icon-close"></i></div>
+        </div>
+</div> 
+<style>#houseinfo_app .bui-listview>li>[class*=bui-btn]{padding-top:.29rem;padding-bottom:.29rem;font-size:.3rem}#houseinfo_app #listview .span1{display:flex;display:-webkit-flex;justify-content:space-between}#houseinfo_app #listview .span1 span:last-child{margin:0 .1rem 0 0}#houseinfo_app .formbox li{justify-content:space-between}#houseinfo_app .linebox{text-align:right;padding-right:.23rem}.bui-box-center .fxk{border:solid 1px #666;width:.25rem;height:.25rem;display:inline-block;border-radius:.05rem;position:relative;top:.02rem;right:.1rem;overflow:hidden;font-size:.28rem;line-height:.2rem;text-align:left}#listview li i{width:.16rem;height:.29rem;background:url(../images/icon/go.png) no-repeat 0 0;background-size:100%;display:inline-block;position:absolute;right:.2rem;top:.35rem}#listview li .spanz{margin-right:.3rem}#houseinfo_app .formbox .roomspz{display:flex;display:-webkit-flex;flex-wrap:wrap;justify-content:flex-start;border:none;margin-top:0;padding-top:0}.roomspz span{width:1.58rem;height:.87rem;text-align:center;line-height:.87rem;font-size:.3rem;color:#666;border:solid 1px #eeeff1;border-radius:.1rem;margin:0 .23rem .2rem 0}.roomspz .cur{border:solid 1px #c9e4e1;color:#4dc2a4}.window_floor{font-size:.3rem;display:flex;display:-webkit-flex;margin:0 0 .3rem 0}.window_floor em{font-style:normal;width:1.5rem;margin:0 .2rem 0 0;text-align:right}.window_floor input{border:solid 1px #eee;width:3.8rem}</style>

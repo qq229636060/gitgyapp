@@ -1,0 +1,49 @@
+<div class="bui-page" id="zdinfo">
+    <header class="bui-bar">
+      <div class="bui-bar-left">
+        <a class="bui-btn" onclick="bui.back();"><i class="icon-back"></i></a>
+        </div>
+        <div class="bui-bar-main">{{usenames}}账单详情</div>
+        <div class="bui-bar-right"><i class="icon-more2" id="mores"></i></div>
+    </header>
+    <main>
+      <div class="cont_top">
+        <div class="cont_top_l">
+          <div>{{housename}}</div>
+        </div>
+       <div class="cont_top_r" v-show="cate == 1">
+        <a :href="'tel:'+ tel"><em></em></a>
+      </div>
+    </div>
+      <div class="yuyuetype">
+        <div>账单状态</div>
+         <div v-if="zt == 1" style="color: #f7a700">应处理</div>
+         <div v-if="zt == 2" style="color: #fc7c7a">已逾期</div>
+         <div v-if="zt == 3" style="color: #27cda1">未到期</div>
+         <div v-if="zt == 4" style="color: #999999">已处理</div> 
+    </div>
+      <ul class="formbox">
+      <li class="pd20"><em>基本信息</em></li>
+      <li><em>姓名</em><div class="linebox">{{zkname}}</div></li> 
+      <li><em>账单周期</em><div class="linebox">{{zqtime}}</div></li>
+      <li><em>应收款日</em><div class="linebox">{{rentTime}}</div></li>
+      <li v-if="zt == 4"><em>支付方式</em><div class="linebox">{{payWay}}</div></li>
+      <li v-if="zt == 4"><em>实际支付时间</em><div class="linebox">{{jzTime}}</div></li>
+      <li><em>备注</em><div class="linebox">{{remarks}}</div></li>
+    </ul>
+    <ul class="formbox">
+        <li class="pd20"><em>费用信息</em></li>
+        <li v-for="m in feiyong"><em>{{m.name}}</em><div class="linebox">{{m.money}} 元</div></li> 
+    </ul>
+    <ul class="formbox" style="margin: 0.2rem 0 1rem 0">
+        <li style="background: #FFF; color: #333"><em>费用总计</em><div class="linebox">{{zmoney}} 元</div></li>
+    </ul>
+      <div v-show="zt!=4" class="bottombtn" style=" position: fixed; bottom: 0">
+        <div style="background: #FFF; color: #333" @click="cuizu" v-show="yezhuorzuke==1">催租</div><div @click="qd" :class="yezhuorzuke!=1?'w100':''">确认交租</div>
+      </div>
+    </main>
+   </div>
+<style type="text/css">
+#zdinfo .icon-more2{ font-size: 0.36rem; color: #fff; line-height: 0.68rem;}
+.bottombtn > .w100{ width:7.5rem; }
+</style>

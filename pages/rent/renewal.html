@@ -1,0 +1,116 @@
+<div class="bui-page" id="apps">
+    <header class="bui-bar">
+        <div class="bui-bar-left">
+            <!-- 左边按钮 -->
+            <a class="bui-btn" onclick="bui.back();"><i class="icon-back"></i></a>
+        </div>
+        <div class="bui-bar-main">续租合同</div>
+        <div class="bui-bar-right">
+            <!-- 右边按钮 -->
+        </div>
+    </header>
+    <main>
+        <form @submit.prevent="submit" v-cloak>
+          <div class="add_housename">{{formboxs.hnames}}</div>
+          <ul class="formbox hetong">
+            <li><em></em></li>
+            <li v-bind:class="formboxs.hetong == 0 ? 'nows':''" @click="clickht(0)"><font><b></b></font>已签纸质合同</li>
+            <li v-bind:class="formboxs.hetong == 1 ? 'nows':''" @click="clickht(1)"><font><b></b></font>新签电子合同<b class="colors">(推荐)</b></li>
+          </ul>
+          <ul class="formbox">
+            <li><em></em></li>  
+            <li><em>租客姓名</em><div class="linebox"><input type="text" name="" placeholder="请输入租客姓名" v-model="formboxs.name"/></div></li>
+            <li><em>手机号码</em><div class="linebox"><input type="tel" name="" placeholder="请输入手机号" v-model="formboxs.tel" @blur="telfunction"/></div></li>
+            <li><em>证件类型</em><div class="linebox">身份证 </div></li>
+            <li><em>证件号码</em><div class="linebox"><input type="text" name="" placeholder="请输入有效证件号码" v-model="formboxs.Id" @blur="idcard"/></div></li>
+          </ul>
+          <div id="idpic">
+          <div class="idphotos">
+            <p>请上传证件照片：</p>
+            <div id="uploader-demo">
+            <div id="fileList" class="uploader-list"><div id="filePicker"></div></div>
+        </div>
+          </div>
+        </div>
+           <div id="uploads">
+          <div class="idphotos">
+            <p>请合同照片：</p>
+            <div id="uploader-demo1">
+            <div id="fileList1" class="uploader-list"> <div id="filePicker1"></div></div>
+        </div>
+          </div>
+        </div>
+          <ul class="formbox">
+            <li><em></em></li>  
+            <li><em>租约起始</em>
+              <div class="linebox" v-show="noedit"><input type="text" id="datepicker_input_s" readonly class="bui-input"  v-model="formboxs.times"></div>
+              <div class="linebox huis" v-show="!noedit">{{formboxs.times}}</div>
+            </li>
+            <li><em>租期终止</em>
+              <div class="linebox"><input type="text"id="datepicker_input_e" readonly class="bui-input" v-model="formboxs.timee"></div>
+            </li>
+            <li><em>支付方式</em>
+              <div class="linebox">
+                <select v-model="formboxs.payfunction" class="selects">
+                  <option v-for="coupon in paydata" v-bind:value="coupon.val">{{coupon.name}}</option>
+                </select>
+              </div>
+              <i v-show="noedit"></i>
+            </li>
+            <li><em>收租日</em><div class="linebox">
+              <div id="daySelect">
+                <div class="selected-val"></div>
+                <div class="selected-val"></div>
+              </div>
+            </div>
+              <i></i>
+            </li>
+            <li><em>房屋租金</em>
+              <div class="linebox"><input type="tel" name="" placeholder="请输入房屋租金金额" v-model="formboxs.zujin"/></div>
+            </li>
+            <li><em>房屋押金</em>
+              <div class="linebox" v-show="noedit"><input type="tel" name="" placeholder="请输入房屋押金金额" v-model="formboxs.yajin"/></div>
+              <div class="linebox huis" v-show="!noedit">{{formboxs.yajin}}</div>
+            </li>
+             <li><em>备注</em>
+              <div class="linebox" v-show="noedit"><input type="tel" name="" placeholder="请输入备注" v-model="formboxs.beizhu"/></div>
+              <div class="linebox huis" v-show="!noedit">{{formboxs.beizhu}}</div>
+            </li>
+          </ul>
+          <div class="other">
+            <div class="addother">
+              <div class="othername">其他费用</div>
+              <div class="addotherbtn" id="addotherbtn">+添加费用</div>
+            </div>
+          </div>
+        </form>
+    </main>
+    <footer>
+      <div class="bottombtn">
+          <div v-on:click="submit(0)">合同预览</div>
+          <div v-on:click="submit(1)">完成</div>
+        </div>
+    </footer>
+</div>
+    <style type="text/css">
+      .bui-dialog .bui-dialog-main,.bui-list>[class*=bui-btn]{font-size: .3rem;}
+      #daySelect{display: flex; display:-webkit-flex}
+      .bui-list>.bui-btn-line {padding-top: 0.1rem;padding-bottom: 0.1rem;line-height: .62rem;}
+      .bui-levelselect .bui-dialog-head,.bui-dialog-head{ font-size: .32rem; height: 1rem; line-height: 1rem; background: #27cda1; color: #fff }
+      .bui-dialog .bui-dialog-head{ color: #FFF; padding-bottom: 0; height: 1rem; line-height: 1rem; }
+      .bui-levelselect .select-value{ padding-top:0.1rem; padding-bottom: 0.1rem;  }
+      .bui-dialog .bui-dialog-close i{ color: #FFF; font-size: .36rem }
+      .bui-dialog .bui-dialog-close{ top:0.2rem; }
+      .bui-alert .bui-dialog-head{ height:.3rem; line-height: 0.6rem; font-size: .26rem; }
+      .bui-alert .bui-box-center{ font-size: .28rem; }
+      
+   .formbox li:first-child {color: #999;background: #f1f5f8;border: none;margin: 0;padding-left: .23rem;position: relative;padding: 0.05rem 0;}
+      .colors{ color: #27cda1; font-weight: normal; }
+      .formbox font{ width:.36rem; height: .36rem; border: solid 1px #ccc ; background: #f1f5f8; display: inline-block; border-radius: 50%; margin: 0 0.1rem 0 0;  }
+      .formbox font b{ width: .18rem; height: .18rem; background: #f1f5f8;border-radius: 50%;display: block; margin: 0.07rem auto; }
+      .nows font{background:#27cda1;position: relative; top:0.05rem;};
+      .nows font b{ background: #FFF } 
+      .idpic a{ color: #ccc }
+       select{color: #ccc}
+       .huis{ color: #ccc }
+    </style>

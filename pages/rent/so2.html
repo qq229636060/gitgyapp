@@ -1,0 +1,90 @@
+<div class="bui-page" id="so2">
+  <header class="bui-bar">
+    <div class="bui-bar-left"> 
+      <!-- 左边按钮 --> 
+      <a class="bui-btn" onclick="bui.back();"><i class="icon-back"></i></a> </div>
+    <div class="bui-bar-main">搜索</div>
+    <div class="bui-bar-right"> 
+      <!-- 右边按钮 --> 
+    </div>
+  </header>
+  <main>
+    <div id="searchbar" class="bui-searchbar bui-box">
+      <div class="span1">
+        <div class="bui-input"> <i class="icon-search"></i>
+          <input type="search" value="" placeholder="房间名、租客名、手机号"/>
+        </div>
+      </div>
+      <div class="btn-search">搜索</div>
+    </div>
+    <!-- 列表控件结构 -->
+     <div id="scroll2" class="bui-scroll" v-cloak v-show="noneshow == 1">
+      <div class="bui-scroll-head"></div>
+      <div class="bui-scroll-main">
+        <ul id="list" class="bui-list">
+            <li class="bui-btn" v-for="(bighouse,indexs) in houselist">
+              <div class="housebox">
+                <div class="myhousebox" @click="gotohouseinfo(bighouse.floor[0].rent_id)">
+                  <p>{{bighouse.apartment}}</p>
+                </div>
+              <div class="floorbox">
+                <div class="fbox" v-for="flbox in bighouse.floor">
+                <div class="numberfloor">—— {{flbox.floor}}楼 ——</div>
+                  <div class="bigsroom">
+                <div :class="rooms.st == '0' ? 'rooms' : 'rooms cursz' " v-for="(rooms,index) in flbox.room" @click="openroom(rooms.id,$event)">
+                  <div class="roominfo">
+                  <div class="roomsnum"><em>房间</em><span class="roomsnum_z">{{rooms.room_no}}</span></div>
+                  <div class="roomstatus" v-if="rooms.st == 1">{{rooms.tenant_name}}</div>
+                  <div class="roomstatus" v-else>空置{{rooms.emptyDay}}天</div>
+                  </div>
+                    <div class="btns" v-show ="btnshow == rooms.id">
+                      <em class="jt"></em>
+                      <div class="oproominfo">
+                        <em>{{rooms.room_no}}</em>
+                        <i v-if="rooms.st == 1">租客:{{rooms.tenant_name}}</i>
+                        <i v-else>空置</i>
+                      </div>
+                      <span v-if="rooms.st == 0">
+                        <a class="btnurl" v-on:click="qyue(rooms.id,rooms.tenant_id)">签约</a>
+                        <a class="btnurl" @click="gotoaddroom(rooms.id)" v-if="rooms.first_edit == 1">编辑</a>
+                        <a class="btnurl" v-bind:data-id="rooms.id" v-on:click="roominfo(rooms.id,rooms.tenant_id)" v-if="rooms.first_edit != 1">详情</a>
+                      </span>
+                      <span v-else>
+                        <a class="btnurl" v-on:click="htinfo(rooms.id,rooms.tenant_id)">合同</a>
+                        <a class="btnurl" @click="gotoaddroom(rooms.id)" v-if="rooms.first_edit == 1">编辑</a>
+                        <a class="btnurl" v-bind:data-id="rooms.id" v-on:click="roominfo(rooms.id,rooms.tenant_id)" v-if="rooms.first_edit != 1">详情</a>
+                      </span>
+                  </div>
+                </div>
+                </div> 
+              </div>
+              </div>
+            </div>
+            </li>
+        </ul>
+      </div>
+      <div class="bui-scroll-foot"></div>
+    </div>
+      <div class="nones" v-show="noneshow == 0">
+        <img src="../../images/icon/nones.png"/>
+        <p>没有数据</p>
+    </div>
+  </main>
+  <footer> 
+    
+  </footer>
+</div>
+<style type="text/css">
+    .bui-searchbar {
+    background: #efeff4;
+    padding: 0.24rem .36rem;
+    padding-bottom: 0.24rem;
+}
+.bui-searchbar .bui-input input[type="search"], .bui-searchbar .bui-input input[type="text"], .bui-searchbar .bui-input input[type="password"], .bui-searchbar .bui-input textarea {
+    height: .7rem;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: .28rem;
+}
+.bui-searchbar .btn-search{ font-size: .3rem; line-height: .7rem; }
+</style>

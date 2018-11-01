@@ -1,0 +1,105 @@
+<div class="bui-page" id="refund">
+    <header class="bui-bar">
+        <div class="bui-bar-left">
+            
+            <a class="bui-btn" onclick="bui.back()"><i class="icon-back"></i></a>
+        </div>
+        <div class="bui-bar-main">退租</div>
+        <div class="bui-bar-right">
+        </div>
+    </header>
+    <main>
+      <form @submit.prevent="submitrefund">
+      <div class="refundhouse">
+        <div class="refundhouse_l">
+          <p>{{refundhousename}}</p>
+          <p>签约人：{{refundusename}}</p>
+        </div>
+        <div class="refundhouse_r">
+          <i @click="call"></i>
+        </div>
+      </div>
+        <ul class="formbox">
+            <li><em>基本信息</em></li>  
+            <li><em>原始租期</em><div class="linebox">{{btime}} ~ {{etime}}</div></li>
+             <li><em>退租类型</em>
+              <div class="linebox">
+                <select class="selects" v-model="tztype">
+                  <option value="1">到期退租</option>
+                  <option value="2">中途退租</option>
+                </select>
+              </div>
+            </li>
+            <li><em>退租时间</em>
+              <div class="linebox">
+                <input type="text" id="datepicker_input" readonly="readonly" class="bui-input" v-show="ifedit == 0">
+                <input type="text" id="datepicker_input1" readonly="readonly" class="bui-input" v-show="ifedit == 1">
+            </div>
+          </li>
+            <li><em>租押金额</em><div class="linebox">租金：{{datas.zujin}}元&nbsp;&nbsp;|&nbsp;&nbsp;押金：{{datas.yajin}}元</div></li>
+            <li><em>退租方式</em>
+              <div class="linebox">
+                <select v-model="retrunpay">
+                  <option v-for="pay in payinfo" :value="pay.val">{{pay.name}}</option>
+                </select>
+            </div></li>
+            <li><em>退租原因</em><div class="linebox"><input type="text" name="" placeholder="请输入退租原因" v-model="texts"></div></li>
+        </ul>
+        <ul class="formbox">
+            <li><em>金额计算</em></li>  
+            <li class="jisuan">
+              <div class="refund_lz">
+                <span>房租</span>
+                <span>
+                  <select v-model="datas.jiajian">
+                    <option selected="selected" value="0">应退</option>
+                    <option value="1">应收</option>
+                  </select>
+                  <i></i>
+                </span>
+              </div>
+              <div class="refund_rz"><input type="text" name="" placeholder="0" v-model="zujinnmu">元</div>
+            </li>
+             <li class="jisuan">
+              <div class="refund_lz">
+                <span>押金</span>
+                <span>
+                  <select v-model="datas.jiajian1" @change="changeType1()">
+                    <option selected="selected" value="0">不退</option>
+                    <option value="1">部分退</option>
+                    <option value="2">全退</option>
+                  </select>
+                  <i></i>
+                </span>
+              </div>
+              <div class="refund_rz"><input type="text" name="" value="0" v-model="yajinnmu" id="inputsz" disabled="">元</div>
+            </li>
+        </ul>
+       <div class="other">
+        <div class="addother">
+          <div class="othername">添加扣款</div><div id="addrefundmoney" class="addotherbtn">+再扣一笔</div></div>
+          <ul class="formbox" v-show="othershow">
+             <li class="jisuan" v-for="(tuizu,index) in datas.tuizudata">
+              <div class="refund_lz">
+                <span>{{tuizu.names}}</span>
+                <span>
+                  <select v-model="tuizu.inputval">
+                    <option value="0">应收</option>
+                    <option value="1">应退</option>
+                  </select>
+                  <i></i>
+                </span>
+              </div>
+              <div class="refund_rz"><input type="text" v-bind:name="tuizu.val" placeholder="0" v-model="tuizu.vals">元</div>
+            </li>
+          </ul>
+      </div>
+      
+      </form>
+    </main>
+    <footer>
+        <div class="bottombtn" v-on:click="submitrefund"><div style="width:100%">确认退租</div></div>
+    </footer>
+ 
+</div>
+<style>.other .formbox li:first-child{background:#fff;border-top:solid 1px #eee;color:#333}.formbox [class*=bui-btn].bui-box{padding:0;border:none;min-height:auto;line-height:.4rem}.bui-list .bui-box .span1{font-size:.3rem}.formbox .span1{overflow:hidden;height:.36rem}.bui-list>.bui-btn-line{line-height:.82rem}.bui-dialog-select .bui-dialog-head{min-height:1rem;line-height:1rem;background:#27cda1;color:#fff;font-size:.3rem}</style>

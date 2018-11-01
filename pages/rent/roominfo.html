@@ -1,0 +1,64 @@
+<div class="bui-page" id="roominfo_app">
+    <header class="bui-bar">
+        <div class="bui-bar-left">
+            
+            <a class="bui-btn" @click="houtui()"><i class="icon-back"></i></a>
+        </div>
+        <div class="bui-bar-main">房间详情</div>
+        <div class="bui-bar-right">
+           <div class="bui-btn"><i class="icon-more2" id="eidtrooms"></i></div>
+        </div>
+    </header>
+    <main>
+      <div class="jds">
+      <div id="slide1" class="bui-slide">
+       <div id="slidemain" class="bui-slide-main">
+         <ul>
+           <li v-for="picurl in datafrom.jdpic">
+             <img :src="picurl.domains + picurl.img">
+           </li>
+         </ul>
+       </div>
+       <div class="picpagesz"><em>{{picnow}}</em>/<em>{{zpicnow}}</em></div>
+     </div>
+     </div>
+        <ul class="formbox diff" v-cloak>
+            <li><em style="color:#333">房间名称</em><div class="linebox">{{datafrom.roomname}}</div></li>
+            <li><em>房源户型</em><div class="linebox">{{datafrom.type1}}房{{datafrom.type2}}厅{{datafrom.type3}}卫</div></li>
+            <li><em>房间面积</em><div class="linebox">{{datafrom.area}}m²</div></li>
+            <li><em>房间朝向</em><div class="linebox">{{datafrom.direction}}</div></li>
+            <li><em>装修情况</em><div class="linebox">{{datafrom.zhuanxiu}}</div></li>
+            <li><em>建筑年代</em><div class="linebox">{{datafrom.years}}年</div></li>
+            <li><em>电梯房</em><div class="linebox">{{datafrom.dianti}}</div></li>
+            <li><em>楼 层</em><div class="linebox">{{datafrom.floors}}层/共{{datafrom.zfloors}}层</div></li>
+            <li><em>房源配置</em><div class="linebox"></div></li>
+            <li class="roomspz">
+               <span v-for="pz in datafrom.roompz" v-bind:data-id="pz.id" :class="pz.oo == 0 ? 'cur':''">{{pz.name}}</span>
+            </li>
+            <li><em>房源标签</em>
+              <div class="linebox tagspan">
+                <span v-for="tags in datafrom.tag">{{tags}}</span>
+              </div>
+          </li>
+          </ul>
+          <ul class="formbox">
+            <li>租金和付款方式</li>
+            <li><em>支付方式</em><div class="linebox">{{datafrom.paytype.name}}</div></li>
+            <li><em>期望租金</em><div class="linebox">{{datafrom.zhujin}}</div></li>
+            <li><em>房源描述</em></li>
+            <li class="nonetop"><div class="texts" v-html="datafrom.miaosu"></div></li>
+          </ul>
+    </main>
+ <footer v-show="btntext == 0">
+  <div class="bottombtn" v-on:click="gotoxht()">
+    <div style="width:100%">录入租客合同</div>
+  </div>
+</footer>
+<footer v-show="btntext != 0">
+<div class="bottombtn" v-on:click="gotoht()">
+    <div style="width:100%">查看租客合同</div>
+  </div>
+</footer>
+  
+</div> 
+<style>.tstitle{width:100%;height:.6rem;line-height:.6rem;background:#fffee3;color:#f56623;font-size:.24rem;text-align:center}.jds{height:200px;overflow:hidden;position:relative}.bui-slide-head{bottom:.2rem;right:.2rem;position:absolute}.diff li:first-child{background-color:#fff;color:#666;padding-right:0}#roominfo_app .formbox li{justify-content:space-between}#roominfo_app .linebox{text-align:right;padding-right:.23rem;width:5.4rem}.tagspan span{margin:0 0 0 .1rem}#roominfo_app .formbox .roomspz{display:flex;display:-webkit-flex;flex-wrap:wrap;justify-content:flex-start;border:none;margin-top:0;padding-top:0}.roomspz span{width:1.58rem;height:.87rem;text-align:center;line-height:.87rem;font-size:.3rem;color:#666;border:solid 1px #eeeff1;border-radius:.1rem;margin:0 .23rem .2rem 0}.roomspz .cur{border:solid 1px #c9e4e1;color:#4dc2a4}#roominfo_app .nonetop{border:none;padding-top:0}#roominfo_app .nonetop div{padding:.2rem;line-height:.54rem;border:solid 1px #eee;width:7rem;border-radius:.1rem}.bui-box-center .fxk{border:solid 1px #666;width:.25rem;height:.25rem;display:inline-block;border-radius:.05rem;position:relative;top:.02rem;right:.1rem;overflow:hidden;font-size:.28rem;line-height:.2rem;text-align:left}.bui-slide-head{display:none}</style>

@@ -1,0 +1,79 @@
+<div class="bui-page" id="money">
+    <header class="bui-bar">
+      <div class="bui-bar-left">
+            
+        <a class="bui-btn" onclick="bui.back()"><i class="icon-back"></i></a>
+        </div>
+        <div class="bui-bar-main">流水明细</div>
+        <div class="bui-bar-right"><div class="bui-btn">
+          <i class="icon-search">
+          <a href="pages/finance/money_so.html" style="display:block;height:.3rem;width:.3rem"></a>
+        </i></div></div>
+    </header>
+    <main>
+       <div class="tj_times" v-cloak>
+          <input class="tjtimes" id="starttimes" type="text" readonly="readonly">
+          &nbsp;一&nbsp;
+          <input class="tjtimes" id="endtimes" type="text" readonly="readonly">
+       </div>
+       <div class="bg" v-show="show < 4" v-on:click="navs('4')"></div>
+       <div class="fix" style="top:2rem">
+       <div class="tiaojian" v-cloak>
+      	<div :class="show==1 ? 'option cur':'option'" v-on:click="navs('1')"><span class="optxt k1">资金流向</span><i></i><em></em></div>
+      	<div :class="show==2 ? 'option cur':'option'" v-on:click="navs('2')"><span class="optxt k2">费用明细</span><i></i><em></em></div>
+      	<div class="tjlist" v-show="show < 4">
+      		<div class="tj1" v-show="show == 1">
+      			<ul class="tjbox">
+              <li @click="overselcet('1','全部',-1,0)" :class="now == -1 ? 'now':''">全部<i></i></li>
+      				<li v-for="(h,index) in zuyuetype" @click="overselcet('1',h.name,index,h.ids)" :class="now == index ? 'now':''">{{h.name}}<i></i></li>
+      			</ul>
+      		</div>
+      		<div class="tj1" v-show="show == 2">
+      			<ul class="tjbox">
+              <li @click="overselcet('2','全部',-2,0)" :class="now == -2 ? 'now':''">全部<i></i></li>
+      				<li v-for="(h1,index) in htstyle" @click="overselcet('2',h1.name,index,h1.ids)" :class="now1 == index ? 'now':''">{{h1.name}}<i></i></li>
+      			</ul>
+      		</div>
+      	</div>
+      </div>
+         <div class="btable" v-cloak>
+           <div class="btablebox">
+             <p>{{moneyIn}}</p>
+             <p>收入金额(元)</p>
+           </div>
+           <div class="btablebox">
+              <p>{{moneyOut}}</p>
+             <p>支出金额(元)</p>
+           </div>
+           <div class="btablebox">
+             <p>{{revenue}}</p>
+             <p>净收入(元)</p>
+           </div>
+         </div>
+    </div>
+ 
+    <div id="scrollcontract" class="bui-scroll" v-cloak>
+      <div class="bui-scroll-head"></div>
+      <div class="bui-scroll-main">
+        <ul id="listcontracts" class="bui-list">
+            <li class="bui-btn" v-for="(contracts, index) in clist" @click="hoverinfo(contracts.id,contracts.costdate)">
+             <div class="contractbox">
+               <div class="contractbox_t">
+                 <span>{{contracts.roominfo}}</span>
+                 <span>{{contracts.payWay}}</span>
+               </div>
+               <div class="contractbox_m">
+                 <p>{{contracts.costname}}<i class="smline">｜</i>{{contracts.jydxname}}</p>
+                 <p>{{contracts.jytime}}</p>
+                 <div :class="contracts.moneylx == '支出' ?'listmoneys':'listmoneys redcurs' ">{{contracts.money}}</div>
+               </div>
+             </div>
+            </li>
+        </ul>
+      </div>
+      <div class="bui-scroll-foot"></div>
+    </div>
+    </main>
+   </div>
+
+ <style>.bui-page>.main,.bui-page>main,.bui-scroll .bui-scroll-foot{background:#f1f5f8}.bui-list{border-top:none}.addhouse{display:block;margin:.15rem 0 .15rem .3rem}.addhouse a{color:#fff;display:block;width:100%;height:100%;position:absolute;top:0}.bui-bar .bui-bar-left,.bui-bar .bui-bar-right{width:1.2rem}#money .bui-scroll{margin:2.4rem 0 0 0}#money .bg{z-index:1}#money .contractbox_t span{color:#333;font-size:.3rem;line-height:.46rem}#money .contractbox_t span:last-child{font-size:.28rem;color:#999;width:1.2rem;text-align:right}.addhouse a,.icon-search a{color:#fff;display:block;width:100%;height:100%;position:absolute;top:0}</style>

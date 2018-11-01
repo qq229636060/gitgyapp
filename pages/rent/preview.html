@@ -1,0 +1,58 @@
+<div class="bui-page">
+    <header class="bui-bar">
+        <div class="bui-bar-left">
+            
+            <a class="bui-btn" onclick="bui.back()"><i class="icon-back"></i></a>
+        </div>
+        <div class="bui-bar-main">合同预览</div>
+        <div class="bui-bar-right">
+            
+        </div>
+    </header>
+    <main>
+      <div id="previewapp">
+      		<div class="add_housename">{{msg.hnames}}</div>
+      		<ul class="formbox">
+      			<li><em>用户信息</em></li>	
+      			<li><em>租客姓名</em><div class="linebox">{{msg.name}}</div></li>
+      			<li><em>手机号码</em><div class="linebox">{{msg.tel}}</div></li>
+      			<li><em>证件类型</em><div class="linebox"><p class="pl10">身份证</p></div></li>
+      			<li><em>证件号码</em><div class="linebox">{{msg.Id}}</div></li>
+      			<li><em>证件附件</em><div :class="idpics == '无'?'linebox':'linebox clickyl'">{{idpics}}</div></li>
+      		</ul>
+      		<ul class="formbox">
+      			<li><em>合同信息</em></li>	
+      			<li><em>租约起始</em><div class="linebox">{{msg.times}}</div></li>
+      			<li><em>租期终止</em><div class="linebox">{{msg.timee}}</div></li>
+      			<li><em>支付方式</em><div class="linebox">{{paytype}}</div></li>
+      			<li><em>收租日</em><div class="linebox">{{msg.rentstype}}{{msg.rentsday}}</div></li>
+      			<li><em>房屋租金</em><div class="linebox">{{msg.zujin}}元</div></li>
+      			<li><em>房屋押金</em><div class="linebox">{{msg.yajin}}元</div></li>
+      		</ul>
+      		<div class="other">
+      			<div class="addother">
+      				<div class="othername">其他费用</div>
+      			</div>
+            <div class="addbox" v-for="o in msg.others">
+              <div class="othername">{{o.name}}</div><div class="inputmoney">{{o.valinput}}<i>元</i></div>
+            </div>
+      		</div>
+          <div class="jdz" style="display:none">
+          <div id="uiSlide" class="bui-slide">
+            <div class="bui-slide-main">
+                <ul>
+                    <li v-for="imgs in msg.idpic">
+                        <img :src="imgs" alt="">
+                    </li>
+                </ul>
+            </div>
+            <div class="cphoto">×</div>
+        </div>
+      </div>
+      </div>
+    </main>
+    <footer>
+      
+    </footer>
+    <style>.formbox li{justify-content:space-between}.formbox li .linebox{margin:0 .2rem 0 0;text-align:right;color:#999}.jdz{width:100%;height:100%;background:rgba(0,0,0,.6);position:fixed;top:0}.formbox li:first-child{padding:.23rem}.cphoto{width:.5rem;height:.5rem;border:solid 1px #333;border-radius:50%;text-align:center;line-height:.5rem;font-size:.36rem;position:fixed;bottom:.6rem;color:#333;left:50%;margin:0 0 0 -.25rem;z-index:999}</style>
+</div>

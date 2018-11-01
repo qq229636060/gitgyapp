@@ -1,0 +1,24 @@
+{
+"code":0,
+"jyleixin":[
+      {"leixin":"全部"},
+      {"leixin":"提现"},
+      {"leixin":"收租"}
+    ],
+"jyzhuantai":[
+      { "zhuantai": "全部", "id": "" },
+      { "zhuantai": "冻结", "id": "" },
+      { "zhuantai": "完结", "id": "" }  
+],
+ "pays":[
+      { "pay": "全部", "id": "" },
+      { "pay": "微信", "id": "" },
+      { "pay": "工银E支付", "id": "" }
+    ],
+"zhanhulist":[
+        {"jylx":"提现","jyzt":"冻结","listname":"招商银行","moneys":"1500.00","times":"2018-07-14 18:32"},
+        {"jylx":"提现","jyzt":"冻结","listname":"招商银行","moneys":"1500.00","times":"2018-07-14 18:32"},
+        {"jylx":"收租","jyzt":"完成","listname":"万达广场B区331栋3单元31楼","moneys":"1000.00","times":"2018-07-14 18:32"}
+      ]
+}
+

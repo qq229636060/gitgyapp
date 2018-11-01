@@ -1,0 +1,46 @@
+<div class="bui-page" id="yz_tuoguan">
+    <header class="bui-bar">
+        <div class="bui-bar-left">
+            <!-- 左边按钮 -->
+            <a class="bui-btn" onclick="bui.back();"><i class="icon-back"></i></a>
+        </div>
+        <div class="bui-bar-main">托管房间</div>
+        <div class="bui-bar-right">
+            <!-- 右边按钮 -->
+        </div>
+    </header>
+    <main>
+       <div id="scroll2" class="bui-scroll zzs">
+		  <div class="bui-scroll-head"></div>
+		  <div class="bui-scroll-main">
+		    <ul id="list" class="bui-list">
+		        <li class="bui-btn" v-for="(bighouse,indexs) in houselist">
+		        	<div class="housebox">
+		          <div class="floorbox">
+                <div class="fbox" >
+		          <div class="numberfloor">—— {{bighouse.floor}}楼 ——</div>
+                  <div class="bigsroom">
+		        		<div :class="{'cursz':rooms.st == 2,'rooms':true ,'nonesz':rooms.st == 0}" v-for="(rooms,index) in bighouse.roomList" :data-id="rooms.id">
+		        		 	<div class="roominfo">
+		        		 	<div class="roomsnum"><em>房间</em><span class="roomsnum_z">{{rooms.room_no}}</span></div>
+		        		 	</div>
+		        		
+		        		</div>
+                </div> 
+              </div>
+		        	</div>
+		        </div>
+		        </li>
+		    </ul>
+		  </div>
+		  <div class="bui-scroll-foot"></div>
+		</div>
+    </main>
+    <footer>
+     
+    </footer>
+</div>
+<style type="text/css">
+.nonesz{border-left:solid 0.08rem #eee; color: #eee; background: #f1f1f1}
+.nonesz .roomsnum{ color: #eee }
+</style>

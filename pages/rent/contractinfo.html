@@ -1,0 +1,78 @@
+<div class="bui-page"  id="contractioninfo">
+    <header class="bui-bar">
+        <div class="bui-bar-left">
+            <!-- 左边按钮 -->
+            <a class="bui-btn" onclick="bui.back();"><i class="icon-back"></i></a>
+        </div>
+        <div class="bui-bar-main">查看合同</div>
+        <div class="bui-bar-right">
+            <div class="bui-btn"><i class="icon-more2" id="roombtnopen"></i></div>
+        </div>
+    </header>
+    <main>
+      <div>
+      		<div class="add_housename">{{roomtitle}}</div>
+      		<ul class="formbox">
+      			<li><em>用户信息</em></li>	
+            <li><em>合同类型</em><div class="linebox">纸质合同</div></li>
+      			<li><em>租客姓名</em><div class="linebox">{{msg.name}}</div></li>
+      			<li><em>手机号码</em><div class="linebox">{{msg.mobile}}</li>
+      			<li><em>证件类型</em><div class="linebox"><p class="pl10">身份证</p></div></li>
+      			<li><em>证件号码</em><div class="linebox">{{msg.credentials}}</div></li>
+      			<li><em>证件附件</em><div class="linebox"><a v-if="ok" @click="lookphoto">查看</a><a v-else>无</a></div></li>
+      		</ul>
+      		<ul class="formbox">
+      			<li><em>合同信息</em></li>	
+      			<li><em>租约起始</em><div class="linebox">{{msg.start_time}}</div></li>
+      			<li><em>租期终止</em><div class="linebox">{{msg.end_time}}</div></li>
+      			<li><em>支付方式</em><div class="linebox">{{payf}}</div></li>
+      			<li><em>收租日</em><div class="linebox"> {{payr}}</div></li>
+      			<li><em>房屋租金</em><div class="linebox">{{msg.rent}}元</div></li>
+      			<li><em>房屋押金</em><div class="linebox">{{msg.deposit}}元</div></li>
+            <li><em>备注</em><div class="linebox">{{msg.remarks}}</div></li>
+      		</ul>
+      		<div class="other">
+      			<div class="addother">
+      				<div class="othername">其他费用</div>
+      			</div>
+            <div class="addbox" v-for="o in msg.others">
+              <div class="othername">{{o.name}}</div><div class="inputmoney">{{o.value}}<i>元</i></div>
+            </div>
+      		</div>
+          <div class="jdz" style="display: none">
+          <div id="uiSlide" class="bui-slide">
+            <div class="bui-slide-main">
+                <ul>
+                    <li v-for="imgs in idpic">
+                      <img :src="imgs.img" alt=""> 
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="cphoto">×</div>
+      </div>
+      </div>
+    </main>
+    <footer>
+     <div class="bottombtn">
+        <div v-on:click="xzrent" v-if="tuifan != 4">续租</div>
+        <div v-if="tuifan == 4" style="background: #ddd; color:#fff">续租</div>
+        <div v-if="tuifan != 4" v-on:click="tuizu">退租</div>
+        <div v-if="tuifan == 4" style="background: #ddd; color:#fff">退租</div>
+     </div>
+    </footer>
+   
+</div> 
+<style type="text/css">
+    #contractioninfo .formbox li{ justify-content: space-between; }
+    #contractioninfo .formbox li .linebox{ margin: 0 0.2rem 0 0; text-align: right; color: #999 }
+    .jdz{width: 100%; height: 100%; background:rgba(0,0,0,0.6); position: fixed; top:0;}
+    .formbox li:first-child{ padding: 0.23rem }
+    .inputmoney i{ top:0; }
+    .bui-slide-fullscreen{background: #eee}
+    .cphoto{ width: .5rem; height: .5rem; border: solid 1px #333; border-radius:50%; text-align:center; line-height: .5rem; font-size:.36rem; position: fixed; bottom: 1.2rem;  color: #333;left: 50%; margin: 0 0 0 -0.25rem; z-index: 999   }
+     .bui-box-center p { font-size: .26rem; }
+     .bui-box-center .fxk{ border: solid 1px #666; width: 0.25rem; height: 0.25rem; display: inline-block; border-radius: 0.05rem; position: relative; top:0.02rem; right: 0.1rem; overflow: hidden; font-size: 0.28rem; line-height: 0.2rem; text-align:left;}
+     .jdz{ z-index: 99999 }
+      .bui-slide>.bui-slide-head{bottom: 1.2rem;}
+</style>

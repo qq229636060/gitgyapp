@@ -1,0 +1,66 @@
+<div class="bui-page">
+    <header class="bui-bar">
+        <div class="bui-bar-left">
+            
+            <a class="bui-btn" onclick="bui.back()"><i class="icon-back"></i></a>
+        </div>
+        <div class="bui-bar-main">查看合同</div>
+        <div class="bui-bar-right">
+           <div class="bui-btn"><i class="icon-more2" id="btnOpen"></i></div>
+        </div>
+    </header>
+    <main>
+      <div id="previewapp">
+      		<div class="add_housename">{{msg[0].hnames}}</div>
+      		<ul class="formbox">
+      			<li><em>用户信息</em></li>	
+      			<li><em>租客姓名</em><div class="linebox">{{msg[0].name}}</div></li>
+      			<li><em>手机号码</em><div class="linebox">{{msg[0].tel}}</div></li>
+      			<li><em>证件类型</em><div class="linebox"><p class="pl10">身份证</p></div></li>
+      			<li><em>证件号码</em><div class="linebox">{{msg[0].Id}}</div></li>
+      			<li><em>证件附件</em><div class="linebox"></div></li>
+      		</ul>
+      		<ul class="formbox">
+      			<li><em>合同信息</em></li>	
+      			<li><em>租约起始</em><div class="linebox">{{msg[0].times}}</div></li>
+      			<li><em>租期终止</em><div class="linebox">{{msg[0].timee}}</div></li>
+      			<li><em>支付方式</em><div class="linebox">{{msg[0].payfunction}}</div></li>
+      			<li><em>收租日</em><div class="linebox">{{msg[0].rentstype}}{{msg[0].rentsday}}</div></li>
+      			<li><em>房屋租金</em><div class="linebox">{{msg[0].zujin}}元</div></li>
+      			<li><em>房屋押金</em><div class="linebox">{{msg[0].yajin}}元</div></li>
+      		</ul>
+      		<div class="other">
+      			<div class="addother">
+      				<div class="othername">其他费用</div>
+      			</div>
+            <div class="addbox" v-for="o in msg[0].others">
+              <div class="othername">{{o.name}}</div><div class="inputmoney">{{o.valinput}}<i>元</i></div>
+            </div>
+      		</div>
+          <div class="jdz" style="display:none">
+          <div id="uiSlide" class="bui-slide">
+            <div class="bui-slide-main">
+                <ul>
+                    <li v-for="imgs in msg[0].idpic">
+                        <img :src="imgs" alt="">
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="bui-slide-head">
+                <ul>
+                    <li>1</li>
+                </ul>
+            </div>
+        </div>
+      </div>
+      </div>
+    </main>
+    <footer>
+      <div class="bottombtn">
+        <div style="width:50%"><a href="pages/rent/addcontract.html">续租</a></div>
+        <div style="width:50%"><a href="pages/rent/refund.html">退租</a></div>
+    </div>
+    </footer>
+    <style>#previewapp .formbox li{justify-content:space-between}#previewapp .formbox li .linebox{margin:0 .2rem 0 0;text-align:right;color:#666}#previewapp .jdz{width:100%;height:100%;background:rgba(0,0,0,.6);position:fixed;top:0}#previewapp .formbox li:first-child{padding:.23rem}</style>
+</div>

@@ -1,0 +1,92 @@
+<div class="bui-page" id="addroom_app">
+    <header class="bui-bar">
+        <div class="bui-bar-left">
+            
+            <a class="bui-btn" @click="houtui()"><i class="icon-back"></i></a>
+        </div>
+        <div class="bui-bar-main">房间发布</div>
+        <div class="bui-bar-right">
+        </div>
+    </header>
+    <main>
+        <form @submit.prevent="submitroom">
+          <div class="tstitle">请您保证房源真实有效，悦租有权下架所有虚假房源</div>
+          <div class="jdpic">
+          <div id="idpic">
+          <div class="idphotos">
+            <div id="uploader-demo">
+            <div id="fileList" class="uploader-list"> <div id="filePicker"></div></div>
+        </div>
+          </div>
+        </div>
+          </div>  
+          <ul class="formbox mt20">
+            <li>
+              <em>房间名称</em><div class="linebox"><input type="text" name="" placeholder="请输入房号" v-model="datafrom.roomnum"></div>
+            </li>
+             <li><em>房源户型</em><div class="linebox samllinput">
+              <input type="tel" name="" placeholder="" v-model="datafrom.type1"><b class="huitxt">室</b> <input type="tel" name="" placeholder="" v-model="datafrom.type2"><b class="huitxt">厅</b> <input type="tel" name="" placeholder="" v-model="datafrom.type3"><b class="huitxt">卫</b></div></li>
+             <li><em>房间面积</em><div class="linebox"><input type="text" name="" placeholder="请输入房间面积" v-model="datafrom.area"></div></li>
+             <li><em>房间朝向</em>
+              <div class="linebox">
+               <select v-model="datafrom.direction">
+                 <option selected="selected" value="">请选择</option>
+                  <option v-for="direction in datafrom.directionlist" :value="direction.id">{{direction.name}}</option>
+                </select>
+              </div><i></i></li>
+             <li><em>装修情况</em>
+              <div class="linebox">
+               <select v-model="datafrom.zhuanxiu">
+                 <option selected="selected" value="-1">请选择</option>
+                  <option v-for="zhuanxiu in datafrom.zhuanxiulist" :value="zhuanxiu.id">{{zhuanxiu.name}}</option>
+                </select>
+              </div><i></i></li>
+             <li><em>建筑年代</em><div class="linebox"><input type="tel" name="" placeholder="请输入房屋年代" v-model="datafrom.years"></div></li>
+             <li><em>电梯房</em><div class="linebox">
+               <select v-model="datafrom.dianti">
+                 <option selected="selected" value="-1">请选择</option>
+                  <option value="1">有</option>
+                  <option value="0">无</option>
+                </select>
+             </div><i></i></li>
+             <li><em>楼层</em><div class="linebox"><input type="tel" name="" placeholder="请输入楼层" v-model="datafrom.floors"></div></li>
+              <li><em>总楼层</em><div class="linebox"><input type="tel" name="" placeholder="请输入总楼层" v-model="datafrom.zfloors"></div></li>
+             <li><em>房源配置</em>
+              <div class="linebox"> 
+                <div id="select" class="bui-btn bui-box">
+                  <div class="span1" style="width:4rem">请选择配置</div>
+                </div>
+            </div><i></i></li>
+             <li><em>房源标签</em>
+              <div class="linebox">
+                 <div id="select1" class="bui-btn bui-box">
+                  <div class="span1">请选择标签</div>
+                </div>
+              </div>
+              <i></i></li>
+           </ul>
+           <div class="linetitle">租金和付款方式</div>
+           <ul class="formbox">
+            <li> <em>押付方式</em>
+              <div class="linebox">
+              <select v-model="datafrom.yajin">
+                 <option selected="selected" value="-1">请选择</option>
+                  <option v-for="payment in datafrom.yajinlist" :value="payment.id">{{payment.name}}</option>
+                </select>
+              </div>
+            </li>
+             <li><em>期望租金</em><div class="linebox"><input type="tel" name="" placeholder="请输入期望租金" v-model="datafrom.zhujin"></div></li>
+             <li><em>房源描述</em><div class="linebox"><input type="tel" name="" placeholder="请输入房源描述" v-model="datafrom.miaosu"></div></li>
+           </ul>
+         
+        </form>
+  
+    </main>
+ <footer>
+  <div class="bottombtn" id="savehouse">
+    <div style="width:50%" @click="submitroom(0)">保存</div>
+    <div @click="submitroom(1)">保存并发布</div>
+</div></footer>
+   
+</div> 
+<style>.formbox li:first-child{background:#fff;color:#333;padding:.23rem}.tstitle{width:100%;height:.6rem;line-height:.6rem;background:#fffee3;color:#f56623;font-size:.24rem;text-align:center}.linetitle{padding:.29rem 0;margin:0 0 0 .23rem;font-size:.3rem}.jdpic{position:relative;width:100%;overflow:hidden}.addphotoicon{width:2.34rem;height:.8rem;position:absolute;left:50%;top:50%;margin:-.4rem 0 0 -1.07rem;z-index:999}.addphotoicon img{width:100%;height:100%}.formbox [class*=bui-btn].bui-box{padding:0;border:none;min-height:auto;line-height:.4rem}.bui-list .bui-box .span1{font-size:.3rem}.formbox .span1{overflow:hidden;height:.36rem}.bui-list>.bui-btn-line{line-height:.82rem}.bui-dialog-select .bui-dialog-head{min-height:1rem;line-height:1rem;background:#27cda1;color:#fff;font-size:.3rem}</style>

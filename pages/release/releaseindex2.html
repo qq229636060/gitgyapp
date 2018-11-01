@@ -1,0 +1,62 @@
+<div class="bui-page" id="rel">
+    <header class="bui-bar">
+        <div class="bui-bar-left">
+            
+            <a class="bui-btn" onclick="bui.back()"><i class="icon-back"></i></a>
+        </div>
+        <div class="bui-bar-main">发布管理</div>
+        <div class="bui-bar-right">
+           
+        </div>
+    </header>
+    <main>
+         <div class="fix">
+         	<div class="typesbox">
+         	<div :class="navs == 1 ? 'types_rel cur': 'types_rel'" @click="navrel(1)">待发布</div>
+         	<div :class="navs == 2 ? 'types_rel cur': 'types_rel'" @click="navrel(2)">已上架</div>
+         	<div :class="navs == 3 ? 'types_rel cur': 'types_rel'" @click="navrel(3)">已下架</div>
+         </div>
+         </div>
+          <div id="scroll" class="bui-scroll mt9">
+          	<div class="bui-scroll-head"></div>
+          	<div class="bui-scroll-main">
+          		<ul id="list" class="bui-list">
+          			<li class="bui-btn" v-for="house in houselist">
+                    <div class="housebox">
+                        <div class="myhousebox">{{house.apartment}}</div>
+                        <div class="floorbox">
+                        <div class="fbox" v-for="floorroom in house.floor">
+                        <div class="numberfloor">—— {{floorroom.floor}}楼 ——</div>
+                        <div class="bigsroom" v-if="navs != 2">
+                          <div class="rooms fbroom" v-for="rooms in floorroom.room">
+                           <p>房间{{rooms.room_no}}</p>
+                           <p v-if="rooms.first_edit == 1" class="c1" @click="gotoaddroom(rooms.id)">完善信息</p>
+                           <p v-if="rooms.first_edit != 1" class="c2" @click="fb(rooms.id)">发布</p>
+                          </div>
+                        </div>
+                                  <div class="bigsroom sall" v-if="navs == 2">
+                          <div class="rooms fbroom" v-for="rooms in floorroom.room" @click="openroom(rooms.id)">
+                           <p>房间{{rooms.room_no}}</p>
+                           <div class="btns" v-show="btnshow == rooms.id"><em class="jt"></em> <div class="oproominfo"><em>{{rooms.room_no}}</em></div>
+                           <span>
+                            <a class="btnurl" @click="editroom(rooms.id)">修改</a>
+                            <a class="btnurl" @click="xiajia(rooms.id)">下架</a>
+                            <a class="btnurl" @click="shuaxin(rooms.id)">刷新</a>
+                            <a class="btnurl" @click="gotof5()">批量</a>
+                          </span></div>
+                          </div>
+                        </div>
+                        </div>
+                        </div>         
+                    </div>
+                </li>
+          		</ul>
+          	</div>
+          	<div class="bui-scroll-foot"></div>
+          </div>
+    </main>
+    <footer>
+        
+    </footer>
+</div>
+<style>.mt9{margin:.9rem 0 0 0}.fbroom{border:none;border:solid 1px #dbdfe2;border-radius:.06rem;height:1.4rem;padding:0}.fbroom>p{text-align:center;font-size:.3rem;margin:0;height:.7rem;line-height:.7rem}.fbroom>p:last-child{border-top:solid 1px #dbdfe2}#scroll{background:#f1f5f8}.myhousebox{font-size:.3rem}.c1{color:#f7a700}.c2{color:#27cda1}#rel .sall .fbroom>p:last-child{border-top:none}</style>
