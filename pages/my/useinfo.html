@@ -1,32 +1,33 @@
 <div class="bui-page" id="useinfo">
     <header class="bui-bar">
         <div class="bui-bar-left">
-            <!-- 左边按钮 -->
-            <a class="bui-btn" onclick="bui.back();"><i class="icon-back"></i></a>
+            
+            <a class="bui-btn" onclick="bui.back()"><i class="icon-back"></i></a>
         </div>
         <div class="bui-bar-main">我的资料</div>
         <div class="bui-bar-right">
-            <!-- 右边按钮 -->
+            
         </div>
     </header>
     <main>
        
        <ul class="formbox">
-           <li class="spface"><em>头像</em><div class="linebox"><img :src="faceimg" class="faceinfo" >
+           <li class="spface"><em>头像</em><div class="linebox"><img :src="faceimg" class="faceinfo">
             <form id="datas">
               <input type="hidden" name="case" value="avatar">
-              <input type="file" accept="image/*" id="cameraInput" name="file" class="sign_file" style="width: 100%">
+              <input type="file" accept="image/*" id="cameraInput" name="file" class="sign_file" style="width:100%">
             </form>
           </div><i></i></li>
-           <li><em>真实姓名</em><div class="linebox"><input type="" name="" v-model="useinfo.real_name" /></div><i></i></li>
+           <li><em>真实姓名</em><div class="linebox"><input type="" name="" v-model="useinfo.real_name"></div><i></i></li>
        </ul>
-        <ul class="formbox" style="margin: 0.3rem 0 0 0">
+        <ul class="formbox" style="margin:.3rem 0 0 0">
            <li><em>注册账号</em><div class="linebox sp">{{useinfo.account}}</div></li>
-           <li><em>用户昵称</em><div class="linebox"><input type="" name="" v-model="useinfo.nick" /></div><i></i></li>
-           <li><em>手机号码</em><div class="linebox"><input type="" name="" v-model="useinfo.mobile" /></div><i></i></li>
-           <li><em>身份证</em><div class="linebox"><input type="" name="" v-model="useinfo.identity_card" /></div><i></i></li>
-           <li><em>品牌名称</em><div class="linebox"><input type="" name="" v-model="useinfo.brandName" /></div><i></i></li>
-           <!-- <li><em>角色身份</em><div class="linebox sp">小卡卡</div></li> -->
+           <li><em>用户昵称</em><div class="linebox"><input type="" name="" v-model="useinfo.nick"></div><i></i></li>
+           <li><em>手机号码</em><div class="linebox"><input type="" name="" v-model="useinfo.mobile"></div><i></i></li>
+           <li><em>身份证</em><div class="linebox"><input type="" name="" v-model="useinfo.identity_card"></div><i></i></li>
+           <li v-if="poweruse_z == 0"><em>品牌名称</em><div class="linebox"><input type="" name="" v-model="useinfo.brandName"></div><i></i></li>
+           <li v-if="poweruse_z == 1"><em>品牌名称</em><div class="linebox"><input type="" name="" v-model="useinfo.brandName" disabled="disabled"></div></li>
+           <li><em>角色身份</em><div class="linebox sp">{{useinfo.role_name}}</div></li>
        </ul>
      
     </main>
@@ -34,15 +35,4 @@
         <div class="saveinfo" @click="saveuse">保存</div>
     </footer>
 </div>
-<style type="text/css">
-    #useinfo .formbox li{ justify-content: space-between; }
-    #useinfo .formbox li .linebox{ margin-right:0.5rem;  }
-    #useinfo .formbox li .sp{ margin-right:0.3rem; color: #999  }
-    #useinfo .formbox li:first-child { background: #FFF }
-    #useinfo .formbox li:first-child em{ color: #333 }
-    #useinfo .formbox li input{ text-align: right; }
-    #useinfo .formbox .spface em{ line-height: 1.4rem; }
-    #useinfo .formbox .spface i{ top:0.8rem; }
-    .saveinfo{    width: 100%;height: 1rem;line-height: 1rem;background: #27cda1;text-align: center;font-size: .3rem;color: #fff;}
-    #cameraInput {width: 1rem;height: 1rem;position: absolute;left: 0;top: 0;opacity: 0;}
-</style>
+<style>#useinfo .formbox li{justify-content:space-between}#useinfo .formbox li .linebox{margin-right:.5rem}#useinfo .formbox li .sp{margin-right:.3rem;color:#999}#useinfo .formbox li:first-child{background:#fff}#useinfo .formbox li:first-child em{color:#333}#useinfo .formbox li input{text-align:right}#useinfo .formbox .spface em{line-height:1.4rem}#useinfo .formbox .spface i{top:.8rem}.saveinfo{width:100%;height:1rem;line-height:1rem;background:#27cda1;text-align:center;font-size:.3rem;color:#fff}#cameraInput{width:1rem;height:1rem;position:absolute;left:0;top:0;opacity:0}</style>

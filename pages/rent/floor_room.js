@@ -1,6 +1,4 @@
-"use strict";
-
-loader.define(function (require, exports, module) {
+loader.define(function(require, exports, module) {
     var islogin = tokenstorage.get("tokens");
     var params = router.getPageParams();
     var rentid = params.rentid;
@@ -15,8 +13,8 @@ loader.define(function (require, exports, module) {
         mode: mode,
         housenames: housenames,
         houseinfo: [],
-        floornum: floornum
-    };
+        floornum:floornum
+    }
     function getfloor() {
         bui.ajax({
             url: apiUrl + "/mapi/rent/rentFloorInfo",
@@ -29,11 +27,14 @@ loader.define(function (require, exports, module) {
                 token: islogin
             },
             method: "post"
-        }).then(function (result) {
+        }).then(function(result) {
             if (result.code == 0) {
                 console.log(result);
                 housedatas.houseinfo = result.data.roomList;
-                addhousez_floor.$nextTick(function () {
+                addhousez_floor.$nextTick(function() {
+                    if(power_rent_room_del == 1){
+                        return true
+                    }else{
                     listviews && listviews.destroy();
                     listviews = bui.listview({
                         id: "#listviews",
@@ -41,9 +42,9 @@ loader.define(function (require, exports, module) {
                             "text": "删除",
                             "classname": "danger"
                         }],
-                        menuWidth: 80,
-                        callback: function callback(e, ui) {
-                            ui.close();
+                        menuWidth:80,
+                        callback: function(e,ui) {
+                             ui.close()
                             var roomli = $(this).parent().parent();
                             bui.confirm({
                                 "title": "",
@@ -55,11 +56,11 @@ loader.define(function (require, exports, module) {
                                     name: "取消",
                                     className: "primary-reverse"
                                 }]
-                            }, function () {
+                            }, function() {
                                 if ($(this).text() == "确定" && mode == 2) {
                                     var roomid = roomli.attr("data_roomid");
                                     if ($(".fxk").html() == "") {
-                                        checked = "0";
+                                        checked = "0"
                                     }
                                     bui.ajax({
                                         url: apiUrl + "/mapi/room/del",
@@ -73,22 +74,24 @@ loader.define(function (require, exports, module) {
                                             token: islogin
                                         },
                                         method: "POST"
-                                    }).then(function (result) {
+                                    }).then(function(result) {
                                         if (result.code == 0) {
-                                            getfloor();
+                                            getfloor()
                                         } else {
                                             bui.alert(result.msg);
                                         }
-                                    }, function (result, status) {});
+                                    }, function(result, status) {
+
+                                    });
                                 }
-                            });
+                            })
                         }
-                    });
-                });
+                    })}
+                })
             } else {
                 bui.alert(result.msg);
             }
-        }, function (result, status) {
+        }, function(result, status) {
             //console.log(status)//"timeout"
         });
     }
@@ -96,25 +99,25 @@ loader.define(function (require, exports, module) {
         el: "#floor_room",
         data: housedatas,
         methods: {
-            houtui: function houtui() {
+            houtui: function() {
                 router.back({
-                    callback: function callback(mod) {
-                        mod.pageview.$options.mounted[0]();
+                    callback: function(mod) {
+                        mod.pageview.$options.mounted[0]()
                     }
-                });
+                })
             }
         },
-        mounted: function mounted() {
-            getfloor();
+        mounted: function() {
+            getfloor()
         }
     });
-    $("body").on("click", ".fxk", function () {
+    $("body").on("click", ".fxk", function() {
         if ($(".fxk").html() == "") {
             $(".fxk").html("√");
         } else {
             $(".fxk").html("");
         }
-    });
+    })
     var editmeun = [{
         name: "编辑楼层",
         value: "edit"
@@ -131,17 +134,21 @@ loader.define(function (require, exports, module) {
     function gotos(e) {
         var val = $(e.target).attr("value");
         if (val == "cancel") {
-            rightmeun.hide();
+            rightmeun.hide()
         };
         if (val == "edit") {
-            rightmeun.hide();
+            rightmeun.hide()
+            if(power_rent_room_edit == 1){
+                bui.alert("你没有权限编辑");
+                return false
+            }
             var s = bui.prompt({
                 content: "请输入楼层",
-                callback: function callback(ui) {
+                callback: function(ui) {
                     var text = $(this).text();
                     if (text == "确定") {
                         ui.close();
-                        if (ui.value() == '') {
+                        if(ui.value() == ''){
                             bui.alert("请填写楼层名");
                             return false;
                         }
@@ -159,49 +166,54 @@ loader.define(function (require, exports, module) {
                                 token: islogin
                             },
                             method: "POST"
-                        }).then(function (result) {
+                        }).then(function(result) {
                             if (result.code == 0) {
                                 rightmeun.hide();
                                 bui.alert("修改成功");
-                                getfloor();
+                                getfloor()
                             } else {
                                 bui.alert(result.msg);
                             }
-                        }, function (result, status) {
+                        }, function(result, status) {
                             //console.log(status)//"timeout"
                         });
-                    } else {
-                        ui.close();
+                    }else{
+                      ui.close();  
                     }
                 }
             });
         };
         //添加房间
         if (val == "addroom") {
+             rightmeun.hide();
+            if(power_rent_room_add == 1){
+                bui.alert("你没有权限添加");
+                return false
+            }
             bui.ajax({
                 url: apiUrl + "/mapi/room/add",
                 data: {
                     mode: 2,
                     rent_id: rentid,
-                    floor_id: floorid
+                    floor_id: floorid,
                 },
                 headers: {
                     clientid: "testclient",
                     token: islogin
                 },
                 method: "POST"
-            }).then(function (result) {
+            }).then(function(result) {
                 if (result.code == 0) {
                     rightmeun.hide();
-                    bui.alert("添加成功", function () {
-                        getfloor();
+                    bui.alert("添加成功", function() {
+                        getfloor()
                     });
                 } else {
                     bui.alert(result.msg);
                 }
-            }, function (result, status) {
+            }, function(result, status) {
                 //console.log(status)//"timeout"
             });
         }
     }
-});
+})

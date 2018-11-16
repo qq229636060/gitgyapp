@@ -11,7 +11,9 @@ loader.define(function (require, exports, module) {
 		monthtime: "",
 		mcaiwudata: "",
 		st: "",
-		st1: ""
+		st1: "",
+		powerday: "",
+		powerday1: ""
 	};
 	var myDate = new Date();
 	var year = myDate.getFullYear();
@@ -22,51 +24,65 @@ loader.define(function (require, exports, module) {
 	} else {
 		if (month <= 10) {
 			var newmonth = "0" + month;
+		} else {
+			var newmonth = month;
 		}
 	};
+	if (day < 10) {
+		var newday = "0" + day;
+	} else {
+		var newday = day;
+	}
 	function getmonth(thisz) {
 		thisz.$nextTick(function () {
-			monthdatas.monthtime = uitime.value();
-			//日运营
-			bui.ajax({
-				url: apiUrl + "/mapi/report/operateDay",
-				data: {
-					mode: mode,
-					time: monthdatas.monthtime
-				},
-				beforeSend: denglu,
-				method: "post"
-			}).then(function (result) {
-				if (result.code == 0) {
-					console.log(result);
-					monthdatas.st = result.data.st;
-					monthdatas.mdata = result.data.list;
-				} else {
-					bui.alert(result.msg);
-				}
-			}, function (result, status) {
-				//console.log(status)//"timeout"
-			});
+			if (power_report_operate_month != 1) {
+				monthdatas.monthtime = uitime.value();
+				//日运营
+				bui.ajax({
+					url: apiUrl + "/mapi/report/operateDay",
+					data: {
+						mode: mode,
+						time: monthdatas.monthtime
+					},
+					beforeSend: denglu,
+					method: "post"
+				}).then(function (result) {
+					if (result.code == 0) {
+						console.log(result);
+						monthdatas.st = result.data.st;
+						monthdatas.mdata = result.data.list;
+					} else {
+						bui.alert(result.msg);
+					}
+				}, function (result, status) {
+					//console.log(status)//"timeout"
+				});
+			} else {
+				monthdatas.powerday = 0;
+			}
 			//日财务
-			bui.ajax({
-				url: apiUrl + "/mapi/report/financeDay",
-				data: {
-					mode: mode,
-					time: monthdatas.monthtime
-				},
-				beforeSend: denglu,
-				method: "post"
-			}).then(function (result) {
-				if (result.code == 0) {
-					monthdatas.st1 = result.data.st;
-					monthdatas.mcaiwudata = result.data.list;
-				} else {
-					bui.alert(result.msg);
-				}
-			}, function (result, status) {
-				//console.log(status)//"timeout"
-			});
-
+			if (power_report_finance_day != 1) {
+				bui.ajax({
+					url: apiUrl + "/mapi/report/financeDay",
+					data: {
+						mode: mode,
+						time: monthdatas.monthtime
+					},
+					beforeSend: denglu,
+					method: "post"
+				}).then(function (result) {
+					if (result.code == 0) {
+						monthdatas.st1 = result.data.st;
+						monthdatas.mcaiwudata = result.data.list;
+					} else {
+						bui.alert(result.msg);
+					}
+				}, function (result, status) {
+					//console.log(status)//"timeout"
+				});
+			} else {
+				monthdatas.powerday1 = 0;
+			}
 			var uiSlideTab = bui.slide({
 				id: "#uiSlideTab",
 				menu: ".bui-nav",
@@ -90,8 +106,8 @@ loader.define(function (require, exports, module) {
 		// input 显示的日期格式
 		formatValue: "yyyy-MM-dd",
 		rotateEffect: true,
-		value: year + '-' + newmonth + '-' + day,
-		max: year + '-' + newmonth + '-' + day,
+		value: year + '-' + newmonth + '-' + newday,
+		max: year + '-' + newmonth + '-' + newday,
 		cols: {
 			hour: "none",
 			minute: "none",
@@ -117,8 +133,20 @@ loader.define(function (require, exports, module) {
 			}
 			if (val == "1") {
 				ui.hide();
+				if (power_report_operate_month == 1 && power_report_finance_month == 1) {
+					bui.alert("你没有权限查看");
+					return false;
+				}
 				router.replace({ url: "pages/chart/month.html", param: {} });
 			}
 		}
+	});
+	uitime.on("show", function () {
+		uiActionsheet.hide();
+		$("#editday").hide();
+	});
+	uitime.on("hide", function () {
+		uiActionsheet.hide();
+		$("#editday").show();
 	});
 });

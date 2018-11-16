@@ -1,11 +1,6 @@
-'use strict';
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-loader.define(function (require, exports, module) {
+loader.define(function(require, exports, module) {
 	var arr = [];
-	var testmoblie,
-	    _idcard = false;
+	var testmoblie, idcard = false;
 	var params = router.getPageParams();
 	var roomid = params.id;
 	var htid = params.htid;
@@ -21,10 +16,10 @@ loader.define(function (require, exports, module) {
 	var left2 = 10;
 	var delimg = [];
 	var islogin = tokenstorage.get("tokens");
-	var denglu = function denglu(xhr) {
-		xhr.setRequestHeader('token', islogin);
-		xhr.setRequestHeader('clientid', 'testclient');
-	};
+	var denglu = function(xhr) {
+			xhr.setRequestHeader('token', islogin);
+			xhr.setRequestHeader('clientid', 'testclient')
+		};
 	var formbox = new Vue({
 		el: "#appsz",
 		data: {
@@ -44,7 +39,7 @@ loader.define(function (require, exports, module) {
 				yajin: "",
 				idpic: [],
 				others: [],
-				beizhu: ""
+				beizhu:""
 			},
 			shouzuri: "",
 			shouzuriday: "",
@@ -69,47 +64,50 @@ loader.define(function (require, exports, module) {
 			uppic2: []
 		},
 		methods: {
-			clickht: function clickht(e) {
-				this.formboxs.hetong = e;
+			clickht: function(e) {
+				this.formboxs.hetong = e
 			},
-			telfunction: function telfunction() {
-				var sMobile = this.formboxs.tel;
-				if (!/^[1][3,4,5,7,8][0-9]{9}$/.test(sMobile)) {
+			telfunction: function() {
+				var sMobile = this.formboxs.tel
+				if (!(/^[1][3,4,5,7,8][0-9]{9}$/.test(sMobile))) {
 					testmoblie = true;
 					return false;
 				} else {
 					testmoblie = false;
 				}
 			},
-			idcard: function idcard() {
+			idcard: function() {
 				var IDcard = this.formboxs.Id;
 				var isIDCard1 = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
 				if (!isIDCard1.test(IDcard)) {
-					_idcard = true;
+					idcard = true
 					//bui.alert("请输入正确身份证号"); 
 					return false;
 				} else {
-					_idcard = false;
+					idcard = false
 				}
 			},
-			submit: function submit(fb) {
+			submit: function(fb) {
 				var that = this;
 				this.formboxs.rentstype = $("#daySelect .selected-val").eq(0).html();
 				this.formboxs.rentsday = $("#daySelect .selected-val").eq(1).html();
 
 				function toObj2(key, val, key1, val1, key2, val2) {
-					var _data;
-
-					var data = (_data = {}, _defineProperty(_data, key, val), _defineProperty(_data, key1, val1), _defineProperty(_data, key2, val2), _data);
+					var data = {
+						[key]: val,
+						[key1]: val1,
+						[key2]: val2
+					};
 					return data;
 				}
-				$(".other input[type='tel']").each(function (index) {
+				$(".other input[type='tel']").each(function(index) {
 					var namesval = $(this).attr("name");
 					var keyid = $(this).attr("data-id");
 					var names = $(this).parent().prev().html();
 					outherlist[keyid] = $(this).val();
 					that.formboxs.others[index] = toObj2("name", names, "valinput", $(this).val(), "id", keyid);
-				});
+
+				})
 				var betime = that.formboxs.times;
 				var endtime = that.formboxs.timee;
 				var d1 = betime.split('-');
@@ -117,14 +115,13 @@ loader.define(function (require, exports, module) {
 				var sdate = new Date(d1[0], parseInt(d1[1] - 1), d1[2]);
 				var edate = new Date(d2[0], parseInt(d2[1] - 1), d2[2]); /*附件图片*/
 				that.uppic1 = [];
-				$(".newnew").each(function (idx) {
-
-					that.uppic1.push($(".newnew").eq(idx).attr("bigdata"));
-				});
+				$(".newnew").each(function(idx) {
+					that.uppic1.push($(".newnew").eq(idx).attr("bigdata"))
+				})
 				that.uppic2 = [];
-				$(".newnew2").each(function (idx) {
-					that.uppic2.push($(".newnew2").eq(idx).attr("bigdata"));
-				});
+				$(".newnew2").each(function(idx) {
+					that.uppic2.push($(".newnew2").eq(idx).attr("bigdata"))
+				})
 				if (testmoblie) {
 					bui.alert("请输入正确手机号");
 				} else if (that.formboxs.name == "") {
@@ -167,44 +164,45 @@ loader.define(function (require, exports, module) {
 								img1: that.uppic1,
 								img2: that.uppic2,
 								del_img: delimg,
-								remarks: that.formboxs.beizhu
+								remarks:that.formboxs.beizhu
 							},
 							method: "POST",
 							dataType: "json",
-							beforeSend: denglu
-						}).then(function (result) {
+							beforeSend: denglu,
+						}).then(function(result) {
 							console.log(result);
 							if (result.code == 0) {
 								bui.hint({
 									content: "<i class='icon-check'></i><br/>签约成功",
 									position: "center",
 									effect: "fadeInDown",
-									onClose: function onClose() {
+									onClose: function() {
 										router.back({
 											name: "houseindex",
-											callback: function callback(mod) {
-												console.log(mod);
-												mod.pageview.$options.mounted[0]();
+											callback: function(mod) {
+												console.log(mod)
+												mod.pageview.$options.mounted[0]()
 											}
-										});
+										})
 									}
 								});
 							} else {
 								bui.alert(result.msg);
 							}
-						}, function (result, status) {
+
+						}, function(result, status) {
 							//console.log(status)//"timeout"
 						});
 					} else {
 						var yulanpic = [];
-						$("#fileList .file-item").each(function (index) {
-							yulanpic.push($("#fileList .file-item").eq(index).attr('bigdata'));
-						});
-						$("#fileList1 .file-item").each(function (index) {
-							yulanpic.push($("#fileList1 .file-item").eq(index).attr('bigdata'));
-						});
+						$("#fileList .file-item").each(function(index) {
+							yulanpic.push($("#fileList .file-item").eq(index).attr('bigdata'))
+						})
+						$("#fileList1 .file-item").each(function(index) {
+							yulanpic.push($("#fileList1 .file-item").eq(index).attr('bigdata'))
+						})
 						that.formboxs.idpic = yulanpic;
-						var storage = bui.storage();
+						var storage = bui.storage()
 						storage.set("formboxs", this.formboxs);
 						router.load({
 							url: "pages/rent/preview.html"
@@ -213,11 +211,10 @@ loader.define(function (require, exports, module) {
 				}
 			}
 		},
-		created: function created() {
+		created() {　　　　　　　　　　　　
 			this.formboxs.payfunction = this.paydata[0].val;
 		},
-
-		mounted: function mounted() {
+		mounted: function() {
 			var that = this;
 			bui.ajax({
 				url: apiUrl + "/mapi/tenant/info",
@@ -227,8 +224,8 @@ loader.define(function (require, exports, module) {
 				},
 				method: "POST",
 				dataType: "json",
-				beforeSend: denglu
-			}).then(function (result) {
+				beforeSend: denglu,
+			}).then(function(result) {
 				that.formboxs.hnames = result.data.room.title;
 				//其他选项
 				otherlist = result.data.config.sundryCollect;
@@ -255,7 +252,7 @@ loader.define(function (require, exports, module) {
 					that.storep2 = result.data.photos[2] == undefined ? result.data.photos[2] = [] : result.data.photos[2];
 					mday[0] = String(parseInt(result.data.tenant.collect_way.id) - 1);
 					mday[1] = String(parseInt(result.data.tenant.collect_day) - 1); /*收租日*/
-					loader.import("../js/mock/addcontract.json", function () {
+					loader.import("../js/mock/addcontract.json", function() {
 						daySelect = bui.levelselect({
 							data: days,
 							title: "选择时间",
@@ -266,8 +263,8 @@ loader.define(function (require, exports, module) {
 								name: "lever1",
 								data: ["lever2"]
 							}
-						});
-					});
+						})
+					})
 					var k;
 					if (result.data.tenant.payment.id == 101) {
 						k = 0;
@@ -292,21 +289,21 @@ loader.define(function (require, exports, module) {
 						}
 						var yother = result.data.tenant.others;
 						for (var i = 0; i < yother.length; i++) {
-							var boxs = '<div class="addbox"><div class="othername">' + yother[i].name + '</div><div class="inputmoney"><input type="tel" value="' + yother[i].value + '" name="other' + yother[i].id + '" data-id="' + yother[i].id + '" disabled="disabled"/><i>元</i></div></div>';
+							var boxs = '<div class="addbox"><div class="othername">' + yother[i].name + '</div><div class="inputmoney"><input type="tel" value="' + yother[i].value + '" name="other' + yother[i].id + '" data-id="' + yother[i].id + '" disabled="disabled"/><i>元</i></div></div>'
 							arr[yother[i].id] = yother[i].id;
-							$(".other").append(boxs);
+							$(".other").append(boxs)
 						}
 					} else {
 						that.noedit = true;
 						var yother = result.data.tenant.others;
 						for (var i = 0; i < yother.length; i++) {
-							var boxs = '<div class="addbox"><div class="othername">' + yother[i].name + '</div><div class="inputmoney"><input type="tel" value="' + yother[i].value + '" name="other' + yother[i].id + '" data-id="' + yother[i].id + '"/><i>元</i><em></em></div></div>';
+							var boxs = '<div class="addbox"><div class="othername">' + yother[i].name + '</div><div class="inputmoney"><input type="tel" value="' + yother[i].value + '" name="other' + yother[i].id + '" data-id="' + yother[i].id + '"/><i>元</i><em></em></div></div>'
 							arr[yother[i].id] = yother[i].id;
-							$(".other").append(boxs);
+							$(".other").append(boxs)
 						}
 					}
 				} else {
-					loader.import("../js/mock/addcontract.json", function () {
+					loader.import("../js/mock/addcontract.json", function() {
 						// 普通初始化
 						daySelect = bui.levelselect({
 							data: days,
@@ -317,8 +314,8 @@ loader.define(function (require, exports, module) {
 								name: "lever1",
 								data: ["lever2"]
 							}
-						});
-					});
+						})
+					})
 				} /*附件上传*/
 				if (that.storep1.length != 0) {
 					left = left - parseInt(that.storep1.length);
@@ -326,6 +323,7 @@ loader.define(function (require, exports, module) {
 						var html = '<div class="file-item thumbnail old ' + '" picid="' + that.storep1[i].id + '" bigdata="' + that.storep1[i].img + '">' + '<img src="' + that.storep1[i].img + '">' + '<i class="close_photo"></i>' + '</div>';
 						$('#fileList').append(html);
 					}
+
 				}
 				if (that.storep2.length != 0) {
 					left2 = left2 - parseInt(that.storep2.length);
@@ -333,6 +331,7 @@ loader.define(function (require, exports, module) {
 						var html = '<div class="file-item thumbnail old ' + '" picid="' + that.storep2[i].id + '" bigdata="' + that.storep2[i].img + '">' + '<img src="' + that.storep2[i].img + '">' + '<i class="close_photo"></i>' + '</div>';
 						$('#fileList1').append(html);
 					}
+
 				}
 
 				var uploader = WebUploader.create({
@@ -354,11 +353,11 @@ loader.define(function (require, exports, module) {
 					fileNumLimit: left,
 					fileSingleSizeLimit: 6 * 1024 * 1024
 				});
-				uploader.on('uploadBeforeSend', function (obj, data, headers) {
+				uploader.on('uploadBeforeSend', function(obj, data, headers) {
 					headers.token = islogin;
 					headers.clientid = 'testclient';
 				});
-				uploader.on('uploadSuccess', function (file, res) {
+				uploader.on('uploadSuccess', function(file, res) {
 					if (left) {
 						if (res && 'code' in res && res.code === 0) {
 							var html = '<div id="' + file.id + '" class="file-item thumbnail newnew" bigdata="' + res.data.url + '">' + '<img src="' + res.data.thumbs['.200x150'] + '">' + '<i class="close_photo"></i>' + '</div>';
@@ -369,7 +368,7 @@ loader.define(function (require, exports, module) {
 						}
 					}
 				});
-				uploader.on("error", function (type) {
+				uploader.on("error", function(type) {
 					var msg = '';
 					if (type == "Q_TYPE_DENIED") {
 						msg = '请上传jpg,jpeg,png格式的图片!';
@@ -384,7 +383,7 @@ loader.define(function (require, exports, module) {
 						bui.alert(msg);
 					}
 				});
-				$('#fileList').on('click', '.close_photo', function () {
+				$('#fileList').on('click', '.close_photo', function() {
 					var id = $(this).parent().attr('id');
 					var picid = $(this).parent().attr('picid');
 					if (picid) {
@@ -418,11 +417,11 @@ loader.define(function (require, exports, module) {
 					fileNumLimit: left2,
 					fileSingleSizeLimit: 6 * 1024 * 1024
 				});
-				uploader2.on('uploadBeforeSend', function (obj, data, headers) {
+				uploader2.on('uploadBeforeSend', function(obj, data, headers) {
 					headers.token = islogin;
 					headers.clientid = 'testclient';
 				});
-				uploader2.on('uploadSuccess', function (file, res) {
+				uploader2.on('uploadSuccess', function(file, res) {
 					if (left2) {
 						if (res && 'code' in res && res.code === 0) {
 							var html = '<div id="' + file.id + '" class="file-item thumbnail newnew2" bigdata="' + res.data.url + '">' + '<img src="' + res.data.thumbs['.200x150'] + '">' + '<i class="close_photo"></i>' + '</div>';
@@ -434,7 +433,7 @@ loader.define(function (require, exports, module) {
 						}
 					}
 				});
-				uploader2.on("error", function (type) {
+				uploader2.on("error", function(type) {
 					var msg = '';
 					if (type == "Q_TYPE_DENIED") {
 						msg = '请上传jpg,jpeg,png格式的图片!';
@@ -449,7 +448,7 @@ loader.define(function (require, exports, module) {
 						bui.alert(msg);
 					}
 				});
-				$('#fileList1').on('click', '.close_photo', function () {
+				$('#fileList1').on('click', '.close_photo', function() {
 					var id = $(this).parent().attr('id');
 					var picid = $(this).parent().attr('picid');
 					if (picid) {
@@ -463,7 +462,13 @@ loader.define(function (require, exports, module) {
 					uploader2.reset();
 					return false;
 				});
-			}, function (result, status) {});
+
+
+
+
+			}, function(result, status) {
+
+			});
 			var inputs = $("#datepicker_input_s");
 			var inpute = $("#datepicker_input_e");
 			var uiPickerdate_s = bui.pickerdate({
@@ -476,9 +481,9 @@ loader.define(function (require, exports, module) {
 					minute: "none",
 					second: "none"
 				},
-				onChange: function onChange(value) {
-					inputs.val(value);
-					that.formboxs.times = value;
+				onChange: function(value) {
+					inputs.val(value)
+					that.formboxs.times = value
 				}
 				// 如果不需要按钮,设置为空
 				// buttons: null
@@ -494,46 +499,50 @@ loader.define(function (require, exports, module) {
 					minute: "none",
 					second: "none"
 				},
-				onChange: function onChange(value) {
-					inpute.val(value);
-					that.formboxs.timee = value;
+				onChange: function(value) {
+					inpute.val(value)
+					that.formboxs.timee = value
 				}
 				// 如果不需要按钮,设置为空
 				// buttons: null
 			});
-			$("#daySelect").on("click", function () {
+			$("#daySelect").on("click", function() {
 				daySelect.show();
 			});
-			$("#addotherbtn").on("click", function () {
+			$("#addotherbtn").on("click", function() {
 				var add = bui.select({
 					title: "添加费用",
 					type: "radio",
 					autoClose: true,
 					data: arrotherlist,
 					height: 300,
-					onChange: function onChange(e) {
+					onChange: function(e) {
 						$(".bui-mask").hide();
 						var othernum = parseInt(add.value());
 						if (arr[othernum] == "" || arr[othernum] == undefined) {
 							arr[othernum] = othernum;
-							var boxs = '<div class="addbox"><div class="othername">' + add.text() + '</div><div class="inputmoney"><input type="tel" name="other' + othernum + '" data-id="' + othernum + '"/><i>元</i><em></em></div></div>';
-							$(".other").append(boxs);
+							var boxs = '<div class="addbox"><div class="othername">' + add.text() + '</div><div class="inputmoney"><input type="tel" name="other' + othernum + '" data-id="' + othernum + '"/><i>元</i><em></em></div></div>'
+							$(".other").append(boxs)
 						} else {
-							bui.alert("请不要重复勾选");
+							bui.alert("请不要重复勾选")
 						}
 					}
 				});
 				add.show();
-			});
-			$(".other").on("click", "em", function () {
+			})
+			$(".other").on("click", "em", function() {
 				var dataid = $(this).prev().prev().attr("data-id");
 				arr[dataid] = "";
 				$(this).parent().parent().remove();
+			})
+			$(".selects").change(function() {
+				$(this).css("color", "#666")
 			});
-			$(".selects").change(function () {
-				$(this).css("color", "#666");
-			});
+
+
 		}
-	});
-	return {};
-});
+	})
+	return {
+
+	}
+})

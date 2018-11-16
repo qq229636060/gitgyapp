@@ -1,8 +1,8 @@
 <div class="bui-page">
     <header class="bui-bar">
         <div class="bui-bar-left">
-            
-            <a class="bui-btn" onclick="bui.back()"><i class="icon-back"></i></a>
+            <!-- 左边按钮 -->
+            <a class="bui-btn" onclick="bui.back();"><i class="icon-back"></i></a>
         </div>
         <div class="bui-bar-main">查看合同</div>
         <div class="bui-bar-right">
@@ -15,7 +15,7 @@
       		<ul class="formbox">
       			<li><em>用户信息</em></li>	
       			<li><em>租客姓名</em><div class="linebox">{{msg[0].name}}</div></li>
-      			<li><em>手机号码</em><div class="linebox">{{msg[0].tel}}</div></li>
+      			<li><em>手机号码</em><div class="linebox">{{msg[0].tel}}</li>
       			<li><em>证件类型</em><div class="linebox"><p class="pl10">身份证</p></div></li>
       			<li><em>证件号码</em><div class="linebox">{{msg[0].Id}}</div></li>
       			<li><em>证件附件</em><div class="linebox"></div></li>
@@ -37,7 +37,7 @@
               <div class="othername">{{o.name}}</div><div class="inputmoney">{{o.valinput}}<i>元</i></div>
             </div>
       		</div>
-          <div class="jdz" style="display:none">
+          <div class="jdz" style="display: none">
           <div id="uiSlide" class="bui-slide">
             <div class="bui-slide-main">
                 <ul>
@@ -46,7 +46,7 @@
                     </li>
                 </ul>
             </div>
-            
+            <!-- 分屏菜单 -->
             <div class="bui-slide-head">
                 <ul>
                     <li>1</li>
@@ -58,9 +58,14 @@
     </main>
     <footer>
       <div class="bottombtn">
-        <div style="width:50%"><a href="pages/rent/addcontract.html">续租</a></div>
-        <div style="width:50%"><a href="pages/rent/refund.html">退租</a></div>
+        <div style="width: 50%"><a href="pages/rent/addcontract.html">续租</a></div>
+        <div style="width: 50%"><a href="pages/rent/refund.html">退租</a></div>
     </div>
     </footer>
-    <style>#previewapp .formbox li{justify-content:space-between}#previewapp .formbox li .linebox{margin:0 .2rem 0 0;text-align:right;color:#666}#previewapp .jdz{width:100%;height:100%;background:rgba(0,0,0,.6);position:fixed;top:0}#previewapp .formbox li:first-child{padding:.23rem}</style>
+    <style type="text/css">
+    #previewapp .formbox li{ justify-content: space-between; }
+    #previewapp .formbox li .linebox{ margin: 0 0.2rem 0 0; text-align: right; color: #666 }
+    #previewapp .jdz{width: 100%; height: 100%; background:rgba(0,0,0,0.6); position: fixed; top:0;}
+    #previewapp .formbox li:first-child{ padding: 0.23rem }
+    </style>
 </div>

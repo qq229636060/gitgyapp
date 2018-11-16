@@ -107,6 +107,13 @@ loader.define(function(require, exports, module) {
 					that.formboxs.others[index] = toObj2("name", names, "valinput", $(this).val(), "id", keyid);
 
 				})
+				$(".newnew").each(function(idx) {
+					that.uppic1.push($(".newnew").eq(idx).attr("bigdata"))
+				})
+				that.uppic2 = [];
+				$(".newnew2").each(function(idx) {
+					that.uppic2.push($(".newnew2").eq(idx).attr("bigdata"))
+				})
 				var betime = that.formboxs.times;
 				var endtime = that.formboxs.timee;
 				var d1 = betime.split('-');
@@ -317,22 +324,22 @@ loader.define(function(require, exports, module) {
 						})
 					})
 				} /*附件上传*/
-				if (that.storep1.length != 0) {
-					left = left - parseInt(that.storep1.length);
-					for (var i = 0; i < that.storep1.length; i++) {
-						var html = '<div class="file-item thumbnail old ' + '" picid="' + that.storep1[i].id + '" bigdata="' + that.storep1[i].img + '">' + '<img src="' + that.storep1[i].img + '">' + '<i class="close_photo"></i>' + '</div>';
-						$('#fileList').append(html);
-					}
+				// if (that.storep1.length != 0) {
+				// 	left = left - parseInt(that.storep1.length);
+				// 	for (var i = 0; i < that.storep1.length; i++) {
+				// 		var html = '<div class="file-item thumbnail old ' + '" picid="' + that.storep1[i].id + '" bigdata="' + that.storep1[i].img + '">' + '<img src="' + that.storep1[i].img + '">' + '<i class="close_photo"></i>' + '</div>';
+				// 		$('#fileList').append(html);
+				// 	}
 
-				}
-				if (that.storep2.length != 0) {
-					left2 = left2 - parseInt(that.storep2.length);
-					for (var i = 0; i < that.storep2.length; i++) {
-						var html = '<div class="file-item thumbnail old ' + '" picid="' + that.storep2[i].id + '" bigdata="' + that.storep2[i].img + '">' + '<img src="' + that.storep2[i].img + '">' + '<i class="close_photo"></i>' + '</div>';
-						$('#fileList1').append(html);
-					}
+				// }
+				// if (that.storep2.length != 0) {
+				// 	left2 = left2 - parseInt(that.storep2.length);
+				// 	for (var i = 0; i < that.storep2.length; i++) {
+				// 		var html = '<div class="file-item thumbnail old ' + '" picid="' + that.storep2[i].id + '" bigdata="' + that.storep2[i].img + '">' + '<img src="' + that.storep2[i].img + '">' + '<i class="close_photo"></i>' + '</div>';
+				// 		$('#fileList1').append(html);
+				// 	}
 
-				}
+				// }
 
 				var uploader = WebUploader.create({
 					auto: true,

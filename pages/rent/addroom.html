@@ -1,7 +1,7 @@
 <div class="bui-page" id="addroom_app">
     <header class="bui-bar">
         <div class="bui-bar-left">
-            
+            <!-- 左边按钮 -->
             <a class="bui-btn" @click="houtui()"><i class="icon-back"></i></a>
         </div>
         <div class="bui-bar-main">房间发布</div>
@@ -9,7 +9,7 @@
         </div>
     </header>
     <main>
-        <form @submit.prevent="submitroom">
+        <form  @submit.prevent="submitroom">
           <div class="tstitle">请您保证房源真实有效，悦租有权下架所有虚假房源</div>
           <div class="jdpic">
           <div id="idpic">
@@ -54,7 +54,7 @@
              <li><em>房源配置</em>
               <div class="linebox"> 
                 <div id="select" class="bui-btn bui-box">
-                  <div class="span1" style="width:4rem">请选择配置</div>
+                  <div class="span1" style="width: 4rem;">请选择配置</div>
                 </div>
             </div><i></i></li>
              <li><em>房源标签</em>
@@ -84,9 +84,25 @@
     </main>
  <footer>
   <div class="bottombtn" id="savehouse">
-    <div style="width:50%" @click="submitroom(0)">保存</div>
+    <div style="width: 50%" @click="submitroom(0)">保存</div>
     <div @click="submitroom(1)">保存并发布</div>
 </div></footer>
    
 </div> 
-<style>.formbox li:first-child{background:#fff;color:#333;padding:.23rem}.tstitle{width:100%;height:.6rem;line-height:.6rem;background:#fffee3;color:#f56623;font-size:.24rem;text-align:center}.linetitle{padding:.29rem 0;margin:0 0 0 .23rem;font-size:.3rem}.jdpic{position:relative;width:100%;overflow:hidden}.addphotoicon{width:2.34rem;height:.8rem;position:absolute;left:50%;top:50%;margin:-.4rem 0 0 -1.07rem;z-index:999}.addphotoicon img{width:100%;height:100%}.formbox [class*=bui-btn].bui-box{padding:0;border:none;min-height:auto;line-height:.4rem}.bui-list .bui-box .span1{font-size:.3rem}.formbox .span1{overflow:hidden;height:.36rem}.bui-list>.bui-btn-line{line-height:.82rem}.bui-dialog-select .bui-dialog-head{min-height:1rem;line-height:1rem;background:#27cda1;color:#fff;font-size:.3rem}</style>
+<style type="text/css">
+.formbox li:first-child {
+    background: #FFF;
+    color: #333;
+    padding: 0.23rem;
+}
+.tstitle{ width: 100%; height: .6rem; line-height: .6rem; background: #FFFEE3; color: #f56623; font-size: .24rem; text-align: center; }
+.linetitle{padding: .29rem 0;margin: 0 0 0 .23rem; font-size: .3rem;}
+.jdpic{ position: relative; width: 100%; overflow: hidden; }
+.addphotoicon{ width: 2.34rem; height: .8rem; position: absolute; left: 50%; top:50%; margin: -0.4rem 0 0 -1.07rem; z-index: 999}
+.addphotoicon img{ width: 100%; height: 100%; }
+.formbox [class*=bui-btn].bui-box{ padding: 0; border:none; min-height: auto;line-height: 0.4rem; }
+.bui-list .bui-box .span1{ font-size: .3rem; }
+.formbox .span1{ overflow: hidden; height: 0.36rem; }
+.bui-list>.bui-btn-line { line-height: .82rem; }
+.bui-dialog-select .bui-dialog-head{ min-height: 1rem; line-height: 1rem; background: #27cda1; color: #FFF; font-size: .3rem;}
+</style>

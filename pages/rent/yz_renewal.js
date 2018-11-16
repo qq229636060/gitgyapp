@@ -58,13 +58,10 @@ loader.define(function(require, exports, module) {
 			}],
 			payftxt: "",
 			phototxt:"请添加证件照片",
-			up1: "",
-			//图片张数
-			up2: "",
-			//图片张数
-			storep1: "",
-			//图片缓存
-			storep2: "" //图片缓存
+			storep1: [],
+			storep2: [],
+			uppic1: [],
+			uppic2: []
 		},
 		methods: {
 			clickht: function(e) {
@@ -90,25 +87,6 @@ loader.define(function(require, exports, module) {
 					idcard = false
 				}
 			},
-			gotoupload: function() {
-				var that = this;
-				var storagepic1 = bui.storage();
-				var storagepic2 = bui.storage();
-				if (htid == 0) {
-					storagepic1.remove("urlpic1");
-					storagepic2.remove("urlpic2");
-				} else {
-					storagepic1.set("urlpic1", that.storep1);
-					storagepic2.set("urlpic2", that.storep2);
-				}
-				bui.load({
-					url: "pages/rent/yz_attachment.html",
-					param: {
-						up1: that.up1,
-						up2: that.up2
-					}
-				});
-			},
 			submit: function(fb) {
 				var that = this;
 				this.formboxs.rentstype = $("#daySelect .selected-val").eq(0).html();
@@ -128,6 +106,15 @@ loader.define(function(require, exports, module) {
 					outherlist[keyid] = $(this).val();
 					that.formboxs.others[index] = toObj2("name", names, "valinput", $(this).val(), "id", keyid);
 
+				})
+				that.uppic1 = [];
+				$(".zz").each(function(idx) {
+					that.uppic1.push($(".zz").eq(idx).attr("bigdata"))
+				})
+				console.log(that.uppic1)
+				that.uppic2 = [];
+				$(".zz1").each(function(idx) {
+					that.uppic2.push($(".zz1").eq(idx).attr("bigdata"))
 				})
 				var betime = that.formboxs.times;
 				var endtime = that.formboxs.timee;
@@ -179,9 +166,10 @@ loader.define(function(require, exports, module) {
 								collect_way: moneyday,
 								collect_day: tqdays,
 								other: outherlist,
-								img1:photo1[0],
-								img2:photo2[0],
-								del_img:delphoto1[0]
+								img1: that.uppic1,
+								img2: that.uppic2,
+								del_img: delimg,
+								remarks:that.formboxs.beizhu
 							},
 							method: "POST",
 							dataType: "json",
@@ -336,22 +324,22 @@ loader.define(function(require, exports, module) {
 						})
 					})
 				} /*附件上传*/
-				if (that.storep1.length != 0) {
-					left = left - parseInt(that.storep1.length);
-					for (var i = 0; i < that.storep1.length; i++) {
-						var html = '<div class="file-item thumbnail old ' + '" picid="' + that.storep1[i].id + '" bigdata="' + that.storep1[i].img + '">' + '<img src="' + that.storep1[i].img + '">' + '<i class="close_photo"></i>' + '</div>';
-						$('#fileList').append(html);
-					}
+				// if (that.storep1.length != 0) {
+				// 	left = left - parseInt(that.storep1.length);
+				// 	for (var i = 0; i < that.storep1.length; i++) {
+				// 		var html = '<div class="file-item thumbnail old zz' + '" picid="' + that.storep1[i].id + '" bigdata="' + that.storep1[i].img + '">' + '<img src="' + that.storep1[i].img + '">' + '<i class="close_photo"></i>' + '</div>';
+				// 		$('#fileList').append(html);
+				// 	}
 
-				}
-				if (that.storep2.length != 0) {
-					left2 = left2 - parseInt(that.storep2.length);
-					for (var i = 0; i < that.storep2.length; i++) {
-						var html = '<div class="file-item thumbnail old ' + '" picid="' + that.storep2[i].id + '" bigdata="' + that.storep2[i].img + '">' + '<img src="' + that.storep2[i].img + '">' + '<i class="close_photo"></i>' + '</div>';
-						$('#fileList1').append(html);
-					}
+				// }
+				// if (that.storep2.length != 0) {
+				// 	left2 = left2 - parseInt(that.storep2.length);
+				// 	for (var i = 0; i < that.storep2.length; i++) {
+				// 		var html = '<div class="file-item thumbnail old zz1' + '" picid="' + that.storep2[i].id + '" bigdata="' + that.storep2[i].img + '">' + '<img src="' + that.storep2[i].img + '">' + '<i class="close_photo"></i>' + '</div>';
+				// 		$('#fileList1').append(html);
+				// 	}
 
-				}
+				// }
 
 				var uploader = WebUploader.create({
 					auto: true,
@@ -379,7 +367,7 @@ loader.define(function(require, exports, module) {
 				uploader.on('uploadSuccess', function(file, res) {
 					if (left) {
 						if (res && 'code' in res && res.code === 0) {
-							var html = '<div id="' + file.id + '" class="file-item thumbnail newnew" bigdata="' + res.data.url + '">' + '<img src="' + res.data.thumbs['.200x150'] + '">' + '<i class="close_photo"></i>' + '</div>';
+							var html = '<div id="' + file.id + '" class="file-item thumbnail newnew zz" bigdata="' + res.data.url + '">' + '<img src="' + res.data.thumbs['.200x150'] + '">' + '<i class="close_photo"></i>' + '</div>';
 							$('#fileList').append(html);
 							--left;
 						} else {
@@ -443,7 +431,7 @@ loader.define(function(require, exports, module) {
 				uploader2.on('uploadSuccess', function(file, res) {
 					if (left2) {
 						if (res && 'code' in res && res.code === 0) {
-							var html = '<div id="' + file.id + '" class="file-item thumbnail newnew2" bigdata="' + res.data.url + '">' + '<img src="' + res.data.thumbs['.200x150'] + '">' + '<i class="close_photo"></i>' + '</div>';
+							var html = '<div id="' + file.id + '" class="file-item thumbnail newnew2 zz1" bigdata="' + res.data.url + '">' + '<img src="' + res.data.thumbs['.200x150'] + '">' + '<i class="close_photo"></i>' + '</div>';
 							$('#fileList1').append(html);
 							--left2;
 						} else {

@@ -3,9 +3,9 @@
         <div class="bui-bar-left"></div>
         <div class="bui-bar-main"><i class="fj">集</i>房源管理</div>
         <div class="bui-bar-right">
-          <div class="bui-btn" style="display:flex;display:-webkit-flex">
-            <i class="icon-search"><a href="pages/rent/so2.html" style="display:block"></a></i>
-            <i class="icon-plus addhouse" style="margin:0 0 0 .2rem"><a href="pages/rent/addhouse.html?mode=2"></a></i>
+          <div class="bui-btn" style="display: flex; display: -webkit-flex;">
+            <i class="icon-search"><a href="pages/rent/so2.html" style="display: block;"></a></i>
+            <i class="icon-plus addhouse" style="margin: 0 0 0 0.2rem"><a @click="gotoaddhouse()"></a></i>
           </div>
         </div>
     </header>
@@ -53,7 +53,7 @@
 		        		 	<div class="roomstatus" v-if="rooms.st == 1">{{rooms.tenant_name}}</div>
                   <div class="roomstatus" v-else>空置{{rooms.emptyDay}}天</div>
 		        		 	</div>
-		        		 	  <div class="btns" v-show="btnshow == rooms.id">
+		        		 	  <div class="btns" v-show ="btnshow == rooms.id">
                       <em class="jt"></em>
                       <div class="oproominfo">
                         <em>{{rooms.room_no}}</em>

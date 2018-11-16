@@ -19,6 +19,7 @@ loader.define(function(require, exports, module) {
 			payf: "",
 			//支付方式
 			payr: "",
+			payday:"",
 			//收租日
 			idpic: [],
 			ok: false,
@@ -44,6 +45,10 @@ loader.define(function(require, exports, module) {
 			},
 			xzrent: function(e) {
 				var that = this;
+				if(power_rent_owner_renew == 1){
+					bui.alert("你没有权限续租");
+					return false;
+				}
 				if(that.ownerBillNum>0){
 					bui.alert("您还有"+that.ownerBillNum+"个应收未收账单未处理");
 					return false;
@@ -58,6 +63,10 @@ loader.define(function(require, exports, module) {
 			},
 			tuizu: function(e) {
 				var that = this;
+				if(power_rent_owner_return == 1){
+					bui.alert("你没有权限退租");
+					return false;
+				}
 				if(that.ownerBillNum>0){
 				 bui.confirm("您还有"+that.ownerBillNum+"个应收未收账单未处理,是否继续退租?",function(ui){
 		           // this 为底部按钮
@@ -102,7 +111,11 @@ loader.define(function(require, exports, module) {
 						that.roomtitle = result.data.rent.title;
 						that.ownerBillNum = result.data.ownerBillNum;
 						that.msg = result.data.owner;
-						that.payr = result.data.owner.collect_way.name;
+						if(result.data.owner.collect_way.id=="1"){
+							that.payday = '提前' + result.data.owner.collect_day +'天收租'
+						}else{
+							that.payday = '固定' + result.data.owner.collect_day +'日收租'
+						}
 						if (result.data.owner.payment.id == 1) {
 							that.payf = result.data.owner.month
 						} else {
@@ -146,7 +159,12 @@ loader.define(function(require, exports, module) {
 						that.roomtitle = result.data.rent.title;
 						that.ownerBillNum = result.data.ownerBillNum;
 						that.msg = result.data.owner;
-						that.payr = result.data.owner.collect_way.name;
+						console.log(result.data.owner.collect_way.id)
+						if(result.data.owner.collect_way.id == "1"){
+							that.payday = '提前' + result.data.owner.collect_day +'天收租'
+						}else{
+							that.payday = '固定' + result.data.owner.collect_day +'日收租'
+						}
 						if (result.data.owner.payment.id == 1) {
 							that.payf = result.data.owner.month
 						} else {
@@ -218,6 +236,10 @@ loader.define(function(require, exports, module) {
 						editcontract.hide();
 					} else if (val == "0") {
 						editcontract.hide();
+						if(power_rent_owner_edit == 1){
+							bui.alert("你没有权限编辑");
+							return false;
+						}
 						router.replace({
 							url: "pages/rent/yz_addcontract.html",
 							param: {
@@ -227,6 +249,10 @@ loader.define(function(require, exports, module) {
 						})
 					} else if (val == "1") {
 						editcontract.hide();
+						if(power_rent_owner_del == 1){
+							bui.alert("你没有权限删除");
+							return false;
+						}
 						bui.confirm({
 							"title": "",
 							"content": '<div class="bui-box-center"><p>是否删除合同</p><p><em class="fxk">√</em>同时删除已确认账单和流水</p></div>',
@@ -274,10 +300,18 @@ loader.define(function(require, exports, module) {
 						});
 					}else if(val == "2"){
 						editcontract.hide();
+						if(power_rent_owner_bill_add == 1){
+							bui.alert("你没有权限添加");
+							return false;
+						}
 						bui.load({url:"pages/finance/addzd",param:{ifadd:0,names:that.msg.name,ownerid:that.msg.id,cate:2}});
 					}else if(val == "3"){
 						editcontract.hide();
-						router.load({ url:"pages/finance/zhangdan.html", param: {owner_id:that.msg.id,mode:mode} });
+						if(power_rent_owner_bill_info == 1){
+							bui.alert("你没有权限查看");
+							return false;
+						}
+						router.load({ url:"pages/finance/zhangdan.html", param: {owner_id:that.msg.id,mode:mode,trader:2} });
 					}
 				}
 			})

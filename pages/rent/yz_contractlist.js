@@ -30,6 +30,10 @@ loader.define(function (require, exports, module){
                     router.load({url:"pages/rent/yz_contractinfo.html", param: {id:e,htid:htid,returntype:returntype,rent_id:rentid,type:databox.types}});
                 },
                 gotoyzadd:function(){
+                     if(power_rent_owner_add == 1){
+                        bui.alert("你没有权限录入");
+                        return false;
+                     }
                      bui.load({
                             url: "pages/rent/yz_addcontract.html",
                             param: {
@@ -72,11 +76,14 @@ loader.define(function (require, exports, module){
                     },
                     onLoad: function (scroll,data) {
                            if(data.code == 0){
-                             console.log(data)
-                             databox.types = 1;
+                             databox.types = 2;
                              for(var i=0; i<data.data.list.length;i++){
                                 databox.clist.push(data.data.list[i])
                              }
+                           }else if(data.code == '-86'){
+                                bui.alert(data.msg,function(){
+                                    bui.back();
+                                });
                            }
                     },
                     callback: function (e) {

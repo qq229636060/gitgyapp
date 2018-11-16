@@ -50,6 +50,10 @@ loader.define(function (require, exports, module) {
 		data: reldata,
 		methods: {
 			gotoaddroom: function gotoaddroom(id) {
+				if (power_rent_room_edit == 1) {
+					bui.alert("你没有权限编辑");
+					return false;
+				}
 				bui.load({ url: "pages/rent/addroom", param: { roomid: id } });
 			},
 			navrel: function navrel(types) {
@@ -71,6 +75,10 @@ loader.define(function (require, exports, module) {
 				}
 			},
 			shuaxin: function shuaxin(roomid) {
+				if (power_rent_list_refresh == 1) {
+					bui.alert("你没有权限刷新");
+					return false;
+				}
 				roomarr[0] = roomid;
 				bui.confirm("是否刷新房源", function (ui) {
 					var text = $(this).text();
@@ -102,6 +110,10 @@ loader.define(function (require, exports, module) {
 				});
 			},
 			xiajia: function xiajia(roomid) {
+				if (power_rent_list_down == 1) {
+					bui.alert("你没有权限下架");
+					return false;
+				}
 				roomarr[0] = roomid;
 				bui.confirm("是否下架房源", function (ui) {
 					var text = $(this).text();

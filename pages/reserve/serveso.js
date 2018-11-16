@@ -1,4 +1,6 @@
-loader.define(function (require, exports, module){
+"use strict";
+
+loader.define(function (require, exports, module) {
     var zuyuetype = [];
     var htstyle = [];
     var htobject = [];
@@ -9,38 +11,40 @@ loader.define(function (require, exports, module){
     var st = params.st;
     var islogin = tokenstorage.get("tokens");
     var uiListcontract;
-    var denglu = function(xhr){xhr.setRequestHeader('token',islogin);xhr.setRequestHeader('clientid','testclient')};
+    var denglu = function denglu(xhr) {
+        xhr.setRequestHeader('token', islogin);xhr.setRequestHeader('clientid', 'testclient');
+    };
     var databox = {
-            stBespeak: [],
-            clist: [],
-            now: '-1',
-            btnshow:'',
-            iconface:0,
-            types:"",
-            val:"0"
+        stBespeak: [],
+        clist: [],
+        now: '-1',
+        btnshow: '',
+        iconface: 0,
+        types: "",
+        val: "0"
     };
     var servelist = new Vue({
         el: "#yuyuelistso",
         data: databox,
         methods: {
-                hover_info:function(e){
-                    router.load({ url:"pages/reserve/kfcont.html", param: {yueid:e}});
-                }  
+            hover_info: function hover_info(e) {
+                router.load({ url: "pages/reserve/kfcont.html", param: { yueid: e } });
+            }
         },
-        mounted: function(){
+        mounted: function mounted() {
             getdatas();
         }
-    })
+    });
 
-     function getdatas() {
-            var uiSearchbar = bui.searchbar({
-                id: "#searchbar",
-                callback: function(ui, keyword) {
-                       uiListcontract && uiListcontract.destroy();
-                    databox.iconface = 0;
-                    databox.clist =[];
+    function getdatas() {
+        var uiSearchbar = bui.searchbar({
+            id: "#searchbar",
+            callback: function callback(ui, keyword) {
+                uiListcontract && uiListcontract.destroy();
+                databox.iconface = 0;
+                databox.clist = [];
 
-                    uiListcontract = bui.list({
+                uiListcontract = bui.list({
                     id: "#scrollcontract",
                     url: apiUrl + "/mapi/reserve/list",
                     method: "post",
@@ -49,40 +53,39 @@ loader.define(function (require, exports, module){
                         token: islogin
                     },
                     page: 1,
-                    pageSize:15,
-                    data:{
-                        mode:mode,
-                        stime:databox.sttime,
-                        etime:databox.edtime,
-                        kw:keyword,
-                        st:databox.val
+                    pageSize: 15,
+                    data: {
+                        mode: mode,
+                        stime: databox.sttime,
+                        etime: databox.edtime,
+                        kw: keyword,
+                        st: databox.val
                     },
-                    refresh:false,
+                    refresh: false,
                     //如果分页的字段名不一样,通过field重新定义
                     field: {
                         page: "page",
                         data: "data.list"
                     },
-                    onLoad: function (scroll,data) {
-                           if(data.code == 0){
-                              databox.types = 0;
-                              for(var i=0; i<data.data.list.length;i++){
-                                databox.clist.push(data.data.list[i])
-                             }
-                           }else{
-                            bui.alert(data.msg,function(e){
+                    onLoad: function onLoad(scroll, data) {
+                        if (data.code == 0) {
+                            databox.types = 0;
+                            for (var i = 0; i < data.data.list.length; i++) {
+                                databox.clist.push(data.data.list[i]);
+                            }
+                        } else {
+                            bui.alert(data.msg, function (e) {
                                 tokenstorage.remove("tokens");
                                 window.location.href = domains;
-                            }); 
-                           } 
+                            });
+                        }
                     },
-                    callback: function (e) {
-                            // 点击整行的时候执行
+                    callback: function callback(e) {
+                        // 点击整行的时候执行
                     }
-                })
-                }
-            })
-           
+                });
+            }
+        });
     }
     var myDate = new Date();
     var datePrevVal;
@@ -145,8 +148,8 @@ loader.define(function (require, exports, module){
         }
     });
     datePrevVal1 = jstime.value();
-     return {
-      pageName: "servelist",
-      pageview: servelist
-    }
-})
+    return {
+        pageName: "servelist",
+        pageview: servelist
+    };
+});

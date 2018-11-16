@@ -1,7 +1,7 @@
 <div class="bui-page" id="floor_room">
     <header class="bui-bar">
         <div class="bui-bar-left">
-            
+            <!-- 左边按钮 -->
             <a class="bui-btn" @click="houtui"><i class="icon-back"></i></a>
         </div>
         <div class="bui-bar-main">房间详情</div>
@@ -13,8 +13,8 @@
         <div class="housenames"><span>{{housenames}}</span><span>{{floornum}}楼</span></div>
         <ul id="listviews" class="bui-listview">
           <li v-for="rooms in houseinfo" :data_roomid="rooms.id">
-          <div class="bui-btn bui-box">
-            <div class="span1">
+          <div class="bui-btn bui-box" >
+            <div class="span1" >
             <span>{{rooms.room_no}}</span>
             <span>{{rooms.state}}</span>
            </div>
@@ -24,4 +24,27 @@
     </main>
 
 </div>
-<style>#listviews{margin:.3rem 0 0 0}.housenames{width:100%;background:#fff;font-size:.3rem;padding:.2rem}#floor_room .bui-listview>li>[class*=bui-btn]{padding-top:.29rem;padding-bottom:.29rem;font-size:.3rem}#floor_room #listviews .span1{display:flex;display:-webkit-flex;justify-content:space-between}#floor_room #listviews .span1 span:last-child{margin:0 .1rem 0 0}#floor_room .formbox li{justify-content:space-between}#floor_room .linebox{text-align:right;padding-right:.23rem}.bui-box-center .fxk{border:solid 1px #666;width:.25rem;height:.25rem;display:inline-block;border-radius:.05rem;position:relative;top:.02rem;right:.1rem;overflow:hidden;font-size:.28rem;line-height:.2rem;text-align:left}.housenames{display:flex;display:-webkit-flex;justify-content:space-between}</style>
+<style type="text/css">
+#listviews{ margin: 0.3rem 0 0 0 }
+.housenames{ width:100%; background: #FFF; font-size: .3rem; padding: 0.2rem; }
+#floor_room .bui-listview>li>[class*=bui-btn]{ padding-top: .29rem; padding-bottom: .29rem; font-size: .3rem; }
+#floor_room #listviews .span1{ display: flex; display: -webkit-flex; justify-content: space-between; }
+#floor_room #listviews .span1 span:last-child{ margin: 0 0.1rem 0 0}
+#floor_room .formbox li {justify-content: space-between;}
+#floor_room .linebox{ text-align: right; padding-right:0.23rem; }
+.bui-box-center .fxk {
+    border: solid 1px #666;
+    width: .25rem;
+    height: .25rem;
+    display: inline-block;
+    border-radius: .05rem;
+    position: relative;
+    top: .02rem;
+    right: .1rem;
+    overflow: hidden;
+    font-size: .28rem;
+    line-height: .2rem;
+    text-align: left;
+}
+.housenames{ display:flex; display: -webkit-flex; justify-content: space-between; }
+</style>

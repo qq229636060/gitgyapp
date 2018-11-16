@@ -28,7 +28,7 @@
 						 	<p>入住率</p>
 						 	</div> 
 						 	<div><p>{{mdata.room_empty_average}}</p> 
-							<p>平均空置天数</p>
+							<p>平均空置天数(元)</p>
 							</div>
 							</div>
 						</div>
@@ -81,10 +81,10 @@
 						<div class="tubiao" id="tubiao"></div>
 						<div class="tubiao" id="tubiao2"></div>
 					</div>
-					<div class="nones" v-show="st == 0"><img src="../../images/icon/nones.png"> <p>没有数据</p></div>
+					<div class="nones" v-if="st == 0"><img src="../../images/icon/nones.png"> <p v-if="power_if != 0">没有数据</p><p v-if="power_if == 0">没有权限</p></div>
                   </li>
                   <li>
-                      <div class="getdata" v-show="st1 == 1">
+                      <div class="getdata" v-if="st1 == 1">
                       	<div class="table710">
 							<div class="tongjiboxs"><div class="tongjiboxs_title"><i></i>房源状况</div>
 							<div class="tongjiboxs_boxs">
@@ -171,7 +171,7 @@
 					   </div>
 					</div>
              	  </div>
-                      <div class="nones" v-show="st1 == 0"><img src="../../images/icon/nones.png"> <p>没有数据</p>
+                      <div class="nones" v-if="st1 == 0"><img src="../../images/icon/nones.png"> <p v-if="power_if1 != 0">没有数据</p><p v-if="power_if1 == 0">没有权限</p>
                       </div>
                   </div></li>
               </ul>

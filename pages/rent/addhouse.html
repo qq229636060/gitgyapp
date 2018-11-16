@@ -1,8 +1,8 @@
 <div class="bui-page" id="addhouse_app">
     <header class="bui-bar">
         <div class="bui-bar-left">
-            
-            <a class="bui-btn" onclick="bui.back()"><i class="icon-back"></i></a>
+            <!-- 左边按钮 -->
+            <a class="bui-btn" onclick="bui.back();"><i class="icon-back"></i></a>
         </div>
         <div class="bui-bar-main">添加房屋</div>
         <div class="bui-bar-right">
@@ -19,23 +19,23 @@
                 </select>
               </div>
               <i></i></li>
-          <li v-if="mode == 2"><em>公寓名称</em><div class="linebox"><input type="text" name="" placeholder="请输入公寓名称" v-model="gy_name"></div></li>
+          <li v-if="mode == 2"><em>公寓名称</em><div class="linebox"><input type="text" name="" placeholder="请输入公寓名称" v-model="gy_name"></li>
           <li><em>小区名称</em><div class="linebox"><div class="sohouse" @click="goto_sohouse">请选择小区</div></div></li>
         <li><em>区域板块</em>
-          <div class="linebox"><input type="text" name="" placeholder="区域板块" readonly="readonly" class="qy"></div></li>
+          <div class="linebox"><input type="text" name="" placeholder="区域板块" readonly="readonly" class="qy" /></div></li>
         <li>
           <em v-if="mode == 1">详细地址</em>
           <em v-if="mode == 2">公寓地址</em>
           <div class="linebox">
-          <input type="text" name="" placeholder="请输入详细地址" readonly="readonly" class="dizhi" id="adders">
+          <input type="text" name="" placeholder="请输入详细地址" readonly="readonly" class="dizhi" id="adders"/>
         </div>
       </li>
           <li v-if="mode == 1"><em>楼栋门牌</em>
             <div class="linebox samllinput">
-               <input type="text" name="" placeholder="" v-model="building"><b class="huitxt">栋</b>
-               <input type="text" name="" placeholder="" v-model="unit"><b class="huitxt">单元</b>
-               <input type="text" name="" placeholder="" v-model="floor"><b class="huitxt">楼</b>
-               <input type="text" name="" placeholder="" v-model="number"><b class="huitxt">号</b>
+               <input type="text" name="" placeholder="" v-model='building'/><b class="huitxt">栋</b>
+               <input type="text" name="" placeholder="" v-model='unit'/><b class="huitxt">单元</b>
+               <input type="text" name="" placeholder="" v-model='floor'/><b class="huitxt">楼</b>
+               <input type="text" name="" placeholder="" v-model='number'/><b class="huitxt">号</b>
             </div>
           </li>
             <li v-if="mode == 1"><em>租凭方式</em><div class="linebox">
@@ -51,13 +51,13 @@
           <li v-if="mode == 2 && editshow == 0">
           <em>楼层总数</em>
           <div class="linebox">
-            <input type="number" name="" placeholder="楼层总数" class="dizhi" v-model="zfloor">
+            <input type="number" name="" placeholder="楼层总数"  class="dizhi" v-model="zfloor"/>
            </div>
           </li>
           <li v-if="mode == 2 && editshow == 0">
           <em>房间数</em>
           <div class="linebox">
-            <input type="number" name="" placeholder="请填写每层房间数" class="dizhi" v-model="zrooms">
+            <input type="number" name="" placeholder="请填写每层房间数" class="dizhi" v-model="zrooms" />
            </div>
           </li>
            <li v-if="mode == 2"><em>公共区域</em></li>
@@ -69,6 +69,34 @@
         </form>
     </main>
  <footer>
-  <div class="bottombtn" id="savehouse" v-on:click="savehouse"><div style="width:100%">保存</div></div></footer>
+  <div class="bottombtn" id="savehouse" v-on:click="savehouse"><div style="width: 100%">保存</div></div></footer>
 </div>
-    <style>.formbox li:first-child{padding:.29rem 0;margin:0 0 0 .23rem;display:flex;display:-webkit-flex;position:relative;background:#fff}#loc,#rentfunction{display:flex;display:-webkit-flex;margin:0 0 0 .15rem}#savehouse{width:100%;height:1rem}#addhouse_app .formbox .roomspz{display:flex;display:-webkit-flex;flex-wrap:wrap;justify-content:flex-start;border:none;margin-top:0;padding-top:0}.roomspz span{width:1.58rem;height:.87rem;text-align:center;line-height:.87rem;font-size:.3rem;color:#666;border:solid 1px #eeeff1;border-radius:.1rem;margin:0 .23rem .2rem 0}.roomspz .cur{border:solid 1px #c9e4e1;color:#4dc2a4}</style>
+    <style type="text/css">
+  .formbox li:first-child{padding: .29rem 0;margin: 0 0 0 .23rem;display: flex;display: -webkit-flex;position: relative; background: #FFF}
+  #loc,#rentfunction{ display: flex; display: -webkit-flex; margin: 0 0 0 0.15rem; }
+  #savehouse{ width: 100%; height: 1rem; }
+  #addhouse_app .formbox .roomspz {
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    border: none;
+    margin-top: 0;
+    padding-top: 0;
+}
+.roomspz span {
+    width: 1.58rem;
+    height: .87rem;
+    text-align: center;
+    line-height: .87rem;
+    font-size: .3rem;
+    color: #666;
+    border: solid 1px #eeeff1;
+    border-radius: .1rem;
+    margin: 0 .23rem .2rem 0;
+}
+.roomspz .cur {
+    border: solid 1px #c9e4e1;
+    color: #4dc2a4;
+}
+</style>

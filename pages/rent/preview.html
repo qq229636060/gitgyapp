@@ -1,12 +1,12 @@
 <div class="bui-page">
     <header class="bui-bar">
         <div class="bui-bar-left">
-            
-            <a class="bui-btn" onclick="bui.back()"><i class="icon-back"></i></a>
+            <!-- 左边按钮 -->
+            <a class="bui-btn" onclick="bui.back();"><i class="icon-back"></i></a>
         </div>
         <div class="bui-bar-main">合同预览</div>
         <div class="bui-bar-right">
-            
+            <!-- 右边按钮 -->
         </div>
     </header>
     <main>
@@ -15,7 +15,7 @@
       		<ul class="formbox">
       			<li><em>用户信息</em></li>	
       			<li><em>租客姓名</em><div class="linebox">{{msg.name}}</div></li>
-      			<li><em>手机号码</em><div class="linebox">{{msg.tel}}</div></li>
+      			<li><em>手机号码</em><div class="linebox">{{msg.tel}}</li>
       			<li><em>证件类型</em><div class="linebox"><p class="pl10">身份证</p></div></li>
       			<li><em>证件号码</em><div class="linebox">{{msg.Id}}</div></li>
       			<li><em>证件附件</em><div :class="idpics == '无'?'linebox':'linebox clickyl'">{{idpics}}</div></li>
@@ -37,7 +37,7 @@
               <div class="othername">{{o.name}}</div><div class="inputmoney">{{o.valinput}}<i>元</i></div>
             </div>
       		</div>
-          <div class="jdz" style="display:none">
+          <div class="jdz" style="display: none">
           <div id="uiSlide" class="bui-slide">
             <div class="bui-slide-main">
                 <ul>
@@ -54,5 +54,11 @@
     <footer>
       
     </footer>
-    <style>.formbox li{justify-content:space-between}.formbox li .linebox{margin:0 .2rem 0 0;text-align:right;color:#999}.jdz{width:100%;height:100%;background:rgba(0,0,0,.6);position:fixed;top:0}.formbox li:first-child{padding:.23rem}.cphoto{width:.5rem;height:.5rem;border:solid 1px #333;border-radius:50%;text-align:center;line-height:.5rem;font-size:.36rem;position:fixed;bottom:.6rem;color:#333;left:50%;margin:0 0 0 -.25rem;z-index:999}</style>
+    <style type="text/css">
+    .formbox li{ justify-content: space-between; }
+    .formbox li .linebox{ margin: 0 0.2rem 0 0; text-align: right; color: #999 }
+    .jdz{width: 100%; height: 100%; background:rgba(0,0,0,0.6); position: fixed; top:0;}
+    .formbox li:first-child{ padding: 0.23rem }
+     .cphoto{ width: .5rem; height: .5rem; border: solid 1px #333; border-radius:50%; text-align:center; line-height: .5rem; font-size:.36rem; position: fixed; bottom: 0.6rem;  color: #333;left: 50%; margin: 0 0 0 -0.25rem; z-index: 999   }
+    </style>
 </div>

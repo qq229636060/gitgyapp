@@ -1,12 +1,12 @@
 <div class="bui-page" id="accountinfo">
     <header class="bui-bar">
         <div class="bui-bar-left">
-            <!-- 左边按钮 -->
-            <a class="bui-btn" onclick="bui.back();"><i class="icon-back"></i></a>
+            
+            <a class="bui-btn" onclick="bui.back()"><i class="icon-back"></i></a>
         </div>
         <div class="bui-bar-main">账户详情</div>
         <div class="bui-bar-right">
-            <!-- 右边按钮 -->
+            
         </div>
     </header>
     <main>
@@ -16,18 +16,27 @@
         </div>
         <div class="acinfo_bottom">
         	<ul class="formbox diff">
+                <li>
+                    <em>房源</em>
+                    <div class="linebox" style="text-align:right">{{c10}}</div>
+                </li>
+                <li>
+                    <em>租客</em>
+                    <div class="linebox">{{c11}}</div>
+                </li>
         		<li v-if="tsz == 2">
         			<em>交易银行</em>
         			<div class="linebox">{{c3}}</div>
         		</li>
+                <li>
+                    <em>交易时间</em>
+                    <div class="linebox">{{c4}}</div>
+                </li>
                 <li v-if="tsz == 1">
                     <em>交易房间</em>
-                    <div class="linebox" style="text-align: right;">{{c9}}</div>
+                    <div class="linebox" style="text-align:right">{{c9}}</div>
                 </li>
-        		<li>
-        			<em>交易对象</em>
-        			<div class="linebox">{{c7}}</div>
-        		</li>
+
 				<li>
         			<em>交易方式</em>
         			<div class="linebox">{{c6}}</div>
@@ -36,28 +45,23 @@
         			<em>交易状态</em>
         			<div class="linebox">{{c2}}</div>
         		</li>
-        		<li>
-        			<em>交易时间</em>
-        			<div class="linebox">{{c4}}</div>
-        		</li>
+                <li v-if="c2 == '完成'">
+                    <em>完成时间</em>
+                    <div class="linebox">{{c12}}</div>
+                </li>
         		<li v-if="tsz == 2">
         			<em>手续费</em>
         			<div class="linebox">{{c8}}元</div>
         		</li>
+                <li v-if="tsz == 2">
+                    <em>实际到账</em>
+                    <div class="linebox">{{c13}}元</div>
+                </li>
         	</ul>
         </div>
     </main>
     <footer>
-        <!-- 底部内容 -->
+        
     </footer>
 </div>
-<style type="text/css">
-	#accountinfo .formbox li {
-    justify-content: space-between;
-    padding-right: 0.3rem;
-    border: none
-}
-.diff li em{ color: #999 }
-.diff li:first-child {background-color: #fff;color: #333;}
-.diff li:first-child em{color: #999;}
-</style>
+<style>#accountinfo .formbox li{justify-content:space-between;padding-right:.3rem;border:none}.diff li em{color:#999}.diff li:first-child{background-color:#fff;color:#333}.diff li:first-child em{color:#999}</style>

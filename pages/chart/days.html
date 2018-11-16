@@ -1,10 +1,10 @@
 <div class="bui-page" id="days">
     <header class="bui-bar">
         <div class="bui-bar-left">
-            <!-- 左边按钮 -->
-            <a class="bui-btn" onclick="bui.back();"><i class="icon-back"></i></a>
+            
+            <a class="bui-btn" onclick="bui.back()"><i class="icon-back"></i></a>
         </div>
-        <div class="bui-bar-main"><input type="" name="" id="xztime" readonly="readonly" /></div>
+        <div class="bui-bar-main"><input type="" name="" id="xztime" readonly="readonly"></div>
         <div class="bui-bar-right">
         	<div class="bui-btn"><i id="editday" class="icon-more2"></i></div>
         </div>
@@ -24,7 +24,7 @@
                      <div class="table710">
 						<div class="tongjiboxs"><div class="tongjiboxs_title"><i></i>房源状况</div>
 						<div class="tongjiboxs_boxs">
-							<div style="margin: 0 auto; text-align: center;">
+							<div style="margin:0 auto;text-align:center">
 						 	<p>{{mdata.rent_rate}}</p> 
 						 	<p>入住率</p>
 						 	</div> 
@@ -50,7 +50,7 @@
 							</div>
 					    </div>
 					    <div class="tongjiboxs_boxs">
-					    	<div style="margin: 0 auto; text-align: center;">
+					    	<div style="margin:0 auto;text-align:center">
 						 	<p>{{mdata.room_average_price}}</p> 
 						 	<p>平均出房价格(元)</p>
 						 	</div> 
@@ -71,14 +71,17 @@
 					    </div>
 						</div>
 					</div>
-					<div class="nones" v-show="st == 0"><img src="../../images/icon/nones.png"> <p>没有数据</p></div>
+					<div class="nones" v-if="st == 0"><img src="../../images/icon/nones.png">
+						<p v-if="powerday != 0">没有数据</p>
+						<p v-if="powerday == 0">没有权限</p>
+					</div>
                   </li>
                   <li>
-                      <div class="getdata" v-show="st1 == 1">
+                      <div class="getdata" v-if="st1 == 1">
                       	<div class="table710">
 							<div class="tongjiboxs"><div class="tongjiboxs_title"><i></i>房源状况</div>
 							<div class="tongjiboxs_boxs">
-							<div style="margin: 0 auto; text-align: center;">
+							<div style="margin:0 auto;text-align:center">
 						 	<p>{{mcaiwudata.bill_total}}</p> 
 						 	<p>总账单(个)</p>
 						 	</div> 
@@ -148,7 +151,10 @@
 					</div>
              	  </div>
              	</div>
-                      <div class="nones" v-show="st1 == 0"><img src="../../images/icon/nones.png"> <p>没有数据</p>
+                      <div class="nones" v-if="st1 == 0">
+                      	<img src="../../images/icon/nones.png"> 
+                      	<p v-if="powerday1 != 0">没有数据</p>
+                      	<p v-if="powerday1 == 0">没有权限</p>
                       </div>
                   </li>
               </ul>
@@ -156,6 +162,6 @@
       </div>
     </main>
     <footer>
-        <!-- 底部内容 -->
+        
     </footer>
 </div>

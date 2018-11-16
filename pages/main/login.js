@@ -1,11 +1,13 @@
+'use strict';
+
 // 默认已经定义了main模块
 loader.define(function (require, exports, module) {
     var tj = true;
     var islogin = tokenstorage.get("tokens");
-    var denglu = function (xhr) {
+    var denglu = function denglu(xhr) {
         xhr.setRequestHeader('token', islogin);
-        xhr.setRequestHeader('clientid', 'testclient')
-    }
+        xhr.setRequestHeader('clientid', 'testclient');
+    };
     if (islogin) {
         router.replace({
             url: "pages/main/main.html"
@@ -20,11 +22,11 @@ loader.define(function (require, exports, module) {
             }
         },
         methods: {
-            loginbtn: function () {
+            loginbtn: function loginbtn() {
                 if (this.iddata.id == "") {
-                    bui.alert("请输入用户名")
+                    bui.alert("请输入用户名");
                 } else if (this.iddata.password == "") {
-                    bui.alert("请输入密码")
+                    bui.alert("请输入密码");
                 } else {
                     if (tj) {
                         tj = false;
@@ -40,7 +42,7 @@ loader.define(function (require, exports, module) {
                             },
                             contentType: "application/x-www-form-urlencoded",
                             method: "post",
-                            dataType: "json",
+                            dataType: "json"
                         }).then(function (res) {
                             if (res.code == 0) {
                                 tokenstorage.set("tokens", res.data.access_token);
@@ -48,32 +50,28 @@ loader.define(function (require, exports, module) {
                                     content: "<i class='icon-check'></i><br />登录成功",
                                     position: "center",
                                     effect: "fadeInDown",
-                                    onClose: function () {
-                                       router.replace({
+                                    onClose: function onClose() {
+                                        router.replace({
                                             url: "pages/main/main.html"
                                         });
                                     }
                                 });
-                            } else if(res.code == '-2') {
+                            } else if (res.code == '-2') {
                                 bui.alert(res.msg);
                                 tj = true;
-                            }else{
+                            } else {
                                 bui.alert(res.msg);
                                 tj = true;
                             }
                         }, function (res, status) {
                             console.log(status);
-                            tj = true
-                        })
+                            tj = true;
+                        });
                     }
                 }
                 return false;
-
             }
         },
-        mounted: function () {
-      
-        }
-    })
-    
-})
+        mounted: function mounted() {}
+    });
+});

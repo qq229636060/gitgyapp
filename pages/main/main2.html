@@ -1,20 +1,20 @@
-<!-- 这里还是一个标准的BUI页面 -->
+
 <div class="bui-page" id="main2">
     <header class="bui-bar">
         <div class="bui-bar-main" @click="fensan"><i class="fj">集</i>首页</div>
     </header>
-    <main>
-      <div class="indexshju" >
+    <main v-cloak>
+      <div class="indexshju">
         <div class="indextitle"><i></i>您的待办</div>
         <div class="indextopshuju">
            <div class="shujuboxs">
-            <a href="pages/finance/zhangdan.html?mode=2&status=1&money_type=1">
+            <a @click="tipzd()">
              <p>{{rtb}}</p>
              <p>应收未收(元)</p>
             </a>
            </div>
            <div class="shujuboxs">
-             <a href="pages/finance/zhangdan.html?mode=2&status=2&money_type=2">
+             <a @click="tipzd1()">
              <p>{{ow}}</p>
              <p>应付未付(元)</p>
             </a>
@@ -22,13 +22,13 @@
         </div>
         <div class="shujubottom">
            <div class="shujuboxs">
-             <a href="pages/rent/contractlist.html?status=1">
+             <a @click="clist()">
              <p><i>{{expire_7day}}</i>笔</p>
              <p>快到期(未来7天)</p>
            </a>
            </div>
            <div class="shujuboxs">
-            <a href="pages/rent/contractlist.html?status=2">
+            <a @click="clist1()">
              <p><i>{{expire_0day}}</i>个</p>
              <p>合同到期</p>
            </a>
@@ -46,44 +46,44 @@
              <p>房源</p>
            </a>
          </div>
-         <div class="fastbox" >
-          <a href="pages/rent/contractlist.html">
+         <div class="fastbox">
+          <a @click="gotozuyue()">
            <p class="fasticon2"></p>
            <p>租约</p>
           </a>
          </div>
          <div class="fastbox">
-            <a href="pages/finance/zhangdan.html?mode=2">
+            <a @click="gotozd()">
            <p class="fasticon3"></p>
            <p>账单</p>
          </a>
          </div>
          <div class="fastbox">
-          <a href="pages/finance/money.html?mode=2">
+          <a @click="gotoliushui()">
            <p class="fasticon4"></p>
            <p>流水</p>
           </a>
          </div>
          <div class="fastbox">
-           <a href="pages/release/releaseindex2.html?mode=2">
+           <a @click="gotofb()">
            <p class="fasticon5"></p>
            <p>发布</p>
          </a>
          </div>
        </div>
        <div class="indextongji">
-          <div class="indextitle"><i></i><a href="pages/chart/month.html">报表统计</a></div>
+          <div class="indextitle"><i></i><a @click="gotobaobiao()">报表统计</a></div>
           <div class="tongjiboxs">
             <div class="tongjiboxs_title"><i></i>房源状况</div>
             <div class="tongjiboxs_boxs">
               <div>
-                 <a href="pages/chart/month.html">
+                 <a @click="gotobaobiao()">
                  <p>{{rent_rate}}</p>
                  <p>上月入住率</p>
                  </a>
               </div>
               <div>
-                 <a href="pages/chart/month.html">
+                 <a @click="gotobaobiao()">
                  <p>{{room_average_price}}</p>
                  <p>上月平均出房价格(元)</p>
                 </a>
@@ -104,10 +104,8 @@
             </div>
           </div>
        </div>
-        <!--  <div>
-         <a href="pages/rent/contractlist.html" class="bui-btn">租约列表</a>
-         </div> -->
-        <!-- 中间内容 -->
+        
+        
     </main>
    <footer>
        <div class="footers">

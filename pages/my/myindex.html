@@ -7,10 +7,10 @@
             <div class="callme"><em></em>{{usecenter.mobile}}</div>
         </div>
         <ul class="hoverlist">
-          <li>
+          <li v-if="powers_z == 0">
             <a href="pages/my/account.html"><em class="icon1"></em>账户余额<i></i></a>
           </li>
-           <li>
+           <li v-if="powers_z == 0">
             <a href="pages/my/bankcard.html"><em class="icon2"></em>银行卡<i></i></a>
           </li>
            <li @click="tels()">
@@ -49,7 +49,4 @@
      </div>
     </footer>
 </div>
-<style type="text/css">
-.myshops{ width: 100%; height: 100%; position: fixed; top:0; left: 0; background: rgba(0,0,0,0.8);display: none; z-index: 999}
-.myshops img{ width: 200px; height: 200px; position: absolute; left: 50%; top:50%; margin: -100px 0 0 -100px; }
-</style>
+<style>.myshops{width:100%;height:100%;position:fixed;top:0;left:0;background:rgba(0,0,0,.8);display:none;z-index:999}.myshops img{width:200px;height:200px;position:absolute;left:50%;top:50%;margin:-100px 0 0 -100px}</style>

@@ -5,8 +5,12 @@ loader.define(function (require, exports, module){
     var houselists = [];
     var leaseStatus_num = "";
     var trader_num = 0;
+    var uu = router.getPageParams().trader_num;
     var islogin = tokenstorage.get("tokens");
     var status = router.getPageParams().status;
+    if(router.getPageParams().trader_num != undefined){
+        trader_num = router.getPageParams().trader_num;
+    }
     var uiListcontract;
     var denglu = function(xhr){xhr.setRequestHeader('token',islogin);xhr.setRequestHeader('clientid','testclient')};
     var databox = {
@@ -21,8 +25,17 @@ loader.define(function (require, exports, module){
             btnshow:'',
             iconface:0,
             types:"",
-            namesz:""
+            namesz:"",
+            nonest:"1"
     };
+    //权限
+        if(uu == 0 || uu ==1){
+            if(uu == 0){
+                $(".k1").html("租客")
+            }else{
+                $(".k1").html("业主")
+            }
+        }
     var contractlist = new Vue({
         el: "#zuyuelistapp",
         data: databox,
@@ -31,15 +44,20 @@ loader.define(function (require, exports, module){
             	    if(this.show < 4){
             	    	this.show = 5
             	    }else{
+                     if(indexs == 1){
+                         if(uu == 0 || uu == 1 ){
+                             return false;
+                         }
+                     }
             	    this.show = indexs
             	    }
                     
                 },
                 hover_info:function(e,htid,returntype,rent_id){
                     if(trader_num == 0){
-                       router.load({ url:"pages/rent/contractinfo.html", param: {id:e,htid:htid,returntype:returntype,rentid:rent_id,type:databox.types}}); 
+                       router.load({ url:"pages/rent/contractinfo.html", param: {id:e,htid:htid,returntype:returntype,rentid:rent_id,type:0}}); 
                    }else{
-                       router.load({ url:"pages/rent/yz_contractinfo.html", param: {htid:htid,rent_id:rent_id}}); 
+                       router.load({ url:"pages/rent/yz_contractinfo.html", param: {htid:htid,rent_id:rent_id,type:1}}); 
                    }
                     
                 },
@@ -106,15 +124,15 @@ loader.define(function (require, exports, module){
                     databox.iconface = 0;
                     databox.clist =[];
                     uiListcontract = bui.list({
-                    id: "#scrollcontractzzz",
+                    id: "#scrollcontract",
                     url: apiUrl + "/mapi/tenant/lease",
                     method: "post",
                     headers: {
                         clientid: "testclient",
                         token: islogin
                     },
-                    page: 1,
-                    pageSize:15,
+                    page:1,
+                    pageSize:10,
                     data:{
                         mode:mode,
                         status:leaseStatus_num
@@ -129,9 +147,16 @@ loader.define(function (require, exports, module){
                            if(data.code == 0){
                               databox.types = 0;
                               databox.namesz = "租客";
+                              if(data.data.list.length == 0){
+                                databox.nonest = 0
+                              }
                               for(var i=0; i<data.data.list.length;i++){
                                 databox.clist.push(data.data.list[i])
                              }
+                           }else if(data.code == "-86"){
+                                bui.alert(data.msg,function(){
+                                    bui.back();
+                                });
                            }else{
                             bui.alert(data.msg,function(e){
                                 tokenstorage.remove("tokens");
@@ -154,8 +179,8 @@ loader.define(function (require, exports, module){
                         clientid: "testclient",
                         token: islogin
                     },
-                    page: 1,
-                    pageSize:15,
+                    page:1,
+                    pageSize:10,
                     data:{
                         mode:mode,
                         status:leaseStatus_num
@@ -168,11 +193,19 @@ loader.define(function (require, exports, module){
                     },
                     onLoad: function (scroll,data) {
                            if(data.code == 0){
-                             databox.types = 1;
+                              databox.types = 1;
                               databox.namesz = "业主";
+                              if(data.data.list.length == 0){
+                                databox.nonest = 0
+                              }
                              for(var i=0; i<data.data.list.length;i++){
                                 databox.clist.push(data.data.list[i])
                              }
+                           }else{
+                            bui.alert(data.msg,function(e){
+                                tokenstorage.remove("tokens");
+                                window.location.href = domains;
+                            }); 
                            }
                     },
                     callback: function (e) {

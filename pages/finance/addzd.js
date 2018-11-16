@@ -26,7 +26,8 @@ loader.define(function (require, exports, module) {
             payinfo: [],
             othershow: "",
             beizhu: "",
-            allcost: []
+            allcost: [],
+            zdname: ""
         },
         methods: {
             savezd: function savezd() {
@@ -95,6 +96,7 @@ loader.define(function (require, exports, module) {
             var inpute = $("#datepicker_input_e");
             var payinput = $("#paytime");
             if (ifadd == 0) {
+                that.zdname = "添加账单";
                 bui.ajax({
                     url: apiUrl + "/mapi/common/getAllCollect",
                     data: {},
@@ -160,6 +162,7 @@ loader.define(function (require, exports, module) {
                     //console.log(status)//"timeout"
                 });
             } else {
+                that.zdname = "编辑账单";
                 bui.ajax({
                     url: apiUrl + "/mapi/bill/info",
                     data: {

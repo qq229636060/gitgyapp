@@ -6,7 +6,6 @@
         <div class="bui-bar-right">
           <div class="bui-btn" style="display:flex;display:-webkit-flex">
             <i class="icon-search"><a href="pages/reserve/serveso.html" style="display:block"></a></i>
-           
           </div>
         </div>
     </header>
@@ -15,7 +14,7 @@
           &nbsp;一&nbsp;
           <input id="endtimes" type="text" readonly="readonly" class="tjtimes"></div>
        <div class="bg" v-show="show < 4" v-on:click="navs('4')"></div>
-       <div class="fix" style="top: 2rem;">
+       <div class="fix" style="top:2rem">
        <div class="tiaojian">
       	<div :class="show==1 ? 'option cur':'option'" v-on:click="navs('1')"><span class="optxt k1">预约状态</span><i></i><em></em></div>
       	<div class="tjlist" v-show="show < 4">
@@ -35,16 +34,16 @@
             <li class="bui-btn" v-for="contracts in clist" v-on:click="hover_info(contracts.id)">
              <div class="contractbox">
                <div class="contractbox_t">
-                 <span style="color: #666">{{contracts.rent_info}}</span>
+                 <span style="color:#666">{{contracts.rent_info}}</span>
                </div>
                <div class="contractbox_m">
-                 <p style="color: #333">{{contracts.name}}&nbsp;&nbsp;&nbsp;{{contracts.mobile}}</p>
+                 <p style="color:#333">{{contracts.name}}&nbsp;&nbsp;&nbsp;{{contracts.mobile}}</p>
                  <p>申请时间{{contracts.bespeak_time}}</p>
                </div>
                <div class="contractbox_b">
-                  <span v-if="contracts.st == 1" style="color: #f7a700">待确认</span>
-                 <span v-if="contracts.st == 2" style="color: #4dc2a4">预约成功</span>
-                 <span v-if="contracts.st == 3" style="color: #999">预约失败</span>
+                  <span v-if="contracts.st == 1" style="color:#f7a700">待确认</span>
+                 <span v-if="contracts.st == 2" style="color:#4dc2a4">预约成功</span>
+                 <span v-if="contracts.st == 3" style="color:#999">预约失败</span>
                 
                </div>
              </div>
@@ -56,7 +55,7 @@
     </main>
     <footer>
        <div class="footers">
-       <div  class="gotoindex">
+       <div class="gotoindex">
         <img src="../../images/icon/home50.png?i=1">
         <p>首页</p>
       </div>
@@ -76,11 +75,4 @@
      </div>
     </footer>
 </div>
- <style type="text/css">
-      .bui-page>.main, .bui-page>main,.bui-scroll .bui-scroll-foot{ background: #f1f5f8 }
-      .bui-scroll{ margin: 0.9rem 0 0 0 }
-      .bui-list{border-top:none }
-      .addhouse{ display: block;    margin: 0.15rem 0 0.15rem 0.3rem;}
-      .addhouse a{color: #fff;display: block;width: 100%;height: 100%;position: absolute;top: 0; }
-     .icon-search a{color:#fff;display:block;width:100%;height:100%;position:absolute;top:0}
- </style>
+ <style>.bui-page>.main,.bui-page>main,.bui-scroll .bui-scroll-foot{background:#f1f5f8}.bui-scroll{margin:.9rem 0 0 0}.bui-list{border-top:none}.addhouse{display:block;margin:.15rem 0 .15rem .3rem}.addhouse a{color:#fff;display:block;width:100%;height:100%;position:absolute;top:0}.icon-search a{color:#fff;display:block;width:100%;height:100%;position:absolute;top:0}</style>
