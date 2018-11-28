@@ -12,10 +12,37 @@
     <main>
       	<form @submit.prevent="submit" v-cloak>
       		<div class="add_housename">{{formboxs.hnames}}</div>
-          <ul class="formbox hetong">
+          <ul class="formbox hetong" v-if="ifeditshow == 1">
             <li><em></em></li>
-            <li v-bind:class="formboxs.hetong == 0 ? 'nows':''" @click="clickht(0)"><font><b></b></font>已签纸质合同</li>
-            <li v-bind:class="formboxs.hetong == 1 ? 'nows':''" @click="clickht(1)"><font><b></b></font>新签电子合同<b class="colors">(推荐)</b></li>
+            <li v-bind:class="formboxs.hetong == 1 ? 'nows':''" @click="clickht(1)"><font><b></b></font>已签纸质合同</li>
+            <li v-bind:class="formboxs.hetong == 2 ? 'nows':''" @click="clickht(2)"><font><b></b></font>新签电子合同<b class="colors">(推荐)</b></li>
+            <li v-if="formboxs.hetong == 2"><em>合同模板</em>
+              <div class="linebox">
+              <select class="selects" v-model="dzmuban">
+                <option value="0">悦租标准合同模板</option>
+                <option v-for="mubans in dzhttype" v-bind:value="mubans.id">{{mubans.template_name}}</option>
+              </select>
+            </div>
+          </li>
+          <li v-if="formboxs.hetong == 2" style="background: rgba(247,247,247,0.5);margin: 0;font-size:0.24rem; padding: 0.1rem 0; border: none; display: flex;display: -webkit-flex;">
+            <div :class="xieyis == '0'?'gx':'gx ty'" @click="ifxieyi()"><em></em></div>
+            <span>您已阅读并同意<a href="pages/rent/ht.html" class="green">《悦租电子合同使用协议》</a></span>
+          </li>
+          </ul>
+          <!--编辑合同不让修改-->
+          <ul class="formbox hetong" v-if="ifeditshow == 0">
+            <li><em></em></li>
+            <li v-bind:class="formboxs.hetong == 1 ? 'nows':''"><font><b></b></font>已签纸质合同</li>
+            <li v-bind:class="formboxs.hetong == 2 ? 'nows':''"><font><b></b></font>新签电子合同<b class="colors">(推荐)</b></li>
+            <li v-if="formboxs.hetong == 2"><em>合同模板</em>
+              <div class="linebox">
+              <select class="selects" v-model="dzmuban" disabled="disabled">
+                <option value="0">悦租标准合同模板</option>
+                <option v-for="mubans in dzhttype" v-bind:value="mubans.id">{{mubans.template_name}}</option>
+              </select>
+            </div>
+          </li>
+         
           </ul>
       		<ul class="formbox">
       			<li><em></em></li>	
@@ -81,7 +108,7 @@
               <div class="linebox huis" v-show="!noedit">{{formboxs.beizhu}}</div>
             </li>
       		</ul>
-      		<div class="other">
+      		<div class="other" id="add_other">
       			<div class="addother">
       				<div class="othername">其他费用</div>
       				<div class="addotherbtn" id="addotherbtn" v-show="noedit">+添加费用</div>
@@ -117,4 +144,7 @@
       .idpic a{ color: #ccc }
        select{color: #ccc}
        .huis{ color: #ccc }
+       .gx{ width: 0.25rem; height: 0.25rem; border: solid 1px #27cda1; margin: 0 0.05rem 0 0.25rem; border-radius: 0.03rem;  position: relative; top:0.03rem; }
+       .green{ color: #27cda1 }
+       .formbox .ty em{ width: 0.2rem; height: 0.2rem; background: url(../images/icon/path.png) no-repeat 0 0; background-size: 100%; }
     </style>

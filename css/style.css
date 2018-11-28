@@ -202,7 +202,7 @@ white-space: nowrap; width: 1rem;}
 .hoverlist{background: #fff;font-size: .3rem;}
 .hoverlist li{padding: .29rem 0;border-top: solid 1px #eeeff1;margin: 0 0 0 .23rem;display: flex;display: -webkit-flex;position: relative;
 }
-.hoverlist li a{ color: #666666; display: block; display: flex; display: -webkit-flex }
+.hoverlist li a{ color: #666666; display: block; display: flex; display: -webkit-flex; width: 100%; height: 100%; }
 .hoverlist li a em{ width: .38rem; height: .42rem; display: block; margin: 0 0.2rem 0 0 }
 .hoverlist li a .icon1{background:url(../images/icon/use4.png) no-repeat 0 0; background-size:100% 100%;}
 .hoverlist li a .icon2{background:url(../images/icon/use3.png) no-repeat 0 0; background-size:100% 100%;}

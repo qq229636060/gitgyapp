@@ -62,13 +62,15 @@ loader.define(function (require, exports, module) {
 					} else {
 						bui.alert(result.msg);
 					}
-				}, function (result, status) {});
+				}, function (result, status) {
+					
+				});
 			},
 			gotohts: function gotohts(rentid, htid) {
 				bui.load({ url: "pages/rent/yz_addcontract.html", param: { rent_id: rentid, htid: htid } });
 			},
 			gotohts2: function gotohts(rentid, htid) {
-				bui.load({ url: "pages/rent/yz_contractlist.html", param: { rent_id: rentid } });
+				bui.load({ url: "pages/rent/yz_contractlist.html", param: {rent_id: rentid} });
 			}
 		},
 		mounted: function mounted() {

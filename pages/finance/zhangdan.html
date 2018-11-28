@@ -1,13 +1,13 @@
 <div class="bui-page" id="zhangdan">
     <header class="bui-bar">
       <div class="bui-bar-left">
-            
-        <a class="bui-btn" onclick="bui.back()"><i class="icon-back"></i></a>
+            <!-- 左边按钮 -->
+        <a class="bui-btn" onclick="bui.back();"><i class="icon-back"></i></a>
         </div>
         <div class="bui-bar-main">账单列表</div>
           <div class="bui-bar-right">
           <div class="bui-btn">
-            <i class="icon-search"><a href="pages/finance/zhangdanso.html" style="display:block;height:.3rem;width:.3rem"></a></i>
+            <i class="icon-search"><a href="pages/finance/zhangdanso.html" style="display: block; height: 0.3rem; width: 0.3rem"></a></i>
           </div>
         </div>
     </header>
@@ -55,10 +55,10 @@
                <div class="contractbox_t">
                  <span>{{contracts.roominfo}}</span>
                  <span v-if="contracts.billStatus == 0"></span>
-                 <span v-if="contracts.billStatus == 1" style="color:#f7a700">应处理</span>
-                 <span v-if="contracts.billStatus == 2" style="color:#fc7c7a">已逾期</span>
-                 <span v-if="contracts.billStatus == 3" style="color:#27cda1">未到期</span>
-                 <span v-if="contracts.billStatus == 4" style="color:#999">已处理</span>
+                 <span v-if="contracts.billStatus == 1" style="color: #f7a700">应处理</span>
+                 <span v-if="contracts.billStatus == 2" style="color: #fc7c7a">已逾期</span>
+                 <span v-if="contracts.billStatus == 3" style="color: #27cda1">未到期</span>
+                 <span v-if="contracts.billStatus == 4" style="color: #999999">已处理</span>
                </div>
                <div class="contractbox_m">
                  <p>{{contracts.jydx}}<i class="smline">:</i>{{contracts.jydxname}}</p>
@@ -74,4 +74,19 @@
     </main>
    </div>
 
- <style>.bui-page>.main,.bui-page>main,.bui-scroll .bui-scroll-foot{background:#f1f5f8}.bui-list{border-top:none}.addhouse{display:block;margin:.15rem 0 .15rem .3rem}.addhouse a{color:#fff;display:block;width:100%;height:100%;position:absolute;top:0}.bui-bar .bui-bar-left,.bui-bar .bui-bar-right{width:1.2rem}#money .bui-scroll{margin:1rem 0 0 0}#money .bg{z-index:1}#money .contractbox_t span{color:#333;font-size:.3rem;line-height:.46rem}#zhangdan .contractbox_t span:last-child{font-size:.28rem;color:#999;width:1.2rem;text-align:right}.mt9{margin:.9rem 0 0 0}.contractbox_t span:first-child{width:5.6rem}.listmoneys{color:#333}#zhangdan .contractbox_t span{color:#333;font-size:.3rem;line-height:.46rem}.addhouse a,.icon-search a{color:#fff;display:block;width:100%;height:100%;position:absolute;top:0}</style>
+ <style>.bui-page>.main,.bui-page>main,.bui-scroll .bui-scroll-foot{background:#f1f5f8}.bui-list{border-top:none}.addhouse{display:block;margin:.15rem 0 .15rem .3rem}.addhouse a{color:#fff;display:block;width:100%;height:100%;position:absolute;top:0}.bui-bar .bui-bar-left,.bui-bar .bui-bar-right{width:1.2rem}#money .bui-scroll{margin:1rem 0 0 0}#money .bg{z-index:1}#money .contractbox_t span{color:#333;font-size:.3rem;line-height:.46rem}#zhangdan .contractbox_t span:last-child{font-size:.28rem;color:#999;width:1.2rem;text-align:right}.mt9 {
+    margin: .9rem 0 0 0;}.contractbox_t span:first-child{ width: 5.6rem; }.listmoneys{color: #333}
+    #zhangdan .contractbox_t span {
+    color: #333;
+    font-size: .3rem;
+    line-height: .46rem;
+}
+.addhouse a, .icon-search a {
+    color: #fff;
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+}
+  </style>

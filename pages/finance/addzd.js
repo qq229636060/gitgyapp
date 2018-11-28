@@ -1,6 +1,4 @@
-"use strict";
-
-loader.define(function (require, exports, module) {
+loader.define(function(require, exports, module) {
     var islogin = tokenstorage.get("tokens");
     var params = router.getPageParams();
     var billid = params.id;
@@ -19,7 +17,7 @@ loader.define(function (require, exports, module) {
     var addzd = new Vue({
         el: "#addzd",
         data: {
-            usenames: "",
+            usenames:"",
             times: "请选择时间",
             timee: "请选择时间",
             paytime: "请选择时间",
@@ -27,10 +25,10 @@ loader.define(function (require, exports, module) {
             othershow: "",
             beizhu: "",
             allcost: [],
-            zdname: ""
+            zdname:""
         },
         methods: {
-            savezd: function savezd() {
+            savezd: function() {
                 var that = this;
                 if (ifadd == 0) {
                     billid = "";
@@ -43,23 +41,23 @@ loader.define(function (require, exports, module) {
                 var edate = new Date(d2[0], parseInt(d2[1] - 1), d2[2]);
                 if (sdate > edate) {
                     bui.alert("开始时间不能大于结束时间");
-                    return false;
+                    return false
                 }
                 console.log(that.payinfo);
                 var objtype = {};
                 var objtype1 = {};
-                $.each(that.payinfo, function (idx) {
+                $.each(that.payinfo, function(idx) {
                     objtype[that.payinfo[idx].value] = that.payinfo[idx].costType;
                     objtype1[that.payinfo[idx].value] = that.payinfo[idx].money;
-                });
+                })
 
                 bui.ajax({
                     url: apiUrl + "/mapi/bill/save",
                     data: {
                         mode: mode,
                         id: billid,
-                        tenant_id: tenantid,
-                        owner_id: ownerid,
+                        tenant_id:tenantid,
+                        owner_id:ownerid,
                         bill_time: that.times + ' ~ ' + that.timee,
                         rent_time: that.paytime,
                         type: objtype,
@@ -72,25 +70,25 @@ loader.define(function (require, exports, module) {
                         token: islogin
                     },
                     method: "post"
-                }).then(function (result) {
+                }).then(function(result) {
                     if (result.code == 0) {
-                        bui.alert("保存成功", function () {
-                            router.back({
-                                callback: function callback(mod) {
-                                    console.log(mod);
-                                    mod.pageview.$options.mounted[0]();
-                                }
-                            });
+                        bui.alert("保存成功",function(){
+                                router.back({
+                                            callback: function(mod) {
+                                                console.log(mod)
+                                                mod.pageview.$options.mounted[0]()
+                                            }
+                                        })
                         });
                     } else {
                         bui.alert(result.msg);
                     }
-                }, function (result, status) {
+                }, function(result, status) {
                     //console.log(status)//"timeout"
                 });
             }
         },
-        mounted: function mounted() {
+        mounted: function() {
             var that = this;
             var inputs = $("#datepicker_input_s");
             var inpute = $("#datepicker_input_e");
@@ -105,7 +103,7 @@ loader.define(function (require, exports, module) {
                         token: islogin
                     },
                     method: "post"
-                }).then(function (result) {
+                }).then(function(result) {
                     if (result.code == 0) {
                         that.usenames = names;
                         for (var i in result.data.allCollect) {
@@ -113,52 +111,52 @@ loader.define(function (require, exports, module) {
                                 name: result.data.allCollect[i],
                                 value: i
                             });
-                            var uiSelect = bui.select({
-                                title: "请选择扣款",
-                                type: "checkbox",
-                                height: "500",
-                                data: allpays,
-                                //如果需要点击再进行操作,增加按钮
-                                buttons: [{
-                                    name: "重置",
-                                    className: ""
-                                }, {
-                                    name: "确定",
-                                    className: "primary-reverse"
-                                }],
-                                callback: function callback(e) {
-                                    var str = uiSelect.text();
-                                    var str1 = uiSelect.value();
-                                    var strs = str.split(",");
-                                    var strs1 = str1.split(",");
-                                    var newarr = [];
-                                    $.each(strs, function (idx) {
-                                        newarr.push({
-                                            name: strs[idx],
-                                            value: strs1[idx],
-                                            costType: '1'
-                                        });
-                                    });
-                                    that.payinfo = newarr;
-                                    var index = $(this).parent().index();
-                                    if (index == 0) {
-                                        uiSelect.selectNone();
-                                    } else {
-                                        uiSelect.hide();
-                                    }
-                                },
-                                onChange: function onChange(argument) {
-                                    //console.log(argument)
+                           var uiSelect = bui.select({
+                            title: "请选择扣款",
+                            type: "checkbox",
+                            height: "500",
+                            data: allpays,
+                            //如果需要点击再进行操作,增加按钮
+                            buttons: [{
+                                name: "重置",
+                                className: ""
+                            }, {
+                                name: "确定",
+                                className: "primary-reverse"
+                            }],
+                            callback: function(e) {
+                                var str = uiSelect.text();
+                                var str1 = uiSelect.value();
+                                var strs = str.split(",");
+                                var strs1 = str1.split(",");
+                                var newarr = [];
+                                $.each(strs, function(idx) {
+                                    newarr.push({
+                                        name: strs[idx],
+                                        value: strs1[idx],
+                                        costType: '0'
+                                    })
+                                })
+                                that.payinfo = newarr;
+                                var index = $(this).parent().index();
+                                if (index == 0) {
+                                    uiSelect.selectNone();
+                                } else {
+                                    uiSelect.hide();
                                 }
-                            });
-                            $("#addrefundmoney").on("click", function () {
-                                uiSelect.show();
-                            });
+                            },
+                            onChange: function(argument) {
+                                //console.log(argument)
+                            }
+                        });
+                        $("#addrefundmoney").on("click", function() {
+                            uiSelect.show();
+                        })
                         }
                     } else {
                         bui.alert(result.msg);
                     }
-                }, function (result, status) {
+                }, function(result, status) {
                     //console.log(status)//"timeout"
                 });
             } else {
@@ -174,14 +172,14 @@ loader.define(function (require, exports, module) {
                         token: islogin
                     },
                     method: "post"
-                }).then(function (result) {
+                }).then(function(result) {
                     if (result.code == 0) {
                         that.usenames = result.data.name;
                         for (var i in result.data.allCollect) {
                             allpays.push({
                                 name: result.data.allCollect[i],
                                 value: i
-                            });
+                            })
                         }
                         var uiSelect = bui.select({
                             title: "请选择扣款",
@@ -196,19 +194,19 @@ loader.define(function (require, exports, module) {
                                 name: "确定",
                                 className: "primary-reverse"
                             }],
-                            callback: function callback(e) {
+                            callback: function(e) {
                                 var str = uiSelect.text();
                                 var str1 = uiSelect.value();
                                 var strs = str.split(",");
                                 var strs1 = str1.split(",");
                                 var newarr = [];
-                                $.each(strs, function (idx) {
+                                $.each(strs, function(idx) {
                                     newarr.push({
                                         name: strs[idx],
                                         value: strs1[idx],
                                         costType: '1'
-                                    });
-                                });
+                                    })
+                                })
                                 that.payinfo = newarr;
                                 var index = $(this).parent().index();
                                 if (index == 0) {
@@ -217,38 +215,42 @@ loader.define(function (require, exports, module) {
                                     uiSelect.hide();
                                 }
                             },
-                            onChange: function onChange(argument) {
+                            onChange: function(argument) {
                                 //console.log(argument)
                             }
                         });
-                        $("#addrefundmoney").on("click", function () {
+                        $("#addrefundmoney").on("click", function() {
                             uiSelect.show();
-                        });
+                        })
 
-                        $.each(result.data.cost, function (idx) {
+                        $.each(result.data.cost, function(idx) {
                             payarr.push(result.data.cost[idx]);
+
                         });
-                        console.log(payarr);
+                        console.log(payarr)
                         for (var i in result.data.cost) {
                             paysing.push({
                                 name: result.data.cost[i].name,
                                 value: i,
-                                money: Math.abs(result.data.cost[i].money),
-                                costType: result.data.cost[i].costType
-                            });
+                                money:Math.abs(result.data.cost[i].money),
+                                costType:result.data.cost[i].costType
+                            })
                         }
                         that.payinfo = paysing;
                         that.paytime = result.data.rentTime;
                         that.times = result.data.startTime;
                         that.timee = result.data.endTime;
                         that.beizhu = result.data.remarks;
+
+
                     } else {
                         bui.alert(result.msg);
                     }
-                }, function (result, status) {
+                }, function(result, status) {
                     //console.log(status)//"timeout"
                 });
             }
+
 
             var uiPickerdate_s = bui.pickerdate({
                 handle: "#datepicker_input_s",
@@ -259,9 +261,9 @@ loader.define(function (require, exports, module) {
                     minute: "none",
                     second: "none"
                 },
-                onChange: function onChange(value) {
-                    inputs.val(value);
-                    that.times = value;
+                onChange: function(value) {
+                    inputs.val(value)
+                    that.times = value
                 }
                 // 如果不需要按钮,设置为空
                 // buttons: null
@@ -275,9 +277,9 @@ loader.define(function (require, exports, module) {
                     minute: "none",
                     second: "none"
                 },
-                onChange: function onChange(value) {
-                    inpute.val(value);
-                    that.timee = value;
+                onChange: function(value) {
+                    inpute.val(value)
+                    that.timee = value
                 }
                 // 如果不需要按钮,设置为空
                 // buttons: null
@@ -291,17 +293,19 @@ loader.define(function (require, exports, module) {
                     minute: "none",
                     second: "none"
                 },
-                onChange: function onChange(value) {
-                    payinput.val(value);
-                    that.paytime = value;
+                onChange: function(value) {
+                    payinput.val(value)
+                    that.paytime = value
                 }
                 // 如果不需要按钮,设置为空
                 // buttons: null
             });
+
         }
-    });
+    })
     return {
         pageName: "addzd",
         pageview: addzd
     };
 });
+

@@ -19,14 +19,16 @@ loader.define(function(require, exports, module) {
 	var pics = [];
 	var datas = {
 			roomtitle: "",
-			msg: [],
+			msg:[],
 			payf: "",
 			payday:"",
 			//收租日
 			idpic: [],
 			ok: false,
 			tuifan: returntype,
-			tenantBillNum:""
+			tenantBillNum:"",
+			compact_type:"",
+			compact_status:""
 		}
 	function getdata_t(){
 			if (type == 1) {
@@ -41,7 +43,9 @@ loader.define(function(require, exports, module) {
 				}).then(function(result) {
 					if (result.code == 0) {
 						datas.roomtitle = result.data.rent.title;
-						datas.tenantBillNum = result.data.tenantBillNum;
+						datas.tenantBillNum = result.data.tenantBillNum; 
+						// datas.compact_type = result.data.tenant.compact_type;
+						// datas.compact_status = result.data.tenant.compact_status;
 						datas.msg = result.data.owner;
 						if(result.data.owner.collect_way.id=="1"){
 							datas.payday = '提前' + result.data.owner.collect_day +'天收租'
@@ -85,12 +89,15 @@ loader.define(function(require, exports, module) {
 					dataType: "json",
 					beforeSend: denglu,
 				}).then(function(result) {
-					console.log(result)
 					if (result.code == 0) {
 						datas.roomtitle = result.data.room.title;
 						datas.tenantBillNum = result.data.tenantBillNum;
+						datas.msg = [];
 						datas.msg = result.data.tenant;
+						datas.compact_type = result.data.tenant.compact_type;
 						datas.payr = result.data.tenant.collect_way.name;
+						datas.compact_type = result.data.tenant.compact_type;
+						datas.compact_status = result.data.tenant.compact_status;
 						if(result.data.tenant.collect_way.id=="1"){
 							datas.payday = '提前' + result.data.tenant.collect_day +'天收租'
 						}else{
@@ -145,6 +152,26 @@ loader.define(function(require, exports, module) {
 		el: "#contractioninfo",
 		data: datas,
 		methods: {
+			seeht:function(){
+				bui.ajax({
+				    url: apiUrl + "/mapi/tenant/getPreviewUrl",
+				    data: {
+				    	tenant_id:htid
+				    },
+				    beforeSend: denglu,
+				    method: "post"
+				}).then(function(result){
+					if(result.code == 0){
+						if(result.data.type == 1){
+							bui.load({url:"pages/rent/ifr.html",param:{ifrurl:result.data.previewUrl,types:1}});
+						}else{
+							bui.load({url:"pages/rent/ifr.html",param:{ifrurl:result.data.previewUrl,types:2} });
+						}
+					}
+				},function(result,status){
+				    //console.log(status)//"timeout"
+				});
+			},
 			lookphoto: function(e){
 				$(".jdz").show();
 				$(".bottombtn").hide();
@@ -164,6 +191,12 @@ loader.define(function(require, exports, module) {
 				})
 			},
 			xzrent: function(e) {
+				if(datas.compact_type == 2){
+							if(datas.compact_status != 1){
+								bui.alert("电子合同待确认不能续租");
+								return false
+							}
+						}
 				if(power_rent_tenant_renew == 1){
 					bui.alert("你没有权限续租");
 					return false;
@@ -181,6 +214,12 @@ loader.define(function(require, exports, module) {
 				})
 			},
 			tuizu: function(e) {
+				if(datas.compact_type == 2){
+							if(datas.compact_status != 1){
+								bui.alert("电子合同待确认不能退租");
+								return false
+							}
+						}
 				if(power_rent_tenant_return == 1){
 					bui.alert("你没有权限退租");
 					return false;
@@ -247,6 +286,12 @@ loader.define(function(require, exports, module) {
 						editcontract.hide();
 					} else if (val == "0") {
 						editcontract.hide();
+						if(datas.compact_type == 2){
+							if(datas.compact_status == 1){
+								bui.alert("电子合同已确认,不能编辑");
+								return false
+							}
+						}
 						if(power_rent_tenant_edit == 1){
 							bui.alert("你没有权限编辑");
 							return false

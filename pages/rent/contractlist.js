@@ -5,6 +5,7 @@ loader.define(function (require, exports, module){
     var houselists = [];
     var leaseStatus_num = "";
     var trader_num = 0;
+    var leaseType;
     var uu = router.getPageParams().trader_num;
     var islogin = tokenstorage.get("tokens");
     var status = router.getPageParams().status;
@@ -74,6 +75,7 @@ loader.define(function (require, exports, module){
                         this.now1 = now;
                         leaseStatus_num = now+1;
                     } else {
+                        leaseType = now+1;
                         this.now2 = now;
                     }
                     getdatas();
@@ -103,6 +105,7 @@ loader.define(function (require, exports, module){
                 })
                 
                  databox.leaseStatus = zuyuetype;
+                 console.log(htstyle)
                  databox.leaseType = htstyle;
                  databox.trader = htobject;
             }, function (res, status) {
@@ -135,7 +138,8 @@ loader.define(function (require, exports, module){
                     pageSize:10,
                     data:{
                         mode:mode,
-                        status:leaseStatus_num
+                        status:leaseStatus_num,
+                        type:leaseType
                     },
                     refresh:false,
                     //如果分页的字段名不一样,通过field重新定义

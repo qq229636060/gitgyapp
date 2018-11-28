@@ -1,12 +1,12 @@
 <div class="bui-page" id="bankcard">
     <header class="bui-bar">
         <div class="bui-bar-left">
-            
-            <a class="bui-btn" onclick="bui.back()"><i class="icon-back"></i></a>
+            <!-- 左边按钮 -->
+            <a class="bui-btn" onclick="bui.back();"><i class="icon-back"></i></a>
         </div>
         <div class="bui-bar-main">银行卡管理</div>
         <div class="bui-bar-right">
-            
+            <!-- 右边按钮 -->
         </div>
     </header>
     <main>
@@ -17,7 +17,7 @@
     	</div>
     	<div class="bankcard" v-show="nonecard == 1">
     		<div class="bankicons">
-    			<img src="../../images/icon/bankcradicon.png">
+    			<img src="../../images/icon/bankcradicon.png"/>
     		</div>
     		<div class="bankinfos">
     			<p>{{cardinfo.card_number}}</p>
@@ -25,9 +25,9 @@
     			<p>{{cardinfo.bank_name}}</p>
     		</div>
     	</div>
-        
+        <!-- 正文内容 -->
     </main>
     <footer>
-        
+        <!-- 底部内容 -->
     </footer>
 </div>

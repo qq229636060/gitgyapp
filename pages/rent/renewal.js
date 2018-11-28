@@ -61,7 +61,9 @@ loader.define(function(require, exports, module) {
 			storep1: [],
 			storep2: [],
 			uppic1: [],
-			uppic2: []
+			uppic2: [],
+			dzhttype:[],
+			dzmuban:0
 		},
 		methods: {
 			clickht: function(e) {
@@ -168,7 +170,9 @@ loader.define(function(require, exports, module) {
 								img1: that.uppic1,
 								img2: that.uppic2,
 								del_img: delimg,
-								remarks:that.formboxs.beizhu
+								remarks:that.formboxs.beizhu,
+								compact_type:that.formboxs.hetong,
+								template_id:that.dzmuban
 							},
 							method: "POST",
 							dataType: "json",
@@ -254,6 +258,8 @@ loader.define(function(require, exports, module) {
 					that.formboxs.yajin = result.data.tenant.deposit;
 					that.formboxs.beizhu = result.data.tenant.remarks;
 					that.shouzuri = result.data.tenant.collect_way;
+					that.formboxs.hetong = result.data.tenant.compact_type;
+					that.dzmuban = result.data.tenant.template_id;
 					that.shouzuriday = result.data.tenant.collect_day;
 					that.storep1 = result.data.photos[1] == undefined ? result.data.photos[1] = [] : result.data.photos[1];
 					that.storep2 = result.data.photos[2] == undefined ? result.data.photos[2] = [] : result.data.photos[2];
@@ -296,7 +302,7 @@ loader.define(function(require, exports, module) {
 						}
 						var yother = result.data.tenant.others;
 						for (var i = 0; i < yother.length; i++) {
-							var boxs = '<div class="addbox"><div class="othername">' + yother[i].name + '</div><div class="inputmoney"><input type="tel" value="' + yother[i].value + '" name="other' + yother[i].id + '" data-id="' + yother[i].id + '" disabled="disabled"/><i>元</i></div></div>'
+							var boxs = '<div class="addbox"><div class="othername">' + yother[i].name + '</div><div class="inputmoney"><input type="tel" value="' + yother[i].value + '" name="other' + yother[i].id + '" data-id="' + yother[i].id + '"/><i>元</i></div></div>'
 							arr[yother[i].id] = yother[i].id;
 							$(".other").append(boxs)
 						}
@@ -538,7 +544,19 @@ loader.define(function(require, exports, module) {
 			$(".selects").change(function() {
 				$(this).css("color", "#666")
 			});
-
+			//电子合同列表
+			bui.ajax({
+			    url: apiUrl + "/mapi/tenant/getTemplateList",
+			    data: {},
+			    beforeSend: denglu,
+			    method: "post"
+			}).then(function(result){
+			    if(result.code == 0){
+			    	that.dzhttype = result.data
+			    }
+			},function(result,status){
+			    //console.log(status)//"timeout"
+			});
 
 		}
 	})

@@ -14,7 +14,8 @@
       		<div class="add_housename">{{roomtitle}}</div>
       		<ul class="formbox">
       			<li><em>用户信息</em></li>	
-            <li><em>合同类型</em><div class="linebox">纸质合同</div></li>
+            <li v-if="compact_type == 1"><em>合同类型</em><div class="linebox">纸质合同</div></li>
+            <li v-if="compact_type == 2"><em>合同类型</em><div class="linebox" @click="seeht()" style="color: #27cda1">电子合同</div></li>
       			<li><em>租客姓名</em><div class="linebox">{{msg.name}}</div></li>
       			<li><em>手机号码</em><div class="linebox">{{msg.mobile}}</li>
       			<li><em>证件类型</em><div class="linebox"><p class="pl10">身份证</p></div></li>
@@ -75,4 +76,5 @@
      .bui-box-center .fxk{ border: solid 1px #666; width: 0.25rem; height: 0.25rem; display: inline-block; border-radius: 0.05rem; position: relative; top:0.02rem; right: 0.1rem; overflow: hidden; font-size: 0.28rem; line-height: 0.2rem; text-align:left;}
      .jdz{ z-index: 99999 }
      .bui-slide>.bui-slide-head{ bottom: 1.2rem; }
+     .bui-router-iframe{ overflow-y:scroll;}
     </style>

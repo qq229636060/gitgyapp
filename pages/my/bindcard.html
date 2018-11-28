@@ -1,38 +1,44 @@
-<div class="bui-page" id="bindcard">
+<div class="bui-page"  id="bindcard">
     <header class="bui-bar">
         <div class="bui-bar-left">
-            
-            <a class="bui-btn" onclick="bui.back()"><i class="icon-back"></i></a>
+            <!-- 左边按钮 -->
+            <a class="bui-btn" onclick="bui.back();"><i class="icon-back"></i></a>
         </div>
         <div class="bui-bar-main">绑定银行卡</div>
         <div class="bui-bar-right">
-            
+            <!-- 右边按钮 -->
         </div>
     </header>
     <main>
     	<form @submit.prevent="submit">
     	    <ul class="formbox">
-      			<li><em>银行卡类型</em><div class="linebox" style="color:#333">借记卡</div></li>	
+      			<li><em>银行卡类型</em><div class="linebox" style="color: #333">借记卡</div></li>	
       			<li><em>银行卡名称</em>
-      				<div class="linebox">
+      				<div class="linebox" >
       					<select class="selects" v-model="formboxs.banks">
       					  <option>请选择</option>
                   <option v-for="bankcardname in formboxs.arrbank" :value="bankcardname.vaule">{{bankcardname.name}}</option>
 			            </select>
       				</div>
       			</li>	
-      			<li><em>开户人姓名</em><div class="linebox"><input type="text" name="" placeholder="请输入真实开户人姓名" v-model="formboxs.bankusename"></div></li>	
-      			<li><em>开户行支行</em><div class="linebox"><input type="text" name="" placeholder="请输入开户行支行（选填）" v-model="formboxs.bankname"></div></li>	
-      			<li><em>银行卡号</em><div class="linebox"><input type="text" name="" placeholder="请输入银行卡号" v-model="formboxs.bankid"></div></li>	
-      			<li><em>手机号</em><div class="linebox"><input type="text" name="" placeholder="请输入手机号" v-model="formboxs.banktel" @blur="telfunction"></div></li>
-      			<li><em>短信验证码</em><div class="linebox"><input type="text" name="" placeholder="请输入验证码" v-model="formboxs.bankyz"><div class="yzma" id="send">发送验证码</div></div></li>
+      			<li><em>开户人姓名</em><div class="linebox"><input type="text" name="" placeholder="请输入真实开户人姓名" v-model="formboxs.bankusename"/></div></li>	
+      			<li><em>开户行支行</em><div class="linebox"><input type="text" name="" placeholder="请输入开户行支行（选填）" v-model="formboxs.bankname"/></div></li>	
+            <li><em>身份证</em><div class="linebox"><input type="text" name="" placeholder="请输入身份证" v-model="formboxs.bindid"/></div></li>
+      			<li><em>银行卡号</em><div class="linebox"><input type="text" name="" placeholder="请输入银行卡号"  v-model="formboxs.bankid"/></div></li>	
+      			<li><em>手机号</em><div class="linebox"><input type="text" name="" placeholder="请输入手机号" v-model="formboxs.banktel" @blur="telfunction"/></div></li>
+      			<li><em>短信验证码</em><div class="linebox"><input type="text" name="" placeholder="请输入验证码" v-model="formboxs.bankyz"/><div class="yzma" id="send">发送验证码</div></div></li>
       		</ul>
     	</form>
-        
+        <!-- 正文内容 -->
     </main>
     <footer>
     	<div class="btnbind" @click="submitcard">完成</div>
-        
+        <!-- 底部内容 -->
     </footer>
 </div>
-<style>#bindcard .formbox li:first-child{background:#fff}#bindcard .formbox li:first-child em{color:#333}#bindcard .formbox li em{width:1.6rem}.yzma{position:absolute;right:0;font-size:.3rem;color:#27cda1;top:.3rem;right:.3rem}</style>
+<style type="text/css">
+	#bindcard .formbox li:first-child { background: #FFF }
+	#bindcard .formbox li:first-child em{ color: #333 }
+	#bindcard .formbox li em{ width: 1.6rem; }
+	.yzma{ position: absolute; right: 0; font-size: .3rem; color: #27cda1; top:0.3rem; right: 0.3rem; }
+</style>

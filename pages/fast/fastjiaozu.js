@@ -67,7 +67,7 @@ loader.define(function (require, exports, module) {
 				});
 			},
 			gotoht: function gotoht(tenant_id) {
-				router.load({ url: "pages/finance/zhangdan.html", param: { tenantid: tenant_id, mode: mode } });
+				router.load({ url: "pages/finance/zhangdan.html", param: {tenantid:tenant_id,mode:mode} });
 			}
 		},
 		mounted: function mounted() {

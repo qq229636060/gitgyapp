@@ -84,7 +84,7 @@ loader.define(function(require, exports, module) {
                                     var roomli = $(this).parent().parent();
                                     bui.confirm({
                                         "title": "",
-                                        "content": '<div class="bui-box-center"><p>是否删除合同</p><p><em class="fxk">√</em>同时删除已确认账单和流水</p></div>',
+                                        "content": '<div class="bui-box-center"><p>是否删除楼层</p><p><em class="fxk">√</em>同时删除已确认账单和流水</p></div>',
                                         "buttons": [{
                                             name: "确定",
                                             className: "primary-reverse"
@@ -382,7 +382,6 @@ loader.define(function(require, exports, module) {
                     }).then(function(result) {
                         uiActionsheets.hide();
                         if (result.code == 0) {
-                            alert("a")
                             bui.hint({
                                 timeout: 2000,
                                 autoClose: true,

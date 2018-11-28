@@ -61,11 +61,22 @@ loader.define(function(require, exports, module) {
 			storep1: [],
 			storep2: [],
 			uppic1: [],
-			uppic2: []
+			uppic2: [],
+			dzhttype:[],
+			dzmuban:0,
+			ifeditshow:"1",
+			xieyis:0
 		},
 		methods: {
+			ifxieyi:function(e){
+				if(this.xieyis == 0){
+					this.xieyis = 1
+				}else{
+					this.xieyis = 0
+				}
+			},
 			clickht: function(e) {
-				this.formboxs.hetong = e
+				this.formboxs.hetong = e;
 			},
 			telfunction: function() {
 				var sMobile = this.formboxs.tel
@@ -100,7 +111,7 @@ loader.define(function(require, exports, module) {
 					};
 					return data;
 				}
-				$(".other input[type='tel']").each(function(index) {
+				$("#add_other input[type='tel']").each(function(index) {
 					var namesval = $(this).attr("name");
 					var keyid = $(this).attr("data-id");
 					var names = $(this).parent().prev().html();
@@ -122,6 +133,8 @@ loader.define(function(require, exports, module) {
 				$(".newnew2").each(function(idx) {
 					that.uppic2.push($(".newnew2").eq(idx).attr("bigdata"))
 				})
+				console.log(that.formboxs.yajin)
+				console.log(that.formboxs.yajin == "")
 				if (testmoblie) {
 					bui.alert("请输入正确手机号");
 				} else if (that.formboxs.name == "") {
@@ -134,10 +147,16 @@ loader.define(function(require, exports, module) {
 					bui.alert("请填写房屋租金");
 				} else if (that.formboxs.rentstype == "请选择") {
 					bui.alert("请选择收租日");
-				} else if (that.formboxs.yajin == "") {
+				} else if (that.formboxs.yajin === "") {
 					bui.alert("请填写房屋押金");
 				} else {
 					if (fb == 1) {
+						if (that.formboxs.hetong == "2"){
+							if(that.xieyis == "0"){
+								bui.alert("请同意电子协议");
+								return false;
+							}
+						}
 						if (that.formboxs.rentstype == "提前日收租") {
 							var moneyday = 1;
 						} else {
@@ -164,6 +183,8 @@ loader.define(function(require, exports, module) {
 								img1: that.uppic1,
 								img2: that.uppic2,
 								del_img: delimg,
+								compact_type:that.formboxs.hetong,
+								template_id:that.dzmuban,
 								remarks:that.formboxs.beizhu
 							},
 							method: "POST",
@@ -237,6 +258,7 @@ loader.define(function(require, exports, module) {
 				}
 				//编辑数据
 				if (htid != 0) {
+					that.ifeditshow = 0;
 					that.pagetitle = "编辑合同";
 					that.formboxs.name = result.data.tenant.name;
 					that.formboxs.tel = result.data.tenant.mobile;
@@ -247,6 +269,11 @@ loader.define(function(require, exports, module) {
 					that.formboxs.yajin = result.data.tenant.deposit;
 					that.formboxs.beizhu = result.data.tenant.remarks;
 					that.shouzuri = result.data.tenant.collect_way;
+					that.formboxs.hetong = result.data.tenant.compact_type;
+					if(result.data.tenant.compact_type == 2){
+						that.xieyis = 1;
+					}
+					that.dzmuban = result.data.tenant.template_id;
 					that.shouzuriday = result.data.tenant.collect_day;
 					that.storep1 = result.data.photos[1] == undefined ? result.data.photos[1] = [] : result.data.photos[1];
 					that.storep2 = result.data.photos[2] == undefined ? result.data.photos[2] = [] : result.data.photos[2];
@@ -291,7 +318,7 @@ loader.define(function(require, exports, module) {
 						for (var i = 0; i < yother.length; i++) {
 							var boxs = '<div class="addbox"><div class="othername">' + yother[i].name + '</div><div class="inputmoney"><input type="tel" value="' + yother[i].value + '" name="other' + yother[i].id + '" data-id="' + yother[i].id + '" disabled="disabled"/><i>元</i></div></div>'
 							arr[yother[i].id] = yother[i].id;
-							$(".other").append(boxs)
+							$("#add_other").append(boxs)
 						}
 					} else {
 						that.noedit = true;
@@ -299,7 +326,7 @@ loader.define(function(require, exports, module) {
 						for (var i = 0; i < yother.length; i++) {
 							var boxs = '<div class="addbox"><div class="othername">' + yother[i].name + '</div><div class="inputmoney"><input type="tel" value="' + yother[i].value + '" name="other' + yother[i].id + '" data-id="' + yother[i].id + '"/><i>元</i><em></em></div></div>'
 							arr[yother[i].id] = yother[i].id;
-							$(".other").append(boxs)
+							$("#add_other").append(boxs)
 						}
 					}
 				} else {
@@ -522,7 +549,7 @@ loader.define(function(require, exports, module) {
 						if (arr[othernum] == "" || arr[othernum] == undefined) {
 							arr[othernum] = othernum;
 							var boxs = '<div class="addbox"><div class="othername">' + add.text() + '</div><div class="inputmoney"><input type="tel" name="other' + othernum + '" data-id="' + othernum + '"/><i>元</i><em></em></div></div>'
-							$(".other").append(boxs)
+							$("#add_other").append(boxs)
 						} else {
 							bui.alert("请不要重复勾选")
 						}
@@ -538,7 +565,27 @@ loader.define(function(require, exports, module) {
 			$(".selects").change(function() {
 				$(this).css("color", "#666")
 			});
-
+			//电子合同列表
+			bui.ajax({
+			    url: apiUrl + "/mapi/tenant/getTemplateList",
+			    data: {},
+			    beforeSend: denglu,
+			    method: "post"
+			}).then(function(result){
+			    if(result.code == 0){
+			    	console.log(result.data);
+			    	$.each(result.data,function(idx){
+			    		if(result.data[idx].is_default == 1){
+			    			that.dzmuban = result.data[idx].id
+			    		}else{
+			    			that.dzmuban = 0
+			    		}
+			    	})
+			    	that.dzhttype = result.data
+			    }
+			},function(result,status){
+			    //console.log(status)//"timeout"
+			});
 
 		}
 	})

@@ -1,5 +1,3 @@
-"use strict";
-
 loader.define(function (require, exports, module) {
     var islogin = tokenstorage.get("tokens");
     mode = router.getPageParams().mode;
@@ -13,10 +11,10 @@ loader.define(function (require, exports, module) {
     var moneydata = {
         zuyuetype: [],
         htstyle: [],
-        yezhu: [],
+        yezhu:[],
         htobject: [],
         clist: [],
-        yezhuid: "",
+        yezhuid:"",
         revenue: "",
         rentid: "",
         payway: "",
@@ -30,41 +28,41 @@ loader.define(function (require, exports, module) {
     };
     var uiListcontract;
     function postdata(p) {
-        if (p == undefined) {
-            var tenant_id = router.getPageParams().tenantid;
-            var owner_id = router.getPageParams().owner_id;
-        } else {
-            var tenant_id = "";
-            var owner_id = "";
+        if(p == undefined){
+           var tenant_id = router.getPageParams().tenantid;
+           var owner_id = router.getPageParams().owner_id; 
+        }else{
+            var tenant_id ="";
+            var owner_id = ""
         }
-
+        
         moneydata.clist = [];
         uiListcontract && uiListcontract.destroy();
-        if (moneydata.s_stimes != "" && moneydata.s_etimes != "") {
-            var timeso = moneydata.s_stimes + ' ~ ' + moneydata.s_etimes;
-        } else {
-            var timeso = "";
+        if(moneydata.s_stimes !=""&&moneydata.s_etimes !=""){
+            var timeso = moneydata.s_stimes+' ~ '+moneydata.s_etimes
+        }else{
+            var timeso = ""
         }
-        if (status == 1) {
+        if(status == 1){
             moneydata.payway = 5;
             var money_type = router.getPageParams().money_type;
             status = "";
-            tenant_id = "";
-            owner_id = "";
-        } else if (status == 2) {
+            tenant_id="";
+            owner_id="";
+        }else if(status == 2){
             moneydata.payway = 5;
             var money_type = router.getPageParams().money_type;
             status = "";
-            tenant_id = "";
-            owner_id = "";
+            tenant_id="";
+            owner_id="";
         }
         //权限
-        if (p_trader == 1 || p_trader == 2) {
+        if(p_trader == 1 || p_trader ==2){
             moneydata.yezhuid = p_trader;
-            if (p_trader == 1) {
-                $(".k3").html("租客");
-            } else {
-                $(".k3").html("业主");
+            if(p_trader == 1){
+                $(".k3").html("租客")
+            }else{
+                $(".k3").html("业主")
             }
         }
         uiListcontract = bui.list({
@@ -72,20 +70,20 @@ loader.define(function (require, exports, module) {
             url: apiUrl + "/mapi/bill/list",
             method: "POST",
             headers: {
-                clientid: "testclient",
+                clientid:"testclient",
                 token: islogin
             },
             page: 1,
             pageSize: 20,
             data: {
-                mode: mode,
-                time: timeso,
-                trader: moneydata.yezhuid,
-                status: moneydata.payway,
-                rent_id: moneydata.rentid,
-                tenant_id: tenant_id,
-                owner_id: owner_id,
-                money_type: money_type
+                mode:mode,
+                time:timeso,
+                trader:moneydata.yezhuid,
+                status:moneydata.payway,
+                rent_id:moneydata.rentid,
+                tenant_id:tenant_id,
+                owner_id:owner_id,
+                money_type:money_type
             },
             autoScroll: true,
             refresh: false,
@@ -96,14 +94,14 @@ loader.define(function (require, exports, module) {
             },
             onLoad: function onLoad(scroll, data) {
                 tenant_id = "";
-                owner_id = "";
+                owner_id ="";
                 if (data.code == 0) {
                     for (var i = 0; i < data.data.flowList.length; i++) {
                         moneydata.clist.push(data.data.flowList[i]);
                     }
-                } else {
+                }else {
                     bui.alert(res.msg);
-                    // bui.alert(data.msg);
+                   // bui.alert(data.msg);
                 }
             },
             callback: function callback(e) {
@@ -119,8 +117,8 @@ loader.define(function (require, exports, module) {
                 if (moneydata.show < 4) {
                     moneydata.show = 5;
                 } else {
-                    if (indexs == 3) {
-                        if (p_trader == 1 || p_trader == 2) {
+                    if(indexs == 3){
+                        if(p_trader == 1 || p_trader ==2){
                             return false;
                         }
                     }
@@ -138,12 +136,12 @@ loader.define(function (require, exports, module) {
                     moneydata.payway = ids;
                 } else {
                     moneydata.now2 = now;
-                    moneydata.yezhuid = ids;
+                    moneydata.yezhuid = ids
                 }
                 postdata(0);
             },
-            hoverinfo: function hoverinfo(e, zt, tenantid, ownerid, cate) {
-                router.load({ url: "pages/finance/zhangdaninfo.html", param: { id: e, zhuantai: zt, tenantid: tenantid, ownerid: ownerid, cate: cate } });
+            hoverinfo: function hoverinfo(e,zt,tenantid,ownerid,cate) {
+                router.load({ url:"pages/finance/zhangdaninfo.html", param: { id:e,zhuantai:zt,tenantid:tenantid,ownerid:ownerid,cate:cate} });
             }
 
         },
@@ -156,34 +154,34 @@ loader.define(function (require, exports, module) {
         method: "POST",
         headers: {
             clientid: "testclient",
-            token: islogin
+            token:islogin
         },
         data: {
-            mode: mode
+            mode:mode
         }
     }).then(function (res) {
-        if (res.code == 0) {
-            if (mode == 1) {
+        if(res.code == 0){
+            if(mode == 1){
                 for (var k in res.data.rentList) {
-                    zuyuetype.push({ name: res.data.rentList[k].cell_name, ids: res.data.rentList[k].id });
+                    zuyuetype.push({name:res.data.rentList[k].cell_name,ids:res.data.rentList[k].id});
                 }
-            } else {
+            }else{
                 for (var k in res.data.rentList) {
-                    zuyuetype.push({ name: res.data.rentList[k].apartment, ids: res.data.rentList[k].id });
+                    zuyuetype.push({name:res.data.rentList[k].apartment,ids:res.data.rentList[k].id});
                 }
             }
             for (var k in res.data.billStatus) {
-                htstyle.push({ name: res.data.billStatus[k], ids: k });
+                htstyle.push({name:res.data.billStatus[k],ids:k});
             }
             for (var k in res.data.trader) {
-                yezhu.push({ name: res.data.trader[k], ids: k });
+                yezhu.push({name:res.data.trader[k],ids:k});
             }
             moneydata.yezhu = yezhu;
             moneydata.zuyuetype = zuyuetype;
             moneydata.htstyle = htstyle;
-        } else {
-            bui.alert(res.msg);
-        }
+         }else{
+             bui.alert(res.msg);
+         }
         // moneydata.htobject = htobject;
     }, function (res, status) {
         alert(status);
@@ -247,7 +245,7 @@ loader.define(function (require, exports, module) {
             }
         }
     });
-    datePrevVal1 = jstime.value();
+     datePrevVal1 = jstime.value();
     return {
         pageName: "zhangdanlist",
         pageview: zhangdanlist

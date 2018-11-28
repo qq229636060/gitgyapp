@@ -14,8 +14,16 @@
           <div class="add_housename">{{formboxs.hnames}}</div>
           <ul class="formbox hetong">
             <li><em></em></li>
-            <li v-bind:class="formboxs.hetong == 0 ? 'nows':''" @click="clickht(0)"><font><b></b></font>已签纸质合同</li>
-            <li v-bind:class="formboxs.hetong == 1 ? 'nows':''" @click="clickht(1)"><font><b></b></font>新签电子合同<b class="colors">(推荐)</b></li>
+            <li v-bind:class="formboxs.hetong == 1 ? 'nows':''" ><font><b></b></font>已签纸质合同</li>
+            <li v-bind:class="formboxs.hetong == 2 ? 'nows':''" ><font><b></b></font>新签电子合同<b class="colors">(推荐)</b></li>
+            <li v-if="formboxs.hetong == 2"><em>合同模板</em>
+              <div class="linebox">
+              <select class="selects" v-model="dzmuban" disabled="disabled">
+                <option value="0">悦租标准合同模板</option>
+                <option v-for="mubans in dzhttype" v-bind:value="mubans.id">{{mubans.template_name}}</option>
+              </select>
+            </div>
+          </li>
           </ul>
           <ul class="formbox">
             <li><em></em></li>  
@@ -73,8 +81,8 @@
               <div class="linebox huis" v-show="!noedit">{{formboxs.yajin}}</div>
             </li>
              <li><em>备注</em>
-              <div class="linebox" v-show="noedit"><input type="tel" name="" placeholder="请输入备注" v-model="formboxs.beizhu"/></div>
-              <div class="linebox huis" v-show="!noedit">{{formboxs.beizhu}}</div>
+              <div class="linebox"><input type="tel" name="" placeholder="请输入备注" v-model="formboxs.beizhu"/></div>
+              
             </li>
           </ul>
           <div class="other">

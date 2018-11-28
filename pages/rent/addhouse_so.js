@@ -46,11 +46,17 @@ loader.define(function(require, exports, module) {
 					     method: "post"
 					 }).then(function(result){
 					     if (result.code == 0) {
-					 				that.houselist = result.data;
-					 				$.each(that.houselist,function(idx){
-					 					that.houselist[idx].cityid = cityid
-					 				})
-					 				console.log(that.houselist)
+					     			if(result.data.length == 0){
+					     				sodata.noneshow = 0;
+					     				return false
+					     			}else{
+					     				sodata.noneshow = 1;
+					     				that.houselist = result.data;
+						 				$.each(that.houselist,function(idx){
+						 					that.houselist[idx].cityid = cityid
+						 				})
+					     			}
+					 				
 					 			} else {
 					 				bui.alert(result.msg, function(e) {
 					 					tokenstorage.remove("tokens");

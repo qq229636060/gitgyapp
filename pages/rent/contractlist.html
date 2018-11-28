@@ -14,7 +14,7 @@
        <div class="tiaojian">
       	<div :class="show==1 ? 'option cur':'option'" v-on:click="navs('1')"><span class="optxt k1">租客</span><i></i><em></em></div>
       	<div :class="show==2 ? 'option cur':'option'" v-on:click="navs('2')"><span class="optxt k2">合同状态</span><i></i><em></em></div>
-      	<!-- <div :class="show==3 ? 'option cur':'option'" v-on:click="navs('3')"><span class="optxt k3">合同类型</span><i></i><em></em></div> -->
+      	 <div :class="show==3 ? 'option cur':'option'" v-on:click="navs('3')"><span class="optxt k3">合同类型</span><i></i><em></em></div>
       	<div class="tjlist" v-show="show < 4">
       		<div class="tj1" v-show="show == 1">
       			<ul class="tjbox">
@@ -27,15 +27,15 @@
       				<li v-for="(h1,index) in leaseStatus" @click="overselcet('2',h1,index)" :class="now1 == index ? 'now':''">{{h1}}<i></i></li>
       			</ul>
       		</div>
-      	<!-- 	<div class="tj2" v-show="show == 3">
+      	<div class="tj2" v-show="show == 3">
       			<ul class="tjbox">
       				<li v-for="(h3,index) in leaseType" @click="overselcet('3',h3,index)" :class="now2 == index ? 'now':''">{{h3}}<i></i></li>
       			</ul>
-      		</div> -->
+      		</div>
       	</div>
       </div>
     </div>
-    <div id="scrollcontract" class="bui-scroll">
+    <div id="scrollcontract" class="bui-scroll" v-if="nonest != 0">
       <div class="bui-scroll-head"></div>
       <div class="bui-scroll-main">
         <ul id="listcontracts" class="bui-list">
@@ -49,12 +49,15 @@
                  <p>租期：{{contracts.start_end}}</p>
                </div>
                <div class="contractbox_b">
-                  <span v-if="contracts.status == 1" style="color: #999">进行中</span>
-                 <span v-if="contracts.status == 2" style="color: #4dc2a4">快到期</span>
-                 <span v-if="contracts.status == 3" style="color: #4dc2a4">已到期</span>
                  <span v-if="contracts.status == 4" style="color: #999">已退房</span>
-                 <span v-if="contracts.leftDay<=7 && contracts.leftDay>0 && contracts.status!= 4">(还有{{contracts.leftDay}}天)</span>
+                 <span v-else-if="contracts.compact_type == 2 && (contracts.compact_status == 2 || contracts.compact_status == 3)" style="color: #999">待确认</span> 
+                 <span v-else-if="contracts.status == 1" style="color: #999">进行中</span>
+                 <span v-else-if="contracts.status == 2" style="color: #4dc2a4">快到期</span>
+                 <span v-else-if="contracts.status == 3" style="color: #4dc2a4">已到期</span>
+                
+                 <span v-else-if="contracts.leftDay<=7 && contracts.leftDay>0 && contracts.status!= 4">(还有{{contracts.leftDay}}天)</span>
                </div>
+                
              </div>
             </li>
         </ul>
