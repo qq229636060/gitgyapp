@@ -96,10 +96,9 @@ loader.define(function (require, exports, module){
                     bui.alert("租金不能小于1元");
                 }else if(this.datafrom.miaosu == ""){
                     bui.alert("请输入房源描述");
-                }else if(this.picarr.length == 0 && this.oldpic.length == 0){
+                }else if(pushnum == 1 && this.picarr.length == 0 && this.oldpic.length == 0){
                     bui.alert("请上传图片");
                 }else{
-                    console.log(that.datafrom.special_window)
                   bui.ajax({
                       url: apiUrl + "/mapi/room/edit",
                       data: {
@@ -198,48 +197,56 @@ loader.define(function (require, exports, module){
                     that.datafrom.directionlist = result.data.orientation;
                     that.datafrom.zhuanxiulist = result.data.decorate;
                     that.datafrom.yajinlist = result.data.payment;
-                    //第一次编辑
-                    if(result.data.room.first_edit == 1){
-                      that.datafrom.roomname = result.data.room.room_no;
-                    }else{
+                    //是否完善信息
+                      //that.datafrom.roomname = result.data.room.room_no;
                         that.datafrom.roomname = result.data.room.room_no;
-                        that.datafrom.type1 = result.data.room.hx_room;
-                        that.datafrom.type2 = result.data.room.hx_hall;
-                        that.datafrom.type3 = result.data.room.hx_toilet;
-                        that.datafrom.area = result.data.room.area;
-                        that.datafrom.direction =  result.data.room.orientation.id;
-                        that.datafrom.zhuanxiu =  result.data.room.decorate.id;
-                        that.datafrom.years =  result.data.room.year;
-                        that.datafrom.dianti = result.data.room.elevator
-                        that.datafrom.floors = result.data.room.floor;
-                        that.datafrom.zfloors = result.data.room.floor_total;
+                        that.datafrom.type1 = parseInt(result.data.room.hx_room) ? result.data.room.hx_room :'';
+                        that.datafrom.type2 = parseInt(result.data.room.money) ? result.data.room.hx_hall :'';
+                        that.datafrom.type3 = parseInt(result.data.room.money)? result.data.room.hx_toilet :'';
+                        that.datafrom.area = parseFloat(result.data.room.area)? parseFloat(result.data.room.area):'';
+                        that.datafrom.direction =  result.data.room.orientation.id?result.data.room.orientation.id:'-1';
+                        that.datafrom.zhuanxiu =  result.data.room.decorate.id?result.data.room.decorate.id:'-1';
+                        that.datafrom.years =  parseInt(result.data.room.year) ? result.data.room.year :'';
+                        that.datafrom.dianti = result.data.room.elevator? result.data.room.elevator:'-1';
+                        that.datafrom.floors = parseInt(result.data.room.floor)? result.data.room.floor:'';
+                        that.datafrom.zfloors =parseInt(result.data.room.floor_total) ? result.data.room.floor_total:'';
+                        that.datafrom.yajin = result.data.room.payment.id;
+                        that.datafrom.zhujin = parseInt(result.data.room.money) ? result.data.room.money:'';
                         that.oldpic = result.data.room.photo.length;
-                         $.each(result.data.room.photo,function(idx){
-                             editpicarr.push({img:result.data.picDomain+result.data.room.photo[idx].img,cover:result.data.room.photo[idx].cover,id:result.data.room.photo[idx].id});
-                         })
-                        if(editpicarr.length != 0){
+                        that.datafrom.miaosu = result.data.room.intro;
+                        $.each(result.data.room.photo, function (idx) {
+                            editpicarr.push({ img: result.data.picDomain + result.data.room.photo[idx].img, cover: result.data.room.photo[idx].cover, id: result.data.room.photo[idx].id });
+                        });
+                        if (editpicarr.length != 0) {
                             var left = parseInt(count) - parseInt(editpicarr.length);
                             for (var i = 0; i < editpicarr.length; i++) {
-                             if(editpicarr[i].cover == 1){var classfm = "fm";}else{var classfm = "";}
-                             var html = '<div class="file-item thumbnail old '+ classfm +'" picid="' + editpicarr[i].id + '" bigdata="' + editpicarr[i].img + '">' +'<div class="covers">封面</div>'+ '<img src="' +editpicarr[i].img + '">' + '<i class="close_photo"></i>' + '</div>';
-                             $('#fileList').append(html);
+                                if (editpicarr[i].cover == 1) {
+                                    var classfm = "fm";
+                                } else {
+                                    var classfm = "";
+                                }
+                                var html = '<div class="file-item thumbnail old ' + classfm + '" picid="' + editpicarr[i].id + '" bigdata="' + editpicarr[i].img + '">' + '<div class="covers">封面</div>' + '<img src="' + editpicarr[i].img + '">' + '<i class="close_photo"></i>' + '</div>';
+                                $('#fileList').append(html);
+                            }
                         }
-                        }
-                        that.picarr = editpicarr;
-                        $.each(result.data.room.supply,function(idx){
+                        if(result.data.room.supply){
+                             $.each(result.data.room.supply,function(idx){
                              pztag += result.data.room.supply[idx].id+",";
                              pztxt += result.data.room.supply[idx].name+",";
                              arrid.push(result.data.room.supply[idx].id);
+                             that.datafrom.arrpz = arrid;
+                             uiSelect.value(pztag);
+                             uiSelect.text(pztxt);
                         })
-                        that.datafrom.arrpz = arrid;
-                        uiSelect.value(pztag);
-                        uiSelect.text(pztxt);
-                        if(result.data.room.special_toilet == 1){
+                        }else{
+                          that.datafrom.arrpz = "";
+                        }
+                         if(result.data.room.special_toilet == 1){
                             tagval += "1,";
                             tagtext += "独卫,";
                             that.datafrom.special_toilet = 1;
-                          
-                        };
+                            };
+            
                         if(result.data.room.special_window == 1){
                             tagval += "2,";
                             tagtext += "飘窗,";
@@ -250,11 +257,9 @@ loader.define(function (require, exports, module){
                             tagtext += "有阳台";
                             that.datafrom.special_balcony = 1;
                         };
-                            
-                        that.datafrom.yajin = result.data.room.payment.id;
-                        that.datafrom.zhujin = result.data.room.money;
-                        that.datafrom.miaosu = result.data.room.intro;
-                    }
+
+
+
                     var uiSelect1 = bui.select({
                                 trigger:"#select1",
                                 title:"请选择标签",

@@ -336,7 +336,7 @@ loader.define(function(require, exports, module) {
 							for (var i = 0; i < yother.length; i++) {
 								var boxs = '<div class="addbox"><div class="othername">' + yother[i].name + '</div><div class="inputmoney"><input type="tel" value="' + yother[i].value + '" name="other' + yother[i].id + '" data-id="' + yother[i].id + '" disabled="disabled"/><i>元</i></div></div>'
 								arr[yother[i].id] = yother[i].id;
-								$(".other").append(boxs)
+								$("#add_other").append(boxs)
 							}
 						} else {
 							that.noedit = true;
@@ -344,7 +344,7 @@ loader.define(function(require, exports, module) {
 							for (var i = 0; i < yother.length; i++) {
 								var boxs = '<div class="addbox"><div class="othername">' + yother[i].name + '</div><div class="inputmoney"><input type="tel" value="' + yother[i].value + '" name="other' + yother[i].id + '" data-id="' + yother[i].id + '"/><i>元</i><em></em></div></div>'
 								arr[yother[i].id] = yother[i].id;
-								$(".other").append(boxs)
+								$("#add_other").append(boxs)
 							}
 						}
 					} else {

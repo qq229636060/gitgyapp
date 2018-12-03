@@ -30,7 +30,7 @@
              <li><em>房间朝向</em>
               <div class="linebox">
                <select v-model="datafrom.direction">
-                 <option selected="selected" value="">请选择</option>
+                 <option selected="selected" value="-1">请选择</option>
                   <option v-for="direction in datafrom.directionlist" :value="direction.id">{{direction.name}}</option>
                 </select>
               </div><i></i></li>

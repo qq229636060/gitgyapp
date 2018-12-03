@@ -67,13 +67,13 @@
                       </div>
 		        		 		  <span v-if="rooms.st == 0">
                         <a class="btnurl" v-on:click="qyue(rooms.id,rooms.tenant_id)">签约</a>
-                        <a class="btnurl" @click="gotoaddroom(rooms.id)" v-if="rooms.first_edit == 1">编辑</a>
-                        <a class="btnurl" v-bind:data-id="rooms.id" v-on:click="roominfo(rooms.id,rooms.tenant_id)" v-if="rooms.first_edit != 1">详情</a>
+                        <a class="btnurl" @click="gotoaddroom(rooms.id)" v-if="rooms.money == '0'">编辑</a>
+                        <a class="btnurl" v-bind:data-id="rooms.id" v-on:click="roominfo(rooms.id,rooms.tenant_id)" v-if="rooms.money != '0'">详情</a>
                       </span>
                       <span v-else>
                         <a class="btnurl" v-on:click="htinfo(rooms.id,rooms.tenant_id)">合同</a>
-                        <a class="btnurl" @click="gotoaddroom(rooms.id)" v-if="rooms.first_edit == 1">编辑</a>
-                        <a class="btnurl" v-bind:data-id="rooms.id" v-on:click="roominfo(rooms.id,rooms.tenant_id)" v-if="rooms.first_edit != 1">详情</a>
+                        <a class="btnurl" @click="gotoaddroom(rooms.id)" v-if="rooms.money == '0'">编辑</a>
+                        <a class="btnurl" v-bind:data-id="rooms.id" v-on:click="roominfo(rooms.id,rooms.tenant_id)" v-if="rooms.money != '0'">详情</a>
                       </span>
 		        		 	</div>
 		        		</div>
